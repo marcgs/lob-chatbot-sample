@@ -1,0 +1,12 @@
+{
+    "python.analysis.extraPaths": [
+        "./app",
+        "./evaluation",
+    ],
+    "python.testing.pytestArgs": [
+        "app",
+        "evaluation"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

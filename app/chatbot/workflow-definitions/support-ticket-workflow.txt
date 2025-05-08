@@ -1,0 +1,135 @@
+// filepath: /workspaces/lob-chatbot-sample/app/chatbot/workflow-definitions/support-ticket-workflow.txt
+0. Gather information to perform the next steps. 
+   a. Greet the User and offer the following options:
+      1. Create a new support ticket.
+      2. Update an existing support ticket.
+      3. Create a new action item for an existing ticket.
+      4. Update an existing action item.
+      5. Search for historical tickets.
+   b. Choose the next steps based on the option that the user chose.
+      1. Go to step 1 if the user wants to create a new support ticket.
+      2. Go to step 5 if the user wants to update an existing support ticket.
+      3. Go to step 8 if the user wants to create a new action item.
+      4. Go to step 11 if the user wants to update an existing action item.
+      5. Go to step 14 if the user wants to search historical tickets.
+
+1. Gather information to call `create_support_ticket`.
+   a. Offer the user 2 options for providing inputs required to create a Support Ticket:  
+      1. By manually typing-in values for required fields
+      2. By providing information from a similar previous ticket
+   b. Choose the next steps based on the option that the user chose.
+      1. Go to step 2 if they want to create a ticket with manually provided data.
+      2. Go to step 3 if they want to create a ticket based on a previous ticket.
+
+2. Create Support Ticket with manually provided data
+   a. Ask the user for the following required information:
+      1. Title of the ticket
+      2. Description of the issue
+      3. Category (Hardware, Software, Network, Other)
+      4. Priority level (Low, Medium, High, Critical)
+      5. Requested by (user name)
+   b. If some information is missing call `ask_clarification` with a prompt asking for the missing inputs.
+   c. Once all information is collected, proceed to step 4.
+
+3. Create Support Ticket based on a previous ticket
+   a. Call `search_tickets` to find similar previous tickets.
+   b. Present the search results to the user and ask which ticket to use as a template.
+   c. Pre-fill the ticket form with the selected template data and ask the user to confirm or modify each field.
+   d. Once all information is collected, proceed to step 4.
+
+4. Create the Support Ticket
+   a. Ask confirmation from the user. Display all information for creating a support ticket.
+   b. Call `create_support_ticket` with the provided information.
+   c. Output the Support Ticket details including the newly assigned ticket ID.
+   d. Ask the user if they want to create an action item for this ticket.
+      1. If yes, go to step 8.
+      2. If no, go to step 0.
+
+5. Gather information to call `update_support_ticket`.
+   a. Ask the user for the ticket ID they want to update.
+   b. Call `get_ticket_details` to retrieve the current ticket information.
+   c. Display the current ticket information to the user.
+   d. Proceed to step 6.
+
+6. Update Support Ticket
+   a. Ask the user which fields they would like to update:
+      1. Title
+      2. Description
+      3. Category
+      4. Priority level
+      5. Status (Open, In Progress, On Hold, Resolved, Closed)
+      6. Assigned to (technician name)
+   b. For each field the user wants to update, ask for the new value.
+   c. Proceed to step 7.
+
+7. Submit the Support Ticket update
+   a. Ask confirmation from the user. Display all fields that will be updated with their new values.
+   b. Call `update_support_ticket` with the provided information.
+   c. Output the updated Support Ticket details.
+   d. Go to step 0.
+
+8. Gather information to call `create_action_item`.
+   a. Ask the user for the ticket ID to which the action item should be linked.
+   b. Call `get_ticket_details` to verify the ticket exists and display its information.
+   c. Proceed to step 9.
+
+9. Collect Action Item details
+   a. Ask the user for the following required information:
+      1. Description of the action item
+      2. Assigned to (person responsible)
+      3. Due date
+      4. Priority level (Low, Medium, High)
+   b. If some information is missing call `ask_clarification` with a prompt asking for the missing inputs.
+   c. Proceed to step 10.
+
+10. Create the Action Item
+    a. Ask confirmation from the user. Display all information for creating an action item.
+    b. Call `create_action_item` with the provided information.
+    c. Output the Action Item details including the newly assigned action item ID.
+    d. Go to step 0.
+
+11. Gather information to call `update_action_item`.
+    a. Ask the user for the action item ID they want to update.
+    b. Call `get_action_item_details` to retrieve the current action item information.
+    c. Display the current action item information to the user.
+    d. Proceed to step 12.
+
+12. Update Action Item
+    a. Ask the user which fields they would like to update:
+       1. Description
+       2. Assigned to
+       3. Due date
+       4. Priority level
+       5. Status (Not Started, In Progress, Completed, Blocked)
+       6. Comments
+    b. For each field the user wants to update, ask for the new value.
+    c. Proceed to step 13.
+
+13. Submit the Action Item update
+    a. Ask confirmation from the user. Display all fields that will be updated with their new values.
+    b. Call `update_action_item` with the provided information.
+    c. Output the updated Action Item details.
+    d. Go to step 0.
+
+14. Search Historical Tickets
+    a. Ask the user for search criteria:
+       1. Keywords in title or description
+       2. Date range
+       3. Category
+       4. Status
+       5. Priority level
+    b. Call `search_tickets` with the provided search criteria.
+    c. Display the search results to the user.
+    d. Ask if the user wants to:
+       1. View details of a specific ticket (go to step 15)
+       2. Modify their search (repeat step 14)
+       3. Return to the main menu (go to step 0)
+
+15. Display Ticket Details
+    a. Call `get_ticket_details` for the selected ticket ID.
+    b. Display comprehensive ticket details, including any action items.
+    c. Ask if the user wants to:
+       1. Update this ticket (go to step 5)
+       2. Create an action item for this ticket (go to step 8)
+       3. Return to the search results (go to step 14)
+       4. Return to the main menu (go to step 0)

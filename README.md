@@ -1,0 +1,60 @@
+# Line-of-business Chatbot Sample
+
+This project demonstrates a line-of-business (LOB) chatbot implementation using a Support Ticket Management System as the sample application. It showcases both a functional workflow for managing support tickets and a methodology for evaluating chatbot performance in business contexts.
+
+## Key Features
+
+### Support Ticket Management Chatbot
+
+The Support Ticket Management chatbot is built with [Semantic Kernel](https://github.com/microsoft/semantic-kernel), where users can:
+
+- Create and update support tickets
+- Manage action items within tickets
+- Search historical tickets for reference
+
+Refer to the [architecture](./docs/architecture/support-ticket-chatbot-architecture.md) documentation for more details.
+
+### Evaluation Framework
+
+The project includes an evaluation framework built using the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme?view=azure-python) that measures:
+
+- **Function call precision**: Are the right functions called at the right time?
+- **Function call recall**: Are all necessary functions called?
+- **Function call arguments precision**: Are the right arguments present for the recalled functions?
+- **Function call arguments recall**: Are all necessary arguments present for the recalled functions?
+- **Function call reliability**: Overall success in completing business process.
+
+This evaluation approach helps address the challenges of assessing non-deterministic, LLM-powered chatbots in business applications. Refer to the [evaluation](./docs/evaluation/evaluation-framework.md) documentation for more information.
+
+## Initial Setup
+
+1. Open this project with Visual Studio Code using the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers). This will ensure all dependencies are correctly installed in an isolated environment.
+
+2. Deploy an OpenAI chat model in Azure (4o preferably) - see [documentation](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
+
+3. Once your model is ready, create an `.env` file by copying `.env.template` and replacing values with your configuration.
+
+## Running the Sample
+
+```bash
+make chatbot  # Runs the chatbot application
+make chatbot-eval  # Runs evaluation against ground truth datasets
+```
+
+## Project Structure
+
+- `app/chatbot/` - Support Ticket Management implementation
+  - `plugins/support_ticket_system/` - [Semantic Kernel plugins](https://learn.microsoft.com/semantic-kernel/agents/plugins/) for function calling
+  - `data_models/` - Data structures for tickets and action items
+  - `workflow-definitions/` - Workflow definitions that guide conversations
+- `evaluation/` - Evaluation framework components
+  - `chatbot/evaluate.py` - Evaluation entry point
+  - `evaluation_service.py` - Core evaluation service
+  - `chatbot/evaluators/` - Specialized evaluators for different metrics
+  - `chatbot/ground-truth/` - Ground truth datasets used for evaluation
+
+## Documentation
+
+- [Architecture](docs/architecture/support-ticket-chatbot-architecture.md) - Chatbot architecture overview
+- [Evaluation Guide](docs/evaluation/evaluation-framework-guide.md) - How the evaluation framework works
+- [User Guide](docs/user-guide/support-ticket-chatbot-user-guide.md.md) - How to use the Support Ticket Chatbot

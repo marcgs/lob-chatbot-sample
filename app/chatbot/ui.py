@@ -1,0 +1,33 @@
+import asyncio
+import gradio as gr
+
+from dotenv import load_dotenv
+from app.chatbot.support_ticket_agent import SupportTicketAgent
+
+
+async def main():
+    # Create an instance of the Support Ticket ChatBot
+    bot = SupportTicketAgent()
+    title = "Sam, your Support Ticket Assistant"
+
+    welcome_message: gr.MessageDict = gr.MessageDict(
+        content=await bot.chat(""), role="assistant"
+    )
+
+    # Create Support Ticket Management interface
+    chat_interface = gr.ChatInterface(
+        type="messages",
+        fn=bot.chat,
+        chatbot=gr.Chatbot(type="messages", value=[welcome_message]),
+        title=title,
+        description="I can help you create and manage support tickets and action items.",
+        theme="default",
+    )
+
+    chat_interface.launch()
+
+
+# Run the main function
+if __name__ == "__main__":
+    load_dotenv()
+    asyncio.run(main())
