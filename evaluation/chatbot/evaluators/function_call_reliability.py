@@ -1,5 +1,5 @@
 from evaluation.chatbot.evaluators.function_call_recall import (
-    FunctionCallRecallEvaluator,
+    FunctionCallRecallEvaluator, FunctionCallArgsRecallEvaluator
 )
 from evaluation.chatbot.evaluators.function_call_precision import (
     FunctionCallPrecisionEvaluator,
@@ -53,17 +53,17 @@ class FunctionCallReliabilityEvaluator(Evaluator):
             float: task completion reliability score
         """
 
-        precision_evaluator = FunctionCallPrecisionEvaluator()
-        precision = precision_evaluator.evaluate(
-            actual_function_calls, expected_function_calls
-        )
-
-        recall_evaluator = FunctionCallRecallEvaluator()
-        recall = recall_evaluator.evaluate(
-            actual_function_calls, expected_function_calls
-        )
-
-        if precision == 1 and recall == 1:
-            return 1.0
-
-        return 0.0
+        # precision_evaluator = FunctionCallPrecisionEvaluator()
+        # precision = precision_evaluator.evaluate(
+        #     actual_function_calls, expected_function_calls
+        # )
+        scores = []
+        evaluators = [
+            # FunctionCallPrecisionEvaluator(),
+            FunctionCallRecallEvaluator(),
+            FunctionCallArgsRecallEvaluator(),
+        ]
+        for evaluator in evaluators:
+            scores.append(evaluator.evaluate(actual_function_calls, expected_function_calls))
+        
+        return sum(scores) / len(scores)

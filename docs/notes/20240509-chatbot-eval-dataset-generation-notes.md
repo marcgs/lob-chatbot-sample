@@ -2,10 +2,10 @@
 
 ## 1. Metrics Overview
 
-- **Function Precision:** 0.47
+- **Function Precision:** 0.46
 - **Function Recall:** 0.52
-- **Argument Precision:** 0.35
-- **Argument Recall:** 0.49
+- **Argument Precision:** 0.28
+- **Argument Recall:** 0.34
 - **Reliability:** 0.00
 
 These scores indicate the chatbot is still missing or incorrectly providing function arguments, and reliability (task completion without error) is low.
