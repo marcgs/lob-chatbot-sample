@@ -1,26 +1,34 @@
-# Chatbot Evaluation Error Analysis Summary and Proposed Improvements
+# Chatbot Evaluation Error Analysis (May 9, 2025)
 
-**Plan file:** [20240509-chatbot-eval-dataset-generation.md](../plans/20240509-chatbot-eval-dataset-generation.md)
+## 1. Metrics Overview
 
-## Gist from Evaluation Analysis (2025-05-09)
+- **Function Precision:** 0.47
+- **Function Recall:** 0.52
+- **Argument Precision:** 0.35
+- **Argument Recall:** 0.49
+- **Reliability:** 0.00
 
-### Key Findings
-- **Low argument precision/recall:** The chatbot often fails to provide all required arguments for function calls, or provides incorrect/extra arguments.
-- **Update Action Item scenarios:** The chatbot cannot proceed if the user does not provide the Action Item ID, even when other identifying information is available. This leads to zero scores for these cases.
-- **Clarification/confirmation:** The bot sometimes asks for clarification, but does not always use available business data to infer missing information or guide the user.
-- **Search/disambiguation:** When searching for tickets or action items, the bot gives up if an exact match is not found, rather than offering to broaden the search or use partial information.
+These scores indicate the chatbot is still missing or incorrectly providing function arguments, and reliability (task completion without error) is low.
 
-### Proposed Changes to Workflow
-- Improve slot-filling and argument handling: Attempt to infer missing arguments from context or business data before asking the user.
-- Enhance update action item flow: If Action Item ID is not provided, search for action items using other details and present options to the user.
-- Smarter clarification and confirmation: When asking for missing information, include context or suggestions based on business data.
-- Robust search and disambiguation: If a search returns no results, offer to broaden the search or allow the user to refine their search.
+## 2. Key Error Patterns
 
-### Workflow Definition Updates
-- Updated `support-ticket-workflow.txt` to:
-  - Add logic for inferring missing information and searching by partial details.
-  - Enhance update action item and search flows for better argument handling, clarification, and disambiguation.
+- **Argument Handling:** The chatbot sometimes fails to match all required arguments for function calls, especially in update scenarios.
+- **Update Action Item Dead-ends:** When the user cannot provide an Action Item ID, the bot attempts to search by other details, but if no match is found, the conversation ends without further suggestions.
+- **Clarification/Confirmation:** The bot asks for clarification but does not always suggest alternative identifiers or next steps if the search fails.
+- **Search/Disambiguation:** The bot does offer to broaden the search, but does not prompt the user to check their records or provide other identifiers if all searches fail.
 
-## Next Steps
-- Re-run evaluation after implementing these workflow changes to measure improvement in metrics.
+## 3. Proposed Workflow Improvements
+
+- **Update Action Item Flow:**
+  - If no matches are found when searching for an action item, suggest the user check their records or provide alternative identifiers (e.g., related ticket details, keywords, or approximate dates) instead of ending the conversation.
+- **Clarification:**
+  - When clarification is needed, always suggest what other information could help (e.g., "If you don't have the Action Item ID, can you provide the ticket title, keywords, or approximate date?").
+- **General:**
+  - Continue to broaden searches and offer next steps, never leaving the user at a dead-end.
+
+**Workflow file updated to reflect these improvements.**
+
+## 4. Next Steps
+
+- Re-run evaluation after these workflow changes to measure improvement.
 - Continue iterative refinement based on error analysis and user feedback.
