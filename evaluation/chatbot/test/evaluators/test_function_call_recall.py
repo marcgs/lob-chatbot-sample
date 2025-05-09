@@ -4,7 +4,7 @@ from evaluation.chatbot.evaluators.function_call_recall import (
     FunctionCallArgsRecallEvaluator,
 )
 from evaluation.chatbot.test.evaluators.test_data import (
-    FC_COMMON_ASK_CLARIFICATION,
+    FC_COMMON_START_OVER,
     FC_TICKET_CREATE,
     FC_TICKET_CREATE_2,
     FC_TICKET_CREATE_3,
@@ -74,10 +74,10 @@ from evaluation.chatbot.test.evaluators.test_data import (
             [
                 FC_TICKET_CREATE,
                 FC_TICKET_CREATE_2,
-                FC_COMMON_ASK_CLARIFICATION,
+                FC_COMMON_START_OVER,
             ],
             [FC_TICKET_CREATE, FC_TICKET_CREATE_2],
-            1.0,  # Ignoring ask_clarification function
+            1.0,  # Ignoring start_over function
         ),
     ],
 )

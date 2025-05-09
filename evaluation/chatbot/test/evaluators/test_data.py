@@ -80,9 +80,9 @@ FC_TICKET_CREATE_2_DIFF_ARGS = {
     },
 }
 
-FC_COMMON_ASK_CLARIFICATION = {
-    "functionName": "CommonPlugin-ask_clarification",
-    "arguments": {"question": "What are you looking for?"},
+FC_COMMON_START_OVER = {
+    "functionName": "CommonPlugin-start_over",
+    "arguments": {},
 }
 
 FC_REFERENCE_DATA_GET_DEPARTMENTS = {

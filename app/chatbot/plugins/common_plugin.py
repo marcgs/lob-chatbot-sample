@@ -17,16 +17,6 @@ class CommonPlugin:
         return "Let's start over with your support ticket request. How can I help you today?"
 
     @kernel_function(
-        name="ask_clarification",
-        description="Prompts the customer for clarification on their support request.",
-    )
-    def ask_clarification(
-        self, prompt: Annotated[str, "The prompt to ask the customer."]
-    ):
-        logger.info("Executing: ask_clarification")
-        return {"prompt": prompt}
-
-    @kernel_function(
         name="summarize_ticket_details",
         description="Provides a summary of the support ticket details the user has provided so far.",
     )

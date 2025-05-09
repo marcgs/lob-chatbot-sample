@@ -69,7 +69,7 @@ The chatbot uses a modular plugin architecture for business logic:
 
 #### Common Plugin
 
-- Contains utility functions like `start_over` and `ask_clarification`
+- Contains utility functions like `start_over` and `explain_workflow`
 - Supports the conversational flow with helper functions
 
 ### Data Models

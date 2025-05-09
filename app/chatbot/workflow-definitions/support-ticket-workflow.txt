@@ -28,7 +28,7 @@
       3. Category (Hardware, Software, Network, Other)
       4. Priority level (Low, Medium, High, Critical)
       5. Requested by (user name)
-   b. If some information is missing call `ask_clarification` with a prompt asking for the missing inputs.
+   b. If some information is missing ask the user for the missing inputs.
    c. Once all information is collected, proceed to step 4.
 
 3. Create Support Ticket based on a previous ticket
@@ -79,7 +79,7 @@
       2. Assigned to (person responsible)
       3. Due date
       4. Priority level (Low, Medium, High)
-   b. If some information is missing call `ask_clarification` with a prompt asking for the missing inputs.
+   b. If some information is missing ask the user for the missing inputs.
    c. Proceed to step 10.
 
 10. Create the Action Item

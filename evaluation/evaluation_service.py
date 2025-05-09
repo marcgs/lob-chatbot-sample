@@ -4,7 +4,6 @@ from azure.ai.evaluation import (
     AzureAIProject,
     EvaluatorConfig,
     EvaluationResult,
-    evaluate,
 )
 from evaluation import common as utils
 

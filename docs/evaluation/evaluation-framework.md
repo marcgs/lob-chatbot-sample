@@ -125,7 +125,7 @@ The evaluation process follows these key steps:
 3. **Comparison and Measurement**: For each conversation:
    - Actual function calls are compared with expected function calls
    - The matching algorithm compares function names (case-insensitive) and arguments
-   - Special functions like `CommonPlugin-ask_clarification` are ignored in the evaluation
+   - Special functions like `CommonPlugin-start_over` are ignored in the evaluation
    - Metrics are calculated for precision, recall, and reliability
 
 4. **Result Aggregation**: Results are aggregated across all conversations and stored in:
