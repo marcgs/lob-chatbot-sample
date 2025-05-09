@@ -48,8 +48,8 @@ make chatbot-eval  # Runs evaluation against ground truth datasets
   - `data_models/` - Data structures for tickets and action items
   - `workflow-definitions/` - Workflow definitions that guide conversations
 - `evaluation/` - Evaluation framework components
-  - `chatbot/evaluate.py` - Evaluation entry point
   - `evaluation_service.py` - Core evaluation service
+  - `chatbot/evaluate.py` - Chatbot evaluation entry point
   - `chatbot/evaluators/` - Specialized evaluators for different metrics
   - `chatbot/ground-truth/` - Ground truth datasets used for evaluation
 
