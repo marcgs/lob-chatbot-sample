@@ -27,7 +27,7 @@
   },
   {
     "scenario_name": "search_and_update_ticket",
-    "user_instructions": "Search for a ticket by 'Low' priority, then updates its description, department and priority.",
+    "user_instructions": "Search for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
@@ -53,13 +53,13 @@
   },
   {
     "scenario_name": "update_action_item_assignee",
-    "user_instructions": "Update the assignee and due date for an existing action item.",
+    "user_instructions": "Update the assignee and due date for an existing action item with ID A-003",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
         "functionName": "ActionItemPlugin-update_action_item",
         "arguments": {
-          "action_id": "{action_id}",
+          "action_id": "A-003",
           "assignee": "{assignee}",
           "due_date": "{due_date}"
         }
