@@ -99,6 +99,19 @@ def run_support_ticket_evaluation(
     try:
         shutil.copy(notebook_src, notebook_dst)
         print(f"Copied error analysis notebook to {notebook_dst}")
+        # Execute all cells in the notebook after copying
+        import nbformat
+        from nbconvert.preprocessors import ExecutePreprocessor
+        with open(notebook_dst, "r", encoding="utf-8") as f:
+            nb = nbformat.read(f, as_version=4)
+        ep = ExecutePreprocessor(kernel_name="python3")
+        try:
+            ep.preprocess(nb, {"metadata": {"path": os.path.dirname(notebook_dst)}})
+            with open(notebook_dst, "w", encoding="utf-8") as f:
+                nbformat.write(nb, f)
+            print(f"Executed and saved notebook with outputs: {notebook_dst}")
+        except Exception as e:
+            print(f"Warning: Failed to execute notebook: {e}")
     except Exception as e:
         print(f"Warning: Could not copy error analysis notebook: {e}")
 
