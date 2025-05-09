@@ -55,13 +55,13 @@ make chatbot-eval  # Runs evaluation against ground truth datasets
 
 ## Migrating the sample
 
-This sample can be used as a template to create other similar chatbots for other use cases:
+This sample can be used as a template to create chatbots for other line-of-business applications. To migrate this sample to your specific use case:
 
 1. In Visual Studio Code use the `Chat: Use Prompt` command from the Command Palette.
-2. Choose `migrate.prompt.md` to attach it to the Copilot chat.
-3. Run the prompt in Agent mode.
-4. Inspect the created migration plan and adapt as required.
-5. Proceed with the implementation plan phase by phase, reviewing outputs at every stage.
+2. Choose `migrate` to attach it to the Copilot chat.
+3. Clearly describe your target use case and business requirements.
+4. Review the generated migration plan and adapt as required.
+5. Implement the plan phase-by-phase, testing thoroughly at each stage.
 
 ## Documentation
 
