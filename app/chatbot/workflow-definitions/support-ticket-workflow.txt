@@ -90,9 +90,15 @@
 
 11. Gather information to call `update_action_item`.
     a. Ask the user for the action item ID they want to update.
-    b. Call `get_action_item_details` to retrieve the current action item information.
-    c. Display the current action item information to the user.
-    d. Proceed to step 12.
+    b. If the user does not know the action item ID, ask for other identifying information (e.g., ticket title, assignee, due date).
+    c. If action item ID is not provided, attempt to search for action items using the provided details:
+       1. If one match is found, proceed with that action item.
+       2. If multiple matches are found, present the list to the user for selection.
+       3. If no matches are found, offer to broaden the search (e.g., partial matches, remove filters) or ask for more details.
+       4. If still not found, suggest the user check their records or provide alternative identifiers (e.g., related ticket details, keywords, or approximate dates).
+    d. Once the action item is identified, call `get_action_item_details` to retrieve the current action item information.
+    e. Display the current action item information to the user.
+    f. Proceed to step 12.
 
 12. Update Action Item
     a. Ask the user which fields they would like to update:
@@ -119,8 +125,9 @@
        4. Status
        5. Priority level
     b. Call `search_tickets` with the provided search criteria.
-    c. Display the search results to the user.
-    d. Ask if the user wants to:
+    c. If no results are found, offer to broaden the search (e.g., remove filters, use partial matches) or ask the user to refine their criteria.
+    d. Display the search results to the user.
+    e. Ask if the user wants to:
        1. View details of a specific ticket (go to step 15)
        2. Modify their search (repeat step 14)
        3. Return to the main menu (go to step 0)
