@@ -1,7 +1,7 @@
 [
   {
     "scenario_name": "create_ticket_and_action_item",
-    "user_instructions": "You are simulating a user who needs to create a critical support ticket for a major issue and immediately assign an action item to a team member.",
+    "user_instructions": "Create a new support ticket and create a new action item for it.",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
@@ -18,7 +18,6 @@
       {
         "functionName": "ActionItemPlugin-create_action_item",
         "arguments": {
-          "parent_ticket_id": "TKT-*",
           "title": "{title}",
           "assignee": "{assignee}",
           "due_date": "{due_date}"
@@ -28,27 +27,25 @@
   },
   {
     "scenario_name": "search_and_update_ticket",
-    "user_instructions": "You are simulating a user who searches for a ticket by department and priority, then updates its description and priority.",
+    "user_instructions": "Search for a ticket by 'Low' priority, then updates its description, department and priority.",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
         "functionName": "TicketManagementPlugin-search_tickets",
         "arguments": {
-          "department_code": "{department_code}",
-          "priority": "{priority}"
+          "priority": "Low"
         }
       },
       {
         "functionName": "TicketManagementPlugin-get_support_ticket",
         "arguments": {
-          "ticket_id": "TKT-*"
         }
       },
       {
         "functionName": "TicketManagementPlugin-update_support_ticket",
         "arguments": {
-          "ticket_id": "TKT-*",
           "priority": "{priority}",
+          "department_code": "{department_code}",
           "description": "{description}"
         }
       }
@@ -56,13 +53,13 @@
   },
   {
     "scenario_name": "update_action_item_assignee",
-    "user_instructions": "You are simulating a user who needs to update the assignee and due date for an existing action item.",
+    "user_instructions": "Update the assignee and due date for an existing action item.",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
         "functionName": "ActionItemPlugin-update_action_item",
         "arguments": {
-          "action_id": "ACT-*",
+          "action_id": "{action_id}",
           "assignee": "{assignee}",
           "due_date": "{due_date}"
         }

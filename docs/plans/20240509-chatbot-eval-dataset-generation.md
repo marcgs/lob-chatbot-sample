@@ -13,13 +13,20 @@
 - [x] Task 2.2: Generated a CSV file (`dummy_support_ticket_data.csv`) with 50 rows of realistic, varied dummy data.
 
 ## Phase 3: Implement Dataset Generation Script
-- [ ] Task 3.1: Design and implement a Python script (`generate_eval_dataset.py`) that:
+- [x] Task 3.1: Design and implement a Python script (`generate_eval_dataset.py`) that:
   - Reads `test_scenarios_templates.json`
   - Reads `dummy_support_ticket_data.csv`
   - For each scenario template, generates multiple test cases by injecting business data into placeholders
   - Outputs the final dataset in the same structure as `support_ticket_eval_dataset.json`
-- [ ] Task 3.2: Add a system prompt template (with placeholders for business data and user instructions) to be used for each generated scenario. The script should inject the appropriate business data and user instructions into this template, following the style and structure of the `instructions` field in `support_ticket_eval_dataset.json`.
-- [ ] Task 3.3: Add CLI arguments to the script for input/output file paths and number of test cases per scenario with default values (3 cases per scenarios)
+- [x] Task 3.2: Add a system prompt template (with placeholders for business data and user instructions) to be used for each generated scenario. The script should inject the appropriate business data and user instructions into this template, following the style and structure of the `instructions` field in `support_ticket_eval_dataset.json`.
+- [x] Task 3.3: Add CLI arguments to the script for input/output file paths and number of test cases per scenario with default values (3 cases per scenarios)
+
+## Phase 3.5: Add Error Analysis Notebook
+- [ ] Task 3.5.1: Create a Python notebook for error analysis that will be copied into the output directory of each `make chatbot-eval` run.
+- [ ] Task 3.5.2: The notebook should load `evaluation_results.json` and perform in-depth analysis, including:
+  - Standard metrics (e.g., precision, recall, F1) broken down by different test case scenarios
+  - Analysis of expected vs actual function calls to identify which functions fail the most and why
+  - Use LLMs to analyze chat history and, for each test case, provide insights on root cause analysis
 
 ## Phase 4: Validation and Documentation
 - [ ] Task 4.1: Validate that the generated dataset matches the required structure and is suitable for evaluation.
