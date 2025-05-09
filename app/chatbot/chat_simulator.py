@@ -23,7 +23,7 @@ class SupportTicketChatSimulator:
     the function calls made by the chatbot.
     """
 
-    async def startSimulation(
+    async def run(
         self,
         instructions: str,
         task_completion_condition: str,
@@ -132,7 +132,7 @@ if __name__ == "__main__":
     instructions = "You are a user who wants to create a new support ticket for a software issue. You need a ticket with title 'Email client crashes on startup', assigned to the IT department, with High priority and Expedited workflow. Provide a detailed description of the issue when asked."
 
     history = asyncio.run(
-        simulator.startSimulation(
+        simulator.run(
             instructions=instructions,
             task_completion_condition="the SupportTicketAgent has confirmed the creation of a Support Ticket",
         )

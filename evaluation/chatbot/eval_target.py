@@ -27,7 +27,7 @@ class SupportTicketEvaluationTarget:
         try:
             simulator = SupportTicketChatSimulator()
             history: ChatHistory = asyncio.get_event_loop().run_until_complete(
-                simulator.startSimulation(
+                simulator.run(
                     instructions=instructions,
                     task_completion_condition=task_completion_condition,
                 )
