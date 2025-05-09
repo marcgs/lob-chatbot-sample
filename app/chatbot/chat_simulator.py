@@ -79,14 +79,17 @@ class SupportTicketChatSimulator:
                 agent=support_ticket_agent,
                 history=message_content_list,
             )
+
             if should_agent_terminate:
                 print("Task completed")
                 break
+
             # we need to add thread to the user agent to make sure it retains the full context of the conversation
             # otherwise it will only see the last message and get confused
             user_response = await user_agent.get_response(
                 messages=agent_message.content, thread=user_thread
             )
+
             user_message = user_response.content
             # Set the role to user for the support ticket agent to think it is a user message
             user_message = ChatMessageContent(
@@ -94,6 +97,7 @@ class SupportTicketChatSimulator:
                 role=AuthorRole.USER,
                 name=user_message.name
             )
+            
             print(f"User: {user_message.to_dict()}")
 
         history = await agent_thread.get_messages()
