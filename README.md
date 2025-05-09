@@ -30,7 +30,7 @@ This evaluation approach helps address the challenges of assessing non-determini
 
 1. Open this project with Visual Studio Code using the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers). This will ensure all dependencies are correctly installed in an isolated environment.
 
-2. Deploy an OpenAI chat model in Azure (4o preferably) - see [documentation](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
+2. Deploy an OpenAI chat model in Azure (GPT-4o or better preferably) - see [documentation](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 
 3. Once your model is ready, create an `.env` file by copying `.env.template` and replacing values with your configuration.
 
