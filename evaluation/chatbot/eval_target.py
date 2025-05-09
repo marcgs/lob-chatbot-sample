@@ -1,7 +1,7 @@
 import asyncio
 import json
 
-from app.chatbot.chat_simulator import SupportTicketChatSimulator
+from evaluation.chatbot.simulation.chat_simulator import SupportTicketChatSimulator
 from semantic_kernel.contents import ChatHistory
 
 

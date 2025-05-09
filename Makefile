@@ -6,8 +6,6 @@ export PATH := $(HOME)/.local/bin:$(PATH)
 .DEFAULT_GOAL := help
 .ONESHELL: # Applies to every target in the file https://www.gnu.org/software/make/manual/html_node/One-Shell.html
 MAKEFLAGS += --silent # https://www.gnu.org/software/make/manual/html_node/Silent.html
-# "small" | "medium" | "large" | "all"
-SUGGESTER_DATASET ?= small
 
 # Load environment file if exists
 ENV_FILE := .env
@@ -59,11 +57,11 @@ chatbot: ## 🤖 Start the Support Ticket Management Chatbot
 	@echo "🤖 Starting the Support Ticket Management Chatbot..."
 	@uv run app/chatbot/ui.py
 
-chatbot-simulation: clear-cache## 🚀 Start a simulated conversation with the Support Ticket Management Chatbot
+chatbot-simulation: clear-cache ## 🚀 Start a simulated conversation with the Support Ticket Management Chatbot
 	@echo "🚀 Starting the simulation..."
-	@uv run app/chatbot/chat_simulator.py
+	@uv run evaluation/chatbot/simulation/chat_simulator.py
 
 chatbot-eval: clear-cache ## 📊 Evaluate the Support Ticket Management Chatbot
-	@echo "📊 Evaluating the chatbot"
+	@echo "📊 Evaluating the Support Ticket Management Chatbot..."
 	@uv run evaluation/chatbot/evaluate.py
 

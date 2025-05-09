@@ -8,7 +8,7 @@ from semantic_kernel.agents import (
     AgentResponseItem,
 )
 
-from app.chatbot.agent_factory import create_support_ticket_agent
+from app.chatbot.factory import create_support_ticket_agent
 
 
 class Chatbot:

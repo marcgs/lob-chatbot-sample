@@ -9,11 +9,8 @@ from semantic_kernel.agents import (
 from semantic_kernel.agents.strategies import KernelFunctionTerminationStrategy
 from semantic_kernel.contents.utils.author_role import AuthorRole
 
-from app.chatbot.agent_factory import (
-    create_user_agent,
-    create_support_ticket_agent,
-    create_termination_strategy,
-)
+from app.chatbot.factory import create_support_ticket_agent
+from evaluation.chatbot.simulation.factory import create_termination_strategy, create_user_agent
 
 
 class SupportTicketChatSimulator:
