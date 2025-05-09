@@ -53,6 +53,16 @@ make chatbot-eval  # Runs evaluation against ground truth datasets
   - `chatbot/evaluators/` - Specialized evaluators for different metrics
   - `chatbot/ground-truth/` - Ground truth datasets used for evaluation
 
+## Migrating the sample
+
+This sample can be used as a template to create other similar chatbots for other use cases:
+
+1. In Visual Studio Code use the `Chat: Use Prompt` command from the Command Palette.
+2. Choose `migrate.prompt.md` to attach it to the Copilot chat.
+3. Run the prompt in Agent mode.
+4. Inspect the created migration plan and adapt as required.
+5. Proceed with the implementation plan phase by phase, reviewing outputs at every stage.
+
 ## Documentation
 
 - [Architecture](docs/architecture/support-ticket-chatbot-architecture.md) - Chatbot architecture overview
