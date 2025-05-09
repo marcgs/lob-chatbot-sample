@@ -92,6 +92,16 @@ def run_support_ticket_evaluation(
         experiment_name=experiment_name,
     )
 
+    # Copy error analysis notebook into output directory
+    import shutil
+    notebook_src = os.path.join(chatbot_eval_root_path(), "error_analysis_chatbot.ipynb")
+    notebook_dst = os.path.join(output_path, "error_analysis_chatbot.ipynb")
+    try:
+        shutil.copy(notebook_src, notebook_dst)
+        print(f"Copied error analysis notebook to {notebook_dst}")
+    except Exception as e:
+        print(f"Warning: Could not copy error analysis notebook: {e}")
+
     # convert results to dataframe
     df = pd.DataFrame(results).round(2)
     print(df.transpose())

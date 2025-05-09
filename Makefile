@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 export PATH := $(HOME)/.local/bin:$(PATH)
 
-.PHONY: help setup install clean lint clear-cache test format fmt chatbot
+.PHONY: help setup install clean lint clear-cache test format fmt chatbot dataset-create
 .DEFAULT_GOAL := help
 .ONESHELL: # Applies to every target in the file https://www.gnu.org/software/make/manual/html_node/One-Shell.html
 MAKEFLAGS += --silent # https://www.gnu.org/software/make/manual/html_node/Silent.html
@@ -64,4 +64,8 @@ chatbot-simulation: clear-cache ## 🚀 Start a simulated conversation with the 
 chatbot-eval: clear-cache ## 📊 Evaluate the Support Ticket Management Chatbot
 	@echo "📊 Evaluating the Support Ticket Management Chatbot..."
 	@uv run evaluation/chatbot/evaluate.py
+
+dataset-create: ## 🏗️ Generate chatbot evaluation dataset from templates and dummy data
+	@echo "🏗️ Generating chatbot evaluation dataset..."
+	@uv run evaluation/chatbot/ground-truth/generate_eval_dataset.py
 
