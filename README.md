@@ -16,15 +16,14 @@ Refer to the [architecture](./docs/architecture/support-ticket-chatbot-architect
 
 ### Evaluation Framework
 
-The project includes an evaluation framework built using the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme?view=azure-python) that measures:
+The project includes an evaluation framework designed to address the challenges of assessing non-deterministic, LLM-powered chatbots in business applications with key features:
 
-- **Function call precision**: Are the right functions called at the right time?
-- **Function call recall**: Are all necessary functions called?
-- **Function call arguments precision**: Are the right arguments present for the recalled functions?
-- **Function call arguments recall**: Are all necessary arguments present for the recalled functions?
-- **Function call reliability**: Overall success in completing business process.
+- LLM-based user agent for simulating user-chatbot interactions
+- Test cases factory with scenarios templating and injection of business data to run evaluations at scale 
+- [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme?view=azure-python) integration for calculating metrics and enabling tracking and comparing evaluation runs in [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry)
+- LLM-power error analysis with actionable summaries
 
-This evaluation approach helps address the challenges of assessing non-deterministic, LLM-powered chatbots in business applications. Refer to the [evaluation](./docs/evaluation/evaluation-framework.md) documentation for more information.
+Refer to the [evaluation](./docs/evaluation/README.md) documentation for more information.
 
 ## Initial Setup
 
@@ -51,7 +50,7 @@ make chatbot-eval  # Runs evaluation against ground truth datasets
   - `evaluation_service.py` - Core evaluation service
   - `chatbot/evaluate.py` - Chatbot evaluation entry point
   - `chatbot/evaluators/` - Specialized evaluators for different metrics
-  - `chatbot/ground-truth/` - Ground truth datasets used for evaluation
+  - `chatbot/ground-truth/` - Ground truth datasets and related code used for evaluation
 
 ## Migrating the sample
 
