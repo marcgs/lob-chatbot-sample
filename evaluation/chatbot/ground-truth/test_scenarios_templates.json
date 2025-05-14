@@ -1,7 +1,7 @@
 [
   {
     "scenario_name": "create_ticket_and_action_item",
-    "user_instructions": "Create a new support ticket and create a new action item for it.",
+    "user_instructions": "Create a new support ticket by manually providing the data and create a new action item for it.",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
@@ -27,13 +27,13 @@
   },
   {
     "scenario_name": "search_and_update_ticket",
-    "user_instructions": "Search for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.",
+    "user_instructions": "Search for a ticket using keyword 'printer', select any of the results and update its description, department and priority fields.",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
         "functionName": "TicketManagementPlugin-search_tickets",
         "arguments": {
-          "priority": "Low"
+          "search_query": "printer"
         }
       },
       {
