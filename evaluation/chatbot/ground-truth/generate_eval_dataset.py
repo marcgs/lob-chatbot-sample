@@ -15,13 +15,16 @@ random.seed(RANDOM_SEED)
 
 # System prompt template (matches support_ticket_eval_dataset.json style)
 SYSTEM_PROMPT_TEMPLATE = """
-You are simulating a human user interacting with a chatbot assistant.
+You are imitating a user interacting with a chatbot assistant.
 
 Your goal is to complete a specific task by conversing naturally with the assistant.
+
 Behave like a non-technical user who understands the task, but not the internal workings of the system.
+
 You have access to some business data relevant to your task. Use it when appropriate during the conversation.
 
 Follow these rules:
+- Act as a user, not an assitant.
 - Never correct the assistant or point out mistakes.
 - You are not allowed to change the inputs proposed by the assistant.
 - Stay focused on the task but allow for slight variability in how you express yourself.
@@ -82,10 +85,15 @@ def load_and_process_data(tickets_path: Path, actions_path: Path) -> list[dict[s
         'Due Date': 'due_date'
     })
     
-    # Convert boolean values
+    # Convert customer_visible column to boolean values
     if 'customer_visible' in tickets_df.columns:
-        tickets_df['customer_visible'] = tickets_df['customer_visible'].map(
-            lambda x: x.lower() == 'true' if isinstance(x, str) else bool(x)
+        # Handle various string representations and ensure proper boolean conversion
+        tickets_df['customer_visible'] = tickets_df['customer_visible'].apply(
+            lambda x: (
+                x.lower() == 'true' if isinstance(x, str) 
+                else bool(x) if pd.notna(x) 
+                else False
+            )
         )
     
     # Prepare result data

@@ -67,20 +67,6 @@ class SupportTicketChatSimulator:
             )
             print(f"Support Ticket Agent: {agent_message.to_dict()}")
 
-            # Convert to list of messages to satisfy the type checker
-            messages_list = await agent_thread.get_messages()
-            # Convert ChatHistory to list[ChatMessageContent] to solve type compatibility issue
-            message_content_list = [msg for msg in messages_list]
-            
-            should_agent_terminate = await termination_strategy.should_agent_terminate(
-                agent=support_ticket_agent,
-                history=message_content_list,
-            )
-
-            if should_agent_terminate:
-                print("Task completed")
-                break
-
             # we need to add thread to the user agent to make sure it retains the full context of the conversation
             # otherwise it will only see the last message and get confused
             user_response = await user_agent.get_response(
@@ -96,6 +82,19 @@ class SupportTicketChatSimulator:
             )
             
             print(f"User: {user_message.to_dict()}")
+
+            # Convert to list of messages to satisfy the type checker
+            messages_list = await agent_thread.get_messages()
+            # # Convert ChatHistory to list[ChatMessageContent] to solve type compatibility issue
+            # message_content_list = [msg for msg in messages_list]
+            should_agent_terminate = await termination_strategy.should_agent_terminate(
+                agent=support_ticket_agent,
+                history=messages_list,
+            )
+
+            if should_agent_terminate:
+                print("Task completed")
+                break
 
         history = await agent_thread.get_messages()
 

@@ -15,7 +15,7 @@ This directory contains the dummy data files used for generating evaluation scen
 
 Each support ticket has the following fields:
 
-- Support Ticket ID: A unique identifier (format: T-2XXXX)
+- Support Ticket ID: A unique identifier (format: TKT-2XXXX)
 - Title: A brief description of the issue
 - Department Code: The code for the department responsible (IT, HR, DEV, etc.)
 - Priority: The urgency level (Low, Medium, High, Critical)
@@ -29,7 +29,7 @@ Each support ticket has the following fields:
 
 Each action item has the following fields:
 
-- Action Item ID: A unique identifier (format: A-XXX)
+- Action Item ID: A unique identifier (format: ACT-XXX)
 - Parent Ticket ID: The ID of the ticket this action item belongs to
 - Title: A brief description of the action
 - Assignee: The person assigned to the action
@@ -55,7 +55,7 @@ This pattern allows the templates to clearly reference which object a field belo
 
 Each action item has the following fields:
 
-- Action Item ID: A unique identifier (format: A-XXX)
+- Action Item ID: A unique identifier (format: ACT-XXX)
 - Parent Ticket ID: The ID of the support ticket this action item belongs to
 - Title: A brief description of the task
 - Assignee: The person responsible for the task

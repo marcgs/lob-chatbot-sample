@@ -12,7 +12,8 @@
           "priority": "{ticket.priority}",
           "workflow_type": "{ticket.workflow_type}",
           "description": "{ticket.description}",
-          "expected_outcome": "{ticket.expected_outcome}"
+          "expected_outcome": "{ticket.expected_outcome}",
+          "customer_visible": "{ticket.customer_visible}"
         }
       },
       {
@@ -53,13 +54,13 @@
   },
   {
     "scenario_name": "update_action_item_assignee",
-    "user_instructions": "Update the assignee and due date for an existing action item with ID A-003",
+    "user_instructions": "Update the assignee and due date for an existing action item with ID ACT-003",
     "task_completion": "The user has confirmed the end of the session.",
     "expected_function_calls": [
       {
         "functionName": "ActionItemPlugin-update_action_item",
         "arguments": {
-          "action_id": "A-003",
+          "action_id": "ACT-003",
           "assignee": "{action.assignee}",
           "due_date": "{action.due_date}"
         }
