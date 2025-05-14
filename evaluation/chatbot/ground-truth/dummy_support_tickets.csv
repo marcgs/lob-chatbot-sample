@@ -1,0 +1,50 @@
+Support Ticket ID,Title,Department Code,Priority,Workflow Type,Description,Expected Outcome,Resolution,Customer Visible
+TKT-20001,Server performance degradation,IT,Critical,Expedited,Main application server is experiencing significant performance degradation affecting all users,Server performance restored to normal levels,,False
+TKT-20002,Database connection timeout,PROD,High,Standard,Database connection timeout in payment processing system,Database connectivity restored,,False
+TKT-20003,Onboarding process delay,HR,Medium,Standard,Delays in onboarding new employees,Onboarding process streamlined,,False
+TKT-20004,Email outage,IT,Critical,Expedited,Company-wide email outage,Email service restored,,False
+TKT-20005,VPN access issue,IT,High,Standard,Remote employees unable to access VPN,VPN access restored,,False
+TKT-20006,Printer malfunction,OPS,Low,Standard,Printer not working in main office,Printer repaired,,False
+TKT-20007,Payroll system error,HR,Critical,Expedited,Payroll system not processing payments,Payroll system operational,,False
+TKT-20008,Website downtime,PROD,Critical,Expedited,Public website is down,Website back online,,False
+TKT-20009,Network latency,IT,Medium,Standard,High latency in internal network,Network performance improved,,False
+TKT-20010,Software license expired,OPS,High,Standard,Key software license expired,License renewed,,False
+TKT-20011,Data backup failure,IT,High,Standard,Automated data backup failed,Backup completed successfully,,False
+TKT-20012,Security breach,IT,Critical,Expedited,Detected unauthorized access,Security incident contained,,False
+TKT-20013,Mobile app crash,PROD,Medium,Standard,Mobile app crashes on launch,App stability improved,,False
+TKT-20014,Cloud storage full,IT,Medium,Standard,Cloud storage quota exceeded,Storage expanded,,False
+TKT-20015,HR portal bug,HR,Low,Standard,Minor bug in HR portal,Bug fixed,,False
+TKT-20016,Customer complaint,CUST,Medium,Standard,Customer reported issue with order,Customer satisfied,,False
+TKT-20017,Inventory mismatch,OPS,High,Standard,Inventory count mismatch,Inventory reconciled,,False
+TKT-20018,Password reset,IT,Low,Standard,User unable to reset password,Password reset completed,,False
+TKT-20019,Meeting room booking issue,OPS,Medium,Standard,Unable to book meeting room,Booking system fixed,,False
+TKT-20020,API integration error,PROD,High,Standard,API integration failing,Integration successful,,False
+TKT-20021,Server overheating,IT,Critical,Expedited,Server temperature exceeds safe limits,Server cooled down,,False
+TKT-20022,Compliance audit,IT,High,Standard,Upcoming compliance audit,Audit passed,,False
+TKT-20023,Remote desktop failure,IT,Medium,Standard,Remote desktop not connecting,Remote access restored,,False
+TKT-20024,File corruption,IT,High,Standard,Corrupted files detected,Files recovered,,False
+TKT-20025,Procurement delay,OPS,Medium,Standard,Delay in procurement process,Procurement on schedule,,False
+TKT-20026,CRM sync issue,CUST,High,Standard,CRM not syncing with email,Sync restored,,False
+TKT-20027,Expense report error,FIN,Medium,Standard,Error in expense report submission,Report corrected,,False
+TKT-20028,Legal document review,FIN,Low,Standard,Pending review of legal documents,Documents reviewed,,False
+TKT-20029,Supplier contract renewal,OPS,High,Standard,Supplier contract needs renewal,Contract renewed,,False
+TKT-20030,Helpdesk ticket backlog,CUST,Medium,Standard,Backlog of unresolved helpdesk tickets,Backlog cleared,,False
+TKT-20031,Asset tracking issue,OPS,Low,Standard,Asset tracking system not updating,Tracking fixed,,False
+TKT-20032,User account locked,IT,Low,Standard,User account locked after failed logins,Account unlocked,,False
+TKT-20033,Training session request,HR,Medium,Standard,Request for new employee training,Training scheduled,,False
+TKT-20034,Data migration,IT,High,Expedited,Migration to new data platform,Migration completed,,False
+TKT-20035,Firewall misconfiguration,IT,High,Standard,Firewall rules misconfigured,Configuration corrected,,False
+TKT-20036,Project deadline extension,PROD,Medium,Standard,Request to extend project deadline,Deadline extended,,False
+TKT-20037,System upgrade,IT,High,Standard,Upgrade required for core system,System upgraded,,False
+TKT-20038,Customer feedback,CUST,Low,Standard,Feedback from customer survey,Feedback reviewed,,False
+TKT-20039,Printer toner low,OPS,Low,Standard,Printer toner needs replacement,Toner replaced,,False
+TKT-20040,Access card issue,IT,Medium,Standard,Employee access card not working,Access restored,,False
+TKT-20041,Mobile device enrollment,IT,Medium,Standard,New mobile device enrollment,Device enrolled,,False
+TKT-20042,Budget approval,FIN,High,Standard,Pending budget approval,Budget approved,,False
+TKT-20043,Knowledge base update,CUST,Low,Standard,Update required for knowledge base,Knowledge base updated,,False
+TKT-20044,Incident report,IT,Critical,Expedited,Major incident reported,Incident resolved,,False
+TKT-20045,Software deployment,PROD,High,Standard,Deploy new software version,Deployment successful,,False
+TKT-20046,Employee exit process,HR,Medium,Standard,Employee exit process initiation,Exit process completed,,False
+TKT-20047,Cloud cost spike,IT,High,Standard,Unexpected spike in cloud costs,Costs analyzed,,False
+TKT-20048,Service request,CUST,Medium,Standard,General service request,Service provided,,False
+TKT-20049,Workstation setup,IT,Low,Standard,Setup new workstation,Workstation ready,,False

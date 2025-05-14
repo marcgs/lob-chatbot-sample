@@ -22,12 +22,7 @@
       2. Go to step 3 if they want to create a ticket based on a previous ticket.
 
 2. Create Support Ticket with manually provided data
-   a. Ask the user for the following required information:
-      1. Title of the ticket
-      2. Description of the issue
-      3. Category (Hardware, Software, Network, Other)
-      4. Priority level (Low, Medium, High, Critical)
-      5. Requested by (user name)
+   a. Ask the user to provide required values for `create_support_ticket` function.
    b. If some information is missing ask the user for the missing inputs.
    c. Once all information is collected, proceed to step 4.
 
@@ -52,13 +47,7 @@
    d. Proceed to step 6.
 
 6. Update Support Ticket
-   a. Ask the user which fields they would like to update:
-      1. Title
-      2. Description
-      3. Category
-      4. Priority level
-      5. Status (Open, In Progress, On Hold, Resolved, Closed)
-      6. Assigned to (technician name)
+   a. Ask the user which fields they would like to update. Derive fields from `update_support_ticket` function.
    b. For each field the user wants to update, ask for the new value.
    c. Proceed to step 7.
 
@@ -74,11 +63,7 @@
    c. Proceed to step 9.
 
 9. Collect Action Item details
-   a. Ask the user for the following required information:
-      1. Description of the action item
-      2. Assigned to (person responsible)
-      3. Due date
-      4. Priority level (Low, Medium, High)
+   a. Ask the user to provide values required for `create_action_item` function.
    b. If some information is missing ask the user for the missing inputs.
    c. Proceed to step 10.
 
@@ -90,18 +75,18 @@
 
 11. Gather information to call `update_action_item`.
     a. Ask the user for the action item ID they want to update.
-    b. Call `get_action_item_details` to retrieve the current action item information.
-    c. Display the current action item information to the user.
-    d. Proceed to step 12.
+    b. If the user does not know the action item ID, ask for other identifying information (e.g., ticket title, assignee, due date).
+    c. If action item ID is not provided, attempt to search for action items using the provided details:
+       1. If one match is found, proceed with that action item.
+       2. If multiple matches are found, present the list to the user for selection.
+       3. If no matches are found, offer to broaden the search (e.g., partial matches, remove filters) or ask for more details.
+       4. If still not found, suggest the user check their records or provide alternative identifiers (e.g., related ticket details, keywords, or approximate dates).
+    d. Once the action item is identified, call `get_action_item_details` to retrieve the current action item information.
+    e. Display the current action item information to the user.
+    f. Proceed to step 12.
 
 12. Update Action Item
-    a. Ask the user which fields they would like to update:
-       1. Description
-       2. Assigned to
-       3. Due date
-       4. Priority level
-       5. Status (Not Started, In Progress, Completed, Blocked)
-       6. Comments
+    a. Ask the user which fields they would like to update. Derive fields from `update_action_item` function.
     b. For each field the user wants to update, ask for the new value.
     c. Proceed to step 13.
 
@@ -112,15 +97,11 @@
     d. Go to step 0.
 
 14. Search Historical Tickets
-    a. Ask the user for search criteria:
-       1. Keywords in title or description
-       2. Date range
-       3. Category
-       4. Status
-       5. Priority level
+    a. Ask the user for search criteria. Derive available fields to search by from `search_tickets` function.
     b. Call `search_tickets` with the provided search criteria.
-    c. Display the search results to the user.
-    d. Ask if the user wants to:
+    c. If no results are found, offer to broaden the search (e.g., remove filters, use partial matches) or ask the user to refine their criteria.
+    d. Display the search results to the user.
+    e. Ask if the user wants to:
        1. View details of a specific ticket (go to step 15)
        2. Modify their search (repeat step 14)
        3. Return to the main menu (go to step 0)

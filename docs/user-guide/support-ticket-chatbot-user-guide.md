@@ -147,7 +147,7 @@ Bot: Here's a summary of the support ticket you're creating:
 
 User: Yes
 
-Bot: Successfully created ticket T-12345: "Email service outage in marketing department"
+Bot: Successfully created ticket TKT-12345: "Email service outage in marketing department"
      What would you like to do next?
      1. Create an action item for this ticket
      2. Update this ticket
@@ -156,7 +156,7 @@ Bot: Successfully created ticket T-12345: "Email service outage in marketing dep
 
 User: Create an action item for this ticket
 
-Bot: I'll help you create an action item for ticket T-12345. What should be the title of this action item?
+Bot: I'll help you create an action item for ticket TKT-12345. What should be the title of this action item?
 
 User: Restart exchange server
 
@@ -173,13 +173,13 @@ Bot: Here's a summary of the action item:
      Assignee: John Smith
      Due Date: 2025-05-07
      Status: Open
-     Parent Ticket: T-12345 (Email service outage in marketing department)
+     Parent Ticket: TKT-12345 (Email service outage in marketing department)
      
      Would you like to create this action item? (Yes/No)
 
 User: Yes
 
-Bot: Successfully created action item AI-5678 for ticket T-12345.
+Bot: Successfully created action item AI-5678 for ticket TKT-12345.
      What would you like to do next?
 ```
 
@@ -202,14 +202,14 @@ Bot: I'd be happy to help you create a new support ticket. How would you like to
      2. Look up a ticket by ID to use as a template
      3. Search for similar past tickets
 
-User: I want to use a template. Can I look up ticket T-12240?
+User: I want to use a template. Can I look up ticket TKT-12240?
 
-Bot: I found ticket T-12240: "Network connectivity issues in Finance department"
+Bot: I found ticket TKT-12240: "Network connectivity issues in Finance department"
      Would you like to use this ticket as a template for your new ticket? (Yes/No)
 
 User: Yes
 
-Bot: I'll use T-12240 as a template. Let me know what information you'd like to change.
+Bot: I'll use TKT-12240 as a template. Let me know what information you'd like to change.
      Current title: "Network connectivity issues in Finance department"
      Would you like to change the title? (Yes/No)
 
@@ -255,15 +255,15 @@ Bot: What keywords would you like to search for in past tickets?
 User: printer not working
 
 Bot: I found the following matching tickets:
-     1. T-11892: "Printer in HR department not printing color documents"
-     2. T-10576: "Marketing department printer offline"
-     3. T-09234: "Sales team printer paper jam issues"
+     1. TKT-11892: "Printer in HR department not printing color documents"
+     2. TKT-10576: "Marketing department printer offline"
+     3. TKT-09234: "Sales team printer paper jam issues"
      
      Would you like to use any of these tickets as a template? If so, enter the number.
 
 User: 2
 
-// ... conversation continues with the bot using T-10576 as a template ...
+// ... conversation continues with the bot using TKT-10576 as a template ...
 ```
 
 ### Updating a Support Ticket Sample
@@ -282,9 +282,9 @@ User: I need to update a ticket status
 
 Bot: I can help you update an existing support ticket. Do you know the ticket ID?
 
-User: Yes, T-12345
+User: Yes, TKT-12345
 
-Bot: I found ticket T-12345: "Email service outage in marketing department"
+Bot: I found ticket TKT-12345: "Email service outage in marketing department"
      What information would you like to update?
      1. Title
      2. Department
@@ -309,7 +309,7 @@ Bot: I'll update the status to "In Progress". Would you like to add any notes ab
 User: John is currently working on the exchange server issue
 
 Bot: Here's a summary of the update:
-     Ticket: T-12345 (Email service outage in marketing department)
+     Ticket: TKT-12345 (Email service outage in marketing department)
      Change: Status updated from "Open" to "In Progress"
      Notes: John is currently working on the exchange server issue
      
@@ -317,7 +317,7 @@ Bot: Here's a summary of the update:
 
 User: Yes
 
-Bot: Successfully updated ticket T-12345. The status is now "In Progress".
+Bot: Successfully updated ticket TKT-12345. The status is now "In Progress".
 ```
 
 ### Creating an Action Item Sample
@@ -332,9 +332,9 @@ Bot: Hello! How can I assist you today with support ticket management? Here are 
 - Search for historical tickets.
 Please let me know which option you'd like to proceed with!
 
-User: I need to add a new task to ticket T-12345
+User: I need to add a new task to ticket TKT-12345
 
-Bot: I'll help you create an action item for ticket T-12345: "Email service outage in marketing department".
+Bot: I'll help you create an action item for ticket TKT-12345: "Email service outage in marketing department".
      What should be the title of this action item?
 
 User: Check network firewall settings
@@ -352,13 +352,13 @@ Bot: Here's a summary of the action item:
      Assignee: Sarah Johnson
      Due Date: 2025-05-08
      Status: Open
-     Parent Ticket: T-12345 (Email service outage in marketing department)
+     Parent Ticket: TKT-12345 (Email service outage in marketing department)
      
      Would you like to create this action item? (Yes/No)
 
 User: Yes
 
-Bot: Successfully created action item AI-5679 for ticket T-12345.
+Bot: Successfully created action item AI-5679 for ticket TKT-12345.
 ```
 
 ### Updating an Action Item Sample
@@ -375,7 +375,7 @@ Please let me know which option you'd like to proceed with!
 
 User: I need to update action item AI-5678
 
-Bot: I found action item AI-5678: "Restart exchange server" (for ticket T-12345)
+Bot: I found action item AI-5678: "Restart exchange server" (for ticket TKT-12345)
      What would you like to update?
      1. Title
      2. Assignee
