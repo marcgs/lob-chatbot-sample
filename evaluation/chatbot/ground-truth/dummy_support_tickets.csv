@@ -1,0 +1,50 @@
+Support Ticket ID,Title,Department Code,Priority,Workflow Type,Description,Expected Outcome,Resolution,Customer Visible
+T-20001,Server performance degradation,IT,Critical,Expedited,Main application server is experiencing significant performance degradation affecting all users,Server performance restored to normal levels,,False
+T-20002,Database connection timeout,DEV,High,Standard,Database connection timeout in payment processing system,Database connectivity restored,,False
+T-20003,Onboarding process delay,HR,Medium,Standard,Delays in onboarding new employees,Onboarding process streamlined,,False
+T-20004,Email outage,IT,Critical,Expedited,Company-wide email outage,Email service restored,,False
+T-20005,VPN access issue,IT,High,Standard,Remote employees unable to access VPN,VPN access restored,,False
+T-20006,Printer malfunction,OPS,Low,Standard,Printer not working in main office,Printer repaired,,False
+T-20007,Payroll system error,HR,Critical,Expedited,Payroll system not processing payments,Payroll system operational,,False
+T-20008,Website downtime,DEV,Critical,Expedited,Public website is down,Website back online,,False
+T-20009,Network latency,IT,Medium,Standard,High latency in internal network,Network performance improved,,False
+T-20010,Software license expired,OPS,High,Standard,Key software license expired,License renewed,,False
+T-20011,Data backup failure,IT,High,Standard,Automated data backup failed,Backup completed successfully,,False
+T-20012,Security breach,SEC,Critical,Expedited,Detected unauthorized access,Security incident contained,,False
+T-20013,Mobile app crash,DEV,Medium,Standard,Mobile app crashes on launch,App stability improved,,False
+T-20014,Cloud storage full,IT,Medium,Standard,Cloud storage quota exceeded,Storage expanded,,False
+T-20015,HR portal bug,HR,Low,Standard,Minor bug in HR portal,Bug fixed,,False
+T-20016,Customer complaint,CS,Medium,Standard,Customer reported issue with order,Customer satisfied,,False
+T-20017,Inventory mismatch,OPS,High,Standard,Inventory count mismatch,Inventory reconciled,,False
+T-20018,Password reset,IT,Low,Standard,User unable to reset password,Password reset completed,,False
+T-20019,Meeting room booking issue,OPS,Medium,Standard,Unable to book meeting room,Booking system fixed,,False
+T-20020,API integration error,DEV,High,Standard,API integration failing,Integration successful,,False
+T-20021,Server overheating,IT,Critical,Expedited,Server temperature exceeds safe limits,Server cooled down,,False
+T-20022,Compliance audit,SEC,High,Standard,Upcoming compliance audit,Audit passed,,False
+T-20023,Remote desktop failure,IT,Medium,Standard,Remote desktop not connecting,Remote access restored,,False
+T-20024,File corruption,IT,High,Standard,Corrupted files detected,Files recovered,,False
+T-20025,Procurement delay,OPS,Medium,Standard,Delay in procurement process,Procurement on schedule,,False
+T-20026,CRM sync issue,CS,High,Standard,CRM not syncing with email,Sync restored,,False
+T-20027,Expense report error,FIN,Medium,Standard,Error in expense report submission,Report corrected,,False
+T-20028,Legal document review,LEG,Low,Standard,Pending review of legal documents,Documents reviewed,,False
+T-20029,Supplier contract renewal,OPS,High,Standard,Supplier contract needs renewal,Contract renewed,,False
+T-20030,Helpdesk ticket backlog,CS,Medium,Standard,Backlog of unresolved helpdesk tickets,Backlog cleared,,False
+T-20031,Asset tracking issue,OPS,Low,Standard,Asset tracking system not updating,Tracking fixed,,False
+T-20032,User account locked,IT,Low,Standard,User account locked after failed logins,Account unlocked,,False
+T-20033,Training session request,HR,Medium,Standard,Request for new employee training,Training scheduled,,False
+T-20034,Data migration,IT,High,Expedited,Migration to new data platform,Migration completed,,False
+T-20035,Firewall misconfiguration,SEC,High,Standard,Firewall rules misconfigured,Configuration corrected,,False
+T-20036,Project deadline extension,DEV,Medium,Standard,Request to extend project deadline,Deadline extended,,False
+T-20037,System upgrade,IT,High,Standard,Upgrade required for core system,System upgraded,,False
+T-20038,Customer feedback,CS,Low,Standard,Feedback from customer survey,Feedback reviewed,,False
+T-20039,Printer toner low,OPS,Low,Standard,Printer toner needs replacement,Toner replaced,,False
+T-20040,Access card issue,SEC,Medium,Standard,Employee access card not working,Access restored,,False
+T-20041,Mobile device enrollment,IT,Medium,Standard,New mobile device enrollment,Device enrolled,,False
+T-20042,Budget approval,FIN,High,Standard,Pending budget approval,Budget approved,,False
+T-20043,Knowledge base update,CS,Low,Standard,Update required for knowledge base,Knowledge base updated,,False
+T-20044,Incident report,SEC,Critical,Expedited,Major incident reported,Incident resolved,,False
+T-20045,Software deployment,DEV,High,Standard,Deploy new software version,Deployment successful,,False
+T-20046,Employee exit process,HR,Medium,Standard,Employee exit process initiation,Exit process completed,,False
+T-20047,Cloud cost spike,IT,High,Standard,Unexpected spike in cloud costs,Costs analyzed,,False
+T-20048,Service request,CS,Medium,Standard,General service request,Service provided,,False
+T-20049,Workstation setup,IT,Low,Standard,Setup new workstation,Workstation ready,,False

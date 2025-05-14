@@ -1,0 +1,172 @@
+Action Item ID,Parent Ticket ID,Title,Assignee,Status,Due Date
+A-201,T-20001,Restart application server,John Smith,Open,2025-05-10
+A-211,T-20001,Scale application server,David Lee,Open,2025-05-18
+A-221,T-20001,Update server monitoring tools,Emma Wilson,In Progress,2025-05-12
+A-231,T-20001,Apply performance patches,Thomas Brown,Open,2025-05-15
+A-202,T-20002,Check database connections,Maria Rodriguez,In Progress,2025-05-15
+A-212,T-20002,Optimize database queries,Carlos Sanchez,Open,2025-05-16
+A-222,T-20002,Update database driver,Jennifer Lopez,In Progress,2025-05-17
+A-203,T-20003,Review onboarding workflow,Alex Johnson,Open,2025-05-08
+A-213,T-20003,Update orientation materials,Sarah Parker,In Progress,2025-05-09
+A-223,T-20003,Schedule HR training,Michael Adams,Open,2025-05-11
+A-233,T-20003,Configure system permissions,Rachel Green,In Progress,2025-05-10
+A-243,T-20003,Create welcome package,Ross Geller,Open,2025-05-12
+A-204,T-20004,Restart email server,Sarah Wilson,Open,2025-05-12
+A-214,T-20004,Check mail routing,James Thompson,In Progress,2025-05-13
+A-224,T-20004,Verify mail protocols,Emily Davis,Open,2025-05-14
+A-205,T-20005,Check VPN configurations,Michael Lee,In Progress,2025-05-14
+A-215,T-20005,Update VPN client software,Jessica Taylor,Open,2025-05-15
+A-225,T-20005,Reset VPN connections,Andrew Martin,In Progress,2025-05-16
+A-235,T-20005,Test remote access,Laura Robinson,Open,2025-05-17
+A-206,T-20006,Replace printer toner,Emily Chen,Open,2025-05-20
+A-216,T-20006,Order new printer supplies,Kevin Wang,In Progress,2025-05-21
+A-226,T-20006,Clean printer hardware,Linda Liu,Open,2025-05-22
+A-207,T-20007,Restart payroll system,David Kim,Critical,2025-05-09
+A-217,T-20007,Verify payment calculations,Michelle Park,In Progress,2025-05-10
+A-227,T-20007,Run payroll audit,Steven Choi,Open,2025-05-11
+A-237,T-20007,Update tax tables,Nancy Lee,In Progress,2025-05-12
+A-247,T-20007,Process manual payments,Robert Jung,Open,2025-05-13
+A-208,T-20008,Restart web servers,Olivia Brown,Open,2025-05-11
+A-218,T-20008,Check server logs,Noah White,In Progress,2025-05-12
+A-228,T-20008,Update website content,Emma Black,Open,2025-05-13
+A-209,T-20009,Check network devices,James Miller,In Progress,2025-05-18
+A-219,T-20009,Reboot network switches,Sophia Johnson,Open,2025-05-19
+A-229,T-20009,Update router firmware,Liam Williams,In Progress,2025-05-20
+A-239,T-20009,Run network diagnostics,Olivia Jones,Open,2025-05-21
+A-010,T-20010,Renew software license,Sophia Garcia,Open,2025-05-13
+A-110,T-20010,Process license payment,Miguel Martinez,In Progress,2025-05-14
+A-210,T-20010,Update license key in systems,Isabella Rodriguez,Open,2025-05-15
+A-011,T-20011,Check backup system,Liam Martinez,In Progress,2025-05-16
+A-111,T-20011,Restore test file from backup,Sofia Hernandez,Open,2025-05-17
+A-211,T-20011,Schedule new backup jobs,Mateo Gonzalez,In Progress,2025-05-18
+A-311,T-20011,Review backup retention policy,Camila Lopez,Open,2025-05-19
+A-012,T-20012,Review security logs,Ava Davis,Open,2025-05-17
+A-112,T-20012,Update security rules,Jackson Wilson,In Progress,2025-05-18
+A-013,T-20013,Debug mobile application,Noah Wilson,In Progress,2025-05-19
+A-113,T-20013,Test app on multiple devices,Lucas Moore,Open,2025-05-20
+A-213,T-20013,Update app dependencies,Harper Taylor,In Progress,2025-05-21
+A-313,T-20013,Fix user login issue,Evelyn Anderson,Open,2025-05-22
+A-014,T-20014,Increase storage allocation,Mia Anderson,Open,2025-05-21
+A-114,T-20014,Order new storage hardware,Ethan Thomas,In Progress,2025-05-22
+A-214,T-20014,Migrate data to new storage,Charlotte Jackson,Open,2025-05-23
+A-314,T-20014,Update storage monitoring,Alexander White,In Progress,2025-05-24
+A-414,T-20014,Document storage architecture,Amelia Harris,Open,2025-05-25
+A-015,T-20015,Fix HR portal bug,Lucas Thomas,In Progress,2025-05-22
+A-115,T-20015,Test portal functionality,Sebastian Martin,Open,2025-05-23
+A-215,T-20015,Update portal documentation,Aria Thompson,In Progress,2025-05-24
+A-016,T-20016,Contact customer for details,Ella White,Open,2025-05-23
+A-116,T-20016,Document customer feedback,Henry Clark,In Progress,2025-05-24
+A-216,T-20016,Create solution proposal,Scarlett Lewis,Open,2025-05-25
+A-316,T-20016,Get customer approval,Madison Walker,In Progress,2025-05-26
+A-017,T-20017,Reconcile inventory counts,Benjamin Harris,In Progress,2025-05-24
+A-117,T-20017,Update inventory system,Eleanor Young,Open,2025-05-25
+A-018,T-20018,Reset user password,Charlotte Clark,Completed,2025-05-25
+A-118,T-20018,Verify user access,William Turner,In Progress,2025-05-26
+A-218,T-20018,Update security questions,Victoria Scott,Open,2025-05-27
+A-318,T-20018,Send credentials to user,Grace Mitchell,Completed,2025-05-28
+A-019,T-20019,Restart booking system,Henry Lewis,Open,2025-05-26
+A-119,T-20019,Verify booking data integrity,Lillian Carter,In Progress,2025-05-27
+A-219,T-20019,Test booking functionality,Samuel Roberts,Open,2025-05-28
+A-020,T-20020,Debug API integration,Amelia Walker,In Progress,2025-05-27
+A-120,T-20020,Update API credentials,Daniel Phillips,Open,2025-05-28
+A-220,T-20020,Test API endpoints,Chloe Evans,In Progress,2025-05-29
+A-320,T-20020,Document API changes,Leo Mitchell,Open,2025-05-30
+A-021,T-20021,Check server cooling system,Jack Hall,Open,2025-05-28
+A-121,T-20021,Clean cooling fans,Zoe Parker,In Progress,2025-05-29
+A-022,T-20022,Prepare compliance documents,Harper Young,In Progress,2025-05-29
+A-122,T-20022,Review legal requirements,Joseph Allen,Open,2025-05-30
+A-222,T-20022,Submit compliance reports,Audrey Nelson,In Progress,2025-05-31
+A-322,T-20022,Schedule compliance training,Theodore King,Open,2025-06-01
+A-023,T-20023,Check remote desktop service,Evelyn King,Open,2025-05-30
+A-123,T-20023,Update remote access policies,Wyatt Baker,In Progress,2025-05-31
+A-223,T-20023,Test remote connections,Stella Adams,Open,2025-06-01
+A-024,T-20024,Recover corrupted files,Alexander Wright,In Progress,2025-05-31
+A-124,T-20024,Run file system check,Hazel Campbell,Open,2025-06-01
+A-224,T-20024,Restore from backup,Miles Cook,In Progress,2025-06-02
+A-324,T-20024,Document recovery process,Nora Stewart,Open,2025-06-03
+A-025,T-20025,Expedite procurement process,Abigail Scott,Open,2025-06-01
+A-125,T-20025,Update vendor information,Caleb Morris,In Progress,2025-06-02
+A-026,T-20026,Check CRM configuration,Matthew Green,In Progress,2025-06-02
+A-126,T-20026,Update customer records,Ellie Rogers,Open,2025-06-03
+A-226,T-20026,Test customer portal,Julian Reed,In Progress,2025-06-04
+A-326,T-20026,Train staff on CRM features,Aurora Collins,Open,2025-06-05
+A-027,T-20027,Review expense report,Scarlett Adams,Open,2025-06-03
+A-127,T-20027,Update expense categories,Owen Morgan,In Progress,2025-06-04
+A-227,T-20027,Process reimbursements,Ivy Bailey,Open,2025-06-05
+A-028,T-20028,Schedule legal document review,Sebastian Baker,In Progress,2025-06-04
+A-128,T-20028,Prepare document summary,Violet Bennett,Open,2025-06-05
+A-228,T-20028,Get legal department approval,Felix Wood,In Progress,2025-06-06
+A-328,T-20028,Archive reviewed documents,Ruby Gray,Open,2025-06-07
+A-428,T-20028,Update document tracking system,Oscar Ward,In Progress,2025-06-08
+A-029,T-20029,Contact supplier about contract,Victoria Nelson,Open,2025-06-05
+A-129,T-20029,Negotiate contract terms,Silas Fisher,In Progress,2025-06-06
+A-229,T-20029,Prepare contract draft,Piper Barnes,Open,2025-06-07
+A-030,T-20030,Allocate additional helpdesk resources,Mason Carter,In Progress,2025-06-06
+A-130,T-20030,Update helpdesk schedules,Alice Cooper,Open,2025-06-07
+A-230,T-20030,Train new helpdesk staff,Levi Ross,In Progress,2025-06-08
+A-330,T-20030,Update helpdesk procedures,Clara Price,Open,2025-06-09
+A-031,T-20031,Update asset tracking system,Penelope Mitchell,Open,2025-06-07
+A-131,T-20031,Conduct asset inventory,Jasper Coleman,In Progress,2025-06-08
+A-032,T-20032,Unlock user account,Logan Perez,Completed,2025-06-08
+A-132,T-20032,Reset security settings,Isla Howard,In Progress,2025-06-09
+A-232,T-20032,Document security incident,Asher Foster,Open,2025-06-10
+A-033,T-20033,Schedule training session,Layla Roberts,Open,2025-06-09
+A-133,T-20033,Prepare training materials,Eli Powell,In Progress,2025-06-10
+A-233,T-20033,Set up training environment,Nova Long,Open,2025-06-11
+A-333,T-20033,Send training invitations,Ezra Jenkins,In Progress,2025-06-12
+A-034,T-20034,Plan data migration steps,Daniel Turner,In Progress,2025-06-10
+A-134,T-20034,Create data backup,Willow Perry,Open,2025-06-11
+A-234,T-20034,Test migration procedure,August Butler,In Progress,2025-06-12
+A-334,T-20034,Schedule migration window,Mila Brooks,Open,2025-06-13
+A-434,T-20034,Update system documentation,Rowan Simmons,In Progress,2025-06-14
+A-035,T-20035,Update firewall rules,Zoe Phillips,Open,2025-06-11
+A-135,T-20035,Test network security,Atlas Sanchez,In Progress,2025-06-12
+A-235,T-20035,Document rule changes,Iris Flores,Open,2025-06-13
+A-036,T-20036,Update project timeline,Leo Campbell,In Progress,2025-06-12
+A-136,T-20036,Reschedule project tasks,Eden Washington,Open,2025-06-13
+A-236,T-20036,Notify project stakeholders,River Watson,In Progress,2025-06-14
+A-037,T-20037,Schedule system upgrade,Nora Parker,Open,2025-06-13
+A-137,T-20037,Create upgrade plan,Sage Harrison,In Progress,2025-06-14
+A-237,T-20037,Prepare rollback procedure,Juniper Wallace,Open,2025-06-15
+A-337,T-20037,Test upgrade in development,Phoenix Jordan,In Progress,2025-06-16
+A-038,T-20038,Review customer feedback,Isaac Evans,In Progress,2025-06-14
+A-138,T-20038,Categorize feedback items,Luna Griffin,Open,2025-06-15
+A-238,T-20038,Create action plan,Sol Murphy,In Progress,2025-06-16
+A-338,T-20038,Update customer service procedures,Nova Coleman,Open,2025-06-17
+A-039,T-20039,Order printer toner,Ellie Edwards,Completed,2025-06-15
+A-139,T-20039,Distribute toner to departments,Apollo Chen,In Progress,2025-06-16
+A-040,T-20040,Reset access card,Wyatt Collins,Open,2025-06-16
+A-140,T-20040,Update access control system,Astrid Nelson,In Progress,2025-06-17
+A-240,T-20040,Test door access,Echo Foster,Open,2025-06-18
+A-041,T-20041,Configure mobile device,Savannah Stewart,In Progress,2025-06-17
+A-141,T-20041,Install required applications,Orion Hayes,Open,2025-06-18
+A-241,T-20041,Set up email account,Cora Diaz,In Progress,2025-06-19
+A-341,T-20041,Configure security settings,Arlo Cooper,Open,2025-06-20
+A-042,T-20042,Prepare budget documentation,Julian Morris,Open,2025-06-18
+A-142,T-20042,Review expense forecasts,Fern Rivera,In Progress,2025-06-19
+A-242,T-20042,Update budget spreadsheets,Bodhi Hill,Open,2025-06-20
+A-043,T-20043,Update knowledge base content,Avery Rogers,In Progress,2025-06-19
+A-143,T-20043,Review article accuracy,Cedar Ross,Open,2025-06-20
+A-243,T-20043,Create new how-to guides,Indigo Ward,In Progress,2025-06-21
+A-343,T-20043,Publish updated content,Bay Powell,Open,2025-06-22
+A-044,T-20044,Prepare incident report,Gabriel Reed,Open,2025-06-20
+A-144,T-20044,Interview affected staff,Azure Peterson,In Progress,2025-06-21
+A-244,T-20044,Document incident timeline,Sky Wilson,Open,2025-06-22
+A-344,T-20044,Create prevention plan,Ember Brown,In Progress,2025-06-23
+A-045,T-20045,Deploy software to test environment,Aurora Cook,In Progress,2025-06-21
+A-145,T-20045,Run automated tests,Moss Garcia,Open,2025-06-22
+A-046,T-20046,Process employee exit paperwork,Lincoln Morgan,Open,2025-06-22
+A-146,T-20046,Collect company property,Rain Davis,In Progress,2025-06-23
+A-246,T-20046,Disable system access,Wren Taylor,Open,2025-06-24
+A-346,T-20046,Conduct exit interview,Brook Martinez,In Progress,2025-06-25
+A-047,T-20047,Analyze cloud usage patterns,Paisley Bell,In Progress,2025-06-23
+A-147,T-20047,Optimize cloud resources,Storm Robinson,Open,2025-06-24
+A-247,T-20047,Update cloud configuration,Vale Wright,In Progress,2025-06-25
+A-347,T-20047,Document cost-saving measures,Lake Howard,Open,2025-06-26
+A-048,T-20048,Process service request,Hudson Murphy,Open,2025-06-24
+A-148,T-20048,Assign service technician,Sparrow Scott,In Progress,2025-06-25
+A-248,T-20048,Schedule service appointment,Ocean Bennett,Open,2025-06-26
+A-049,T-20049,Prepare workstation hardware,Brooklyn Bailey,In Progress,2025-06-25
+A-149,T-20049,Install operating system,Reed Cooper,Open,2025-06-26
+A-249,T-20049,Configure user settings,Leaf Morgan,In Progress,2025-06-27
+A-349,T-20049,Deploy to user location,Ash Peterson,Open,2025-06-28

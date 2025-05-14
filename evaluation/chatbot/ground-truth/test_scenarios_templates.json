@@ -7,20 +7,20 @@
       {
         "functionName": "TicketManagementPlugin-create_support_ticket",
         "arguments": {
-          "title": "{title}",
-          "department_code": "{department_code}",
-          "priority": "{priority}",
-          "workflow_type": "{workflow_type}",
-          "description": "{description}",
-          "expected_outcome": "{expected_outcome}"
+          "title": "{ticket.title}",
+          "department_code": "{ticket.department_code}",
+          "priority": "{ticket.priority}",
+          "workflow_type": "{ticket.workflow_type}",
+          "description": "{ticket.description}",
+          "expected_outcome": "{ticket.expected_outcome}"
         }
       },
       {
         "functionName": "ActionItemPlugin-create_action_item",
         "arguments": {
-          "title": "{title}",
-          "assignee": "{assignee}",
-          "due_date": "{due_date}"
+          "title": "{action.title}",
+          "assignee": "{action.assignee}",
+          "due_date": "{action.due_date}"
         }
       }
     ]
@@ -44,9 +44,9 @@
       {
         "functionName": "TicketManagementPlugin-update_support_ticket",
         "arguments": {
-          "priority": "{priority}",
-          "department_code": "{department_code}",
-          "description": "{description}"
+          "priority": "{ticket.priority}",
+          "department_code": "{ticket.department_code}",
+          "description": "{ticket.description}"
         }
       }
     ]
@@ -60,8 +60,8 @@
         "functionName": "ActionItemPlugin-update_action_item",
         "arguments": {
           "action_id": "A-003",
-          "assignee": "{assignee}",
-          "due_date": "{due_date}"
+          "assignee": "{action.assignee}",
+          "due_date": "{action.due_date}"
         }
       }
     ]

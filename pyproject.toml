@@ -21,6 +21,7 @@ dependencies = [
     "seaborn>=0.13.0",
     "nbformat",
     "nbconvert",
+    "pandas"
 ]
 
 [tool.pyright]
