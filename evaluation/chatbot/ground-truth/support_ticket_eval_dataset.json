@@ -1,85 +1,135 @@
 [
     {
         "scenarioType": "create_ticket_and_action_item",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20041\"\n- title: \"Mobile device enrollment\"\n- department_code: \"IT\"\n- priority: \"Medium\"\n- workflow_type: \"Standard\"\n- description: \"New mobile device enrollment\"\n- expected_outcome: \"Device enrolled\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-20241\"\n- title: \"Set up email account\"\n- assignee: \"Cora Diaz\"\n- status: \"In Progress\"\n- due_date: \"2025-06-19\"\n\nHere is your task:\nCreate a new support ticket and create a new action item for it.\n\nBegin the conversation. Respond as the user.\n",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20049\"\n- title: \"Workstation setup\"\n- department_code: \"IT\"\n- priority: \"Low\"\n- workflow_type: \"Standard\"\n- description: \"Setup new workstation\"\n- expected_outcome: \"Workstation ready\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-249\"\n- title: \"Configure user settings\"\n- assignee: \"Leaf Morgan\"\n- status: \"In Progress\"\n- due_date: \"2025-06-27\"\n\nHere is your task:\nCreate a new support ticket and create a new action item for it.\n\nBegin the conversation. Respond as the user.\n",
         "task_completion_condition": "The user has confirmed the end of the session.",
         "expected_function_calls": [
             {
                 "functionName": "TicketManagementPlugin-create_support_ticket",
                 "arguments": {
-                    "title": "Mobile device enrollment",
+                    "title": "Workstation setup",
                     "department_code": "IT",
-                    "priority": "Medium",
+                    "priority": "Low",
                     "workflow_type": "Standard",
-                    "description": "New mobile device enrollment",
-                    "expected_outcome": "Device enrolled"
+                    "description": "Setup new workstation",
+                    "expected_outcome": "Workstation ready"
                 }
             },
             {
                 "functionName": "ActionItemPlugin-create_action_item",
                 "arguments": {
-                    "title": "Set up email account",
-                    "assignee": "Cora Diaz",
-                    "due_date": "2025-06-19"
+                    "title": "Configure user settings",
+                    "assignee": "Leaf Morgan",
+                    "due_date": "2025-06-27"
                 }
             }
         ]
     },
     {
         "scenarioType": "create_ticket_and_action_item",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20014\"\n- title: \"Cloud storage full\"\n- department_code: \"IT\"\n- priority: \"Medium\"\n- workflow_type: \"Standard\"\n- description: \"Cloud storage quota exceeded\"\n- expected_outcome: \"Storage expanded\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-20114\"\n- title: \"Order new storage hardware\"\n- assignee: \"Ethan Thomas\"\n- status: \"In Progress\"\n- due_date: \"2025-05-22\"\n\nHere is your task:\nCreate a new support ticket and create a new action item for it.\n\nBegin the conversation. Respond as the user.\n",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20046\"\n- title: \"Employee exit process\"\n- department_code: \"HR\"\n- priority: \"Medium\"\n- workflow_type: \"Standard\"\n- description: \"Employee exit process initiation\"\n- expected_outcome: \"Exit process completed\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-146\"\n- title: \"Collect company property\"\n- assignee: \"Rain Davis\"\n- status: \"In Progress\"\n- due_date: \"2025-06-23\"\n\nHere is your task:\nCreate a new support ticket and create a new action item for it.\n\nBegin the conversation. Respond as the user.\n",
         "task_completion_condition": "The user has confirmed the end of the session.",
         "expected_function_calls": [
             {
                 "functionName": "TicketManagementPlugin-create_support_ticket",
                 "arguments": {
-                    "title": "Cloud storage full",
-                    "department_code": "IT",
+                    "title": "Employee exit process",
+                    "department_code": "HR",
                     "priority": "Medium",
                     "workflow_type": "Standard",
-                    "description": "Cloud storage quota exceeded",
-                    "expected_outcome": "Storage expanded"
+                    "description": "Employee exit process initiation",
+                    "expected_outcome": "Exit process completed"
                 }
             },
             {
                 "functionName": "ActionItemPlugin-create_action_item",
                 "arguments": {
-                    "title": "Order new storage hardware",
-                    "assignee": "Ethan Thomas",
-                    "due_date": "2025-05-22"
+                    "title": "Collect company property",
+                    "assignee": "Rain Davis",
+                    "due_date": "2025-06-23"
                 }
             }
         ]
     },
     {
         "scenarioType": "create_ticket_and_action_item",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20001\"\n- title: \"Server performance degradation\"\n- department_code: \"IT\"\n- priority: \"Critical\"\n- workflow_type: \"Expedited\"\n- description: \"Main application server is experiencing significant performance degradation affecting all users\"\n- expected_outcome: \"Server performance restored to normal levels\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-2101\"\n- title: \"Scale application server\"\n- assignee: \"David Lee\"\n- status: \"Open\"\n- due_date: \"2025-05-18\"\n\nHere is your task:\nCreate a new support ticket and create a new action item for it.\n\nBegin the conversation. Respond as the user.\n",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20010\"\n- title: \"Software license expired\"\n- department_code: \"OPS\"\n- priority: \"High\"\n- workflow_type: \"Standard\"\n- description: \"Key software license expired\"\n- expected_outcome: \"License renewed\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-010\"\n- title: \"Renew software license\"\n- assignee: \"Sophia Garcia\"\n- status: \"Open\"\n- due_date: \"2025-05-13\"\n\nHere is your task:\nCreate a new support ticket and create a new action item for it.\n\nBegin the conversation. Respond as the user.\n",
         "task_completion_condition": "The user has confirmed the end of the session.",
         "expected_function_calls": [
             {
                 "functionName": "TicketManagementPlugin-create_support_ticket",
                 "arguments": {
-                    "title": "Server performance degradation",
-                    "department_code": "IT",
-                    "priority": "Critical",
-                    "workflow_type": "Expedited",
-                    "description": "Main application server is experiencing significant performance degradation affecting all users",
-                    "expected_outcome": "Server performance restored to normal levels"
+                    "title": "Software license expired",
+                    "department_code": "OPS",
+                    "priority": "High",
+                    "workflow_type": "Standard",
+                    "description": "Key software license expired",
+                    "expected_outcome": "License renewed"
                 }
             },
             {
                 "functionName": "ActionItemPlugin-create_action_item",
                 "arguments": {
-                    "title": "Scale application server",
-                    "assignee": "David Lee",
-                    "due_date": "2025-05-18"
+                    "title": "Renew software license",
+                    "assignee": "Sophia Garcia",
+                    "due_date": "2025-05-13"
                 }
             }
         ]
     },
     {
         "scenarioType": "search_and_update_ticket",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20025\"\n- title: \"Procurement delay\"\n- department_code: \"OPS\"\n- priority: \"Medium\"\n- workflow_type: \"Standard\"\n- description: \"Delay in procurement process\"\n- expected_outcome: \"Procurement on schedule\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-20025\"\n- title: \"Expedite procurement process\"\n- assignee: \"Abigail Scott\"\n- status: \"Open\"\n- due_date: \"2025-06-01\"\n\nHere is your task:\nSearch for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.\n\nBegin the conversation. Respond as the user.\n",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20045\"\n- title: \"Software deployment\"\n- department_code: \"DEV\"\n- priority: \"High\"\n- workflow_type: \"Standard\"\n- description: \"Deploy new software version\"\n- expected_outcome: \"Deployment successful\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-045\"\n- title: \"Deploy software to test environment\"\n- assignee: \"Aurora Cook\"\n- status: \"In Progress\"\n- due_date: \"2025-06-21\"\n\nHere is your task:\nSearch for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.\n\nBegin the conversation. Respond as the user.\n",
+        "task_completion_condition": "The user has confirmed the end of the session.",
+        "expected_function_calls": [
+            {
+                "functionName": "TicketManagementPlugin-search_tickets",
+                "arguments": {
+                    "priority": "Low"
+                }
+            },
+            {
+                "functionName": "TicketManagementPlugin-get_support_ticket",
+                "arguments": {}
+            },
+            {
+                "functionName": "TicketManagementPlugin-update_support_ticket",
+                "arguments": {
+                    "priority": "High",
+                    "department_code": "DEV",
+                    "description": "Deploy new software version"
+                }
+            }
+        ]
+    },
+    {
+        "scenarioType": "search_and_update_ticket",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20005\"\n- title: \"VPN access issue\"\n- department_code: \"IT\"\n- priority: \"High\"\n- workflow_type: \"Standard\"\n- description: \"Remote employees unable to access VPN\"\n- expected_outcome: \"VPN access restored\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-235\"\n- title: \"Test remote access\"\n- assignee: \"Laura Robinson\"\n- status: \"Open\"\n- due_date: \"2025-05-17\"\n\nHere is your task:\nSearch for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.\n\nBegin the conversation. Respond as the user.\n",
+        "task_completion_condition": "The user has confirmed the end of the session.",
+        "expected_function_calls": [
+            {
+                "functionName": "TicketManagementPlugin-search_tickets",
+                "arguments": {
+                    "priority": "Low"
+                }
+            },
+            {
+                "functionName": "TicketManagementPlugin-get_support_ticket",
+                "arguments": {}
+            },
+            {
+                "functionName": "TicketManagementPlugin-update_support_ticket",
+                "arguments": {
+                    "priority": "High",
+                    "department_code": "IT",
+                    "description": "Remote employees unable to access VPN"
+                }
+            }
+        ]
+    },
+    {
+        "scenarioType": "search_and_update_ticket",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20019\"\n- title: \"Meeting room booking issue\"\n- department_code: \"OPS\"\n- priority: \"Medium\"\n- workflow_type: \"Standard\"\n- description: \"Unable to book meeting room\"\n- expected_outcome: \"Booking system fixed\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-019\"\n- title: \"Restart booking system\"\n- assignee: \"Henry Lewis\"\n- status: \"Open\"\n- due_date: \"2025-05-26\"\n\nHere is your task:\nSearch for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.\n\nBegin the conversation. Respond as the user.\n",
         "task_completion_condition": "The user has confirmed the end of the session.",
         "expected_function_calls": [
             {
@@ -97,102 +147,52 @@
                 "arguments": {
                     "priority": "Medium",
                     "department_code": "OPS",
-                    "description": "Delay in procurement process"
-                }
-            }
-        ]
-    },
-    {
-        "scenarioType": "search_and_update_ticket",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20018\"\n- title: \"Password reset\"\n- department_code: \"IT\"\n- priority: \"Low\"\n- workflow_type: \"Standard\"\n- description: \"User unable to reset password\"\n- expected_outcome: \"Password reset completed\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-20318\"\n- title: \"Send credentials to user\"\n- assignee: \"Grace Mitchell\"\n- status: \"Completed\"\n- due_date: \"2025-05-28\"\n\nHere is your task:\nSearch for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.\n\nBegin the conversation. Respond as the user.\n",
-        "task_completion_condition": "The user has confirmed the end of the session.",
-        "expected_function_calls": [
-            {
-                "functionName": "TicketManagementPlugin-search_tickets",
-                "arguments": {
-                    "priority": "Low"
-                }
-            },
-            {
-                "functionName": "TicketManagementPlugin-get_support_ticket",
-                "arguments": {}
-            },
-            {
-                "functionName": "TicketManagementPlugin-update_support_ticket",
-                "arguments": {
-                    "priority": "Low",
-                    "department_code": "IT",
-                    "description": "User unable to reset password"
-                }
-            }
-        ]
-    },
-    {
-        "scenarioType": "search_and_update_ticket",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20026\"\n- title: \"CRM sync issue\"\n- department_code: \"CS\"\n- priority: \"High\"\n- workflow_type: \"Standard\"\n- description: \"CRM not syncing with email\"\n- expected_outcome: \"Sync restored\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-20026\"\n- title: \"Check CRM configuration\"\n- assignee: \"Matthew Green\"\n- status: \"In Progress\"\n- due_date: \"2025-06-02\"\n\nHere is your task:\nSearch for a ticket with 'Low' priority, select any of the results and update its description, department and priority fields.\n\nBegin the conversation. Respond as the user.\n",
-        "task_completion_condition": "The user has confirmed the end of the session.",
-        "expected_function_calls": [
-            {
-                "functionName": "TicketManagementPlugin-search_tickets",
-                "arguments": {
-                    "priority": "Low"
-                }
-            },
-            {
-                "functionName": "TicketManagementPlugin-get_support_ticket",
-                "arguments": {}
-            },
-            {
-                "functionName": "TicketManagementPlugin-update_support_ticket",
-                "arguments": {
-                    "priority": "High",
-                    "department_code": "CS",
-                    "description": "CRM not syncing with email"
+                    "description": "Unable to book meeting room"
                 }
             }
         ]
     },
     {
         "scenarioType": "update_action_item_assignee",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20001\"\n- title: \"Server performance degradation\"\n- department_code: \"IT\"\n- priority: \"Critical\"\n- workflow_type: \"Expedited\"\n- description: \"Main application server is experiencing significant performance degradation affecting all users\"\n- expected_outcome: \"Server performance restored to normal levels\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-2101\"\n- title: \"Scale application server\"\n- assignee: \"David Lee\"\n- status: \"Open\"\n- due_date: \"2025-05-18\"\n\nHere is your task:\nUpdate the assignee and due date for an existing action item with ID A-003\n\nBegin the conversation. Respond as the user.\n",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20010\"\n- title: \"Software license expired\"\n- department_code: \"OPS\"\n- priority: \"High\"\n- workflow_type: \"Standard\"\n- description: \"Key software license expired\"\n- expected_outcome: \"License renewed\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-010\"\n- title: \"Renew software license\"\n- assignee: \"Sophia Garcia\"\n- status: \"Open\"\n- due_date: \"2025-05-13\"\n\nHere is your task:\nUpdate the assignee and due date for an existing action item with ID A-003\n\nBegin the conversation. Respond as the user.\n",
         "task_completion_condition": "The user has confirmed the end of the session.",
         "expected_function_calls": [
             {
                 "functionName": "ActionItemPlugin-update_action_item",
                 "arguments": {
                     "action_id": "A-003",
-                    "assignee": "David Lee",
-                    "due_date": "2025-05-18"
+                    "assignee": "Sophia Garcia",
+                    "due_date": "2025-05-13"
                 }
             }
         ]
     },
     {
         "scenarioType": "update_action_item_assignee",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20024\"\n- title: \"File corruption\"\n- department_code: \"IT\"\n- priority: \"High\"\n- workflow_type: \"Standard\"\n- description: \"Corrupted files detected\"\n- expected_outcome: \"Files recovered\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-20024\"\n- title: \"Recover corrupted files\"\n- assignee: \"Alexander Wright\"\n- status: \"In Progress\"\n- due_date: \"2025-05-31\"\n\nHere is your task:\nUpdate the assignee and due date for an existing action item with ID A-003\n\nBegin the conversation. Respond as the user.\n",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20025\"\n- title: \"Procurement delay\"\n- department_code: \"OPS\"\n- priority: \"Medium\"\n- workflow_type: \"Standard\"\n- description: \"Delay in procurement process\"\n- expected_outcome: \"Procurement on schedule\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-025\"\n- title: \"Expedite procurement process\"\n- assignee: \"Abigail Scott\"\n- status: \"Open\"\n- due_date: \"2025-06-01\"\n\nHere is your task:\nUpdate the assignee and due date for an existing action item with ID A-003\n\nBegin the conversation. Respond as the user.\n",
         "task_completion_condition": "The user has confirmed the end of the session.",
         "expected_function_calls": [
             {
                 "functionName": "ActionItemPlugin-update_action_item",
                 "arguments": {
                     "action_id": "A-003",
-                    "assignee": "Alexander Wright",
-                    "due_date": "2025-05-31"
+                    "assignee": "Abigail Scott",
+                    "due_date": "2025-06-01"
                 }
             }
         ]
     },
     {
         "scenarioType": "update_action_item_assignee",
-        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20002\"\n- title: \"Database connection timeout\"\n- department_code: \"DEV\"\n- priority: \"High\"\n- workflow_type: \"Standard\"\n- description: \"Database connection timeout in payment processing system\"\n- expected_outcome: \"Database connectivity restored\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-2202\"\n- title: \"Update database driver\"\n- assignee: \"Jennifer Lopez\"\n- status: \"In Progress\"\n- due_date: \"2025-05-17\"\n\nHere is your task:\nUpdate the assignee and due date for an existing action item with ID A-003\n\nBegin the conversation. Respond as the user.\n",
+        "instructions": "\nYou are simulating a human user interacting with a chatbot assistant.\n\nYour goal is to complete a specific task by conversing naturally with the assistant.\nBehave like a non-technical user who understands the task, but not the internal workings of the system.\nYou have access to some business data relevant to your task. Use it when appropriate during the conversation.\n\nFollow these rules:\n- Never correct the assistant or point out mistakes.\n- You are not allowed to change the inputs proposed by the assistant.\n- Stay focused on the task but allow for slight variability in how you express yourself.\n- Use the business data as needed, but do not mention that it was \"given\" to you.\n- Do not modify the business data you are given.\n- Speak naturally, as if you are recalling or referencing information you know.\n- Once your task is completed, you must end the conversation by saying \"the session is finished\".\n- Your goal is achieved when the assistant has completed the task and you have confirmed it.\n\nHere is the business data you can use during the conversation:\nSupport Ticket data:\n- id: \"T-20027\"\n- title: \"Expense report error\"\n- department_code: \"FIN\"\n- priority: \"Medium\"\n- workflow_type: \"Standard\"\n- description: \"Error in expense report submission\"\n- expected_outcome: \"Report corrected\"\n- customer_visible: \"False\"\n\nAction Item data:\n- id: \"A-227\"\n- title: \"Process reimbursements\"\n- assignee: \"Ivy Bailey\"\n- status: \"Open\"\n- due_date: \"2025-06-05\"\n\nHere is your task:\nUpdate the assignee and due date for an existing action item with ID A-003\n\nBegin the conversation. Respond as the user.\n",
         "task_completion_condition": "The user has confirmed the end of the session.",
         "expected_function_calls": [
             {
                 "functionName": "ActionItemPlugin-update_action_item",
                 "arguments": {
                     "action_id": "A-003",
-                    "assignee": "Jennifer Lopez",
-                    "due_date": "2025-05-17"
+                    "assignee": "Ivy Bailey",
+                    "due_date": "2025-06-05"
                 }
             }
         ]
