@@ -50,6 +50,8 @@ For more details on the conversation workflow, refer to the [workflow diagrams](
 
 The chatbot uses a modular plugin architecture for business logic:
 
+> **Note:** In this sample, all plugins use mocked services with in-memory data storage for demonstration purposes. A production implementation would replace these with connectors to your actual enterprise systems.
+
 #### Ticket Management Plugin
 
 - Core functions: `create_support_ticket`, `get_support_ticket`, `update_support_ticket`, `search_tickets`

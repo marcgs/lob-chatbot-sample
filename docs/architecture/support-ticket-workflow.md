@@ -152,7 +152,7 @@ sequenceDiagram
 
 ## Data Flow Between Components
 
-The diagram below illustrates how data flows between system components:
+The diagram below illustrates how data flows between system components. Note that this sample implementation uses in-memory data stores with mocked services for demonstration purposes. In a production environment, you would replace these with connections to actual enterprise systems:
 
 ```mermaid
 flowchart TD

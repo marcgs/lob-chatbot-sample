@@ -19,7 +19,7 @@ Refer to the [architecture](./docs/architecture/support-ticket-chatbot-architect
 The project includes an evaluation framework designed to address the challenges of assessing non-deterministic, LLM-powered chatbots in business applications with key features:
 
 - LLM-based user agent for simulating user-chatbot interactions
-- Test cases factory with scenarios templating and injection of business data to run evaluations at scale 
+- Test cases factory with scenarios templating and injection of business data to run evaluations at scale
 - [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme?view=azure-python) integration for calculating metrics and enabling tracking and comparing evaluation runs in [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry)
 - LLM-power error analysis with actionable summaries
 
@@ -56,7 +56,7 @@ make chatbot-eval  # Runs evaluation against ground truth datasets
 
 This sample can be used as a template to create chatbots for other line-of-business applications. To migrate this sample to your specific use case:
 
-1. In Visual Studio Code use the `Chat: Use Prompt` command from the Command Palette.
+1. In Visual Studio Code use the `Chat: Run Prompt` command from the Command Palette.
 2. Choose `migrate` to attach it to the Copilot chat.
 3. Clearly describe your target use case and business requirements.
 4. Review the generated migration plan and adapt as required.
@@ -64,6 +64,6 @@ This sample can be used as a template to create chatbots for other line-of-busin
 
 ## Documentation
 
-- [Architecture](docs/architecture/support-ticket-chatbot-architecture.md) - Chatbot architecture overview
-- [Evaluation Guide](docs/evaluation/evaluation-framework-guide.md) - How the evaluation framework works
-- [User Guide](docs/user-guide/support-ticket-chatbot-user-guide.md.md) - How to use the Support Ticket Chatbot
+- [Architecture](./docs/architecture/support-ticket-chatbot-architecture.md) - Chatbot architecture overview
+- [Evaluation Guide](./docs/evaluation/README.md) - How the evaluation framework works
+- [User Guide](./docs/user-guide/support-ticket-chatbot-user-guide.md) - How to use the Support Ticket Chatbot
