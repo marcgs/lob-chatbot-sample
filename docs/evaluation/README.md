@@ -46,7 +46,7 @@ The evaluation service loads ground truth data, executes evaluations against the
 
 ### 3. Chatbot Simulator
 
-Simulates realistic user interactions with the chatbot ([evaluate.py](../../evaluation/chatbot/simulation/chat_simulator.py)):
+Simulates realistic user interactions with the chatbot ([chat_simulator.py](../../evaluation/chatbot/simulation/chat_simulator.py)):
 
 - **LLM-based User Simulation** - Uses an LLM to generate natural user inputs based on test scenarios
 - **Conversation Flow Management** - Handles multi-turn conversations while following scenario instructions
