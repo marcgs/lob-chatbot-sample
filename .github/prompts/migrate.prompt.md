@@ -20,7 +20,7 @@ First, thoroughly analyze the existing Support Ticket Management System implemen
    - Understand conversational flow patterns
 
 4. **Evaluation Framework**:
-   - Review the evaluation approach in `docs/evaluation/evaluation-framework.md`
+   - Review the evaluation approach in `docs/evaluation/README.md`
    - Understand ground-truth data formats in `evaluation/chatbot/ground-truth/`
 
 ## Ask for Target Use Case
