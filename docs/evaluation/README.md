@@ -1,4 +1,4 @@
-# Line-of-Business Chatbot Evaluation Framework Guide
+# Line-of-Business Chatbot Evaluation Framework
 
 ## The Challenge of Evaluating LOB Chatbots
 
@@ -24,7 +24,7 @@ The architecture diagram above illustrates our comprehensive approach to LOB cha
 
 ### 1. Ground Truth Dataset Management
 
-The foundation of our evaluation framework is a structured ground truth dataset that defines expected chatbot behaviors:
+The foundation of our evaluation framework is a structured ground truth dataset that defines expected chatbot behaviors (see [documentation](../../evaluation/chatbot/ground-truth/README.md)):
 
 - **Scenario Templates** - Predefined conversation patterns representing common business workflows
 - **Business Data Integration** - Real business data (support tickets, action items) incorporated into test scenarios
@@ -35,7 +35,7 @@ The ground truth dataset uses a JSON/JSONL format with fields for scenario type,
 
 ### 2. Evaluation Service
 
-The central orchestrator of the evaluation process:
+The central orchestrator of the evaluation process ([evaluation_service.py](../../evaluation/evaluation_service.py)):
 
 - **Test Execution Coordination** - Manages the flow of test scenarios through the evaluation pipeline
 - **Evaluator Registration** - Maintains the collection of metric evaluators
@@ -46,7 +46,7 @@ The evaluation service loads ground truth data, executes evaluations against the
 
 ### 3. Chatbot Simulator
 
-Simulates realistic user interactions with the chatbot:
+Simulates realistic user interactions with the chatbot ([evaluate.py](../../evaluation/chatbot/simulation/chat_simulator.py)):
 
 - **LLM-based User Simulation** - Uses an LLM to generate natural user inputs based on test scenarios
 - **Conversation Flow Management** - Handles multi-turn conversations while following scenario instructions
@@ -58,11 +58,11 @@ This component enables systematic testing at scale without requiring human teste
 
 A collection of focused metric calculators that measure specific aspects of chatbot performance:
 
-- **Function Call Precision Evaluator** - Measures if the chatbot calls the right functions (correct function calls / total function calls)
-- **Function Call Recall Evaluator** - Assesses if all necessary functions are called (correct function calls / expected function calls)
-- **Function Call Arguments Precision Evaluator** - Evaluates parameter accuracy in function calls (correct arguments / total arguments provided)
-- **Function Call Arguments Recall Evaluator** - Checks if all required parameters are included (correct arguments / expected arguments)
-- **Function Call Reliability Evaluator** - Measures overall success in completing business processes (requires both perfect precision and recall)
+- **Function Call Precision Evaluator** – Measures if the chatbot calls the right functions ([function_call_precision.py](../../evaluation/chatbot/evaluators/function_call_precision.py))
+- **Function Call Recall Evaluator** – Assesses if all necessary functions are called ([function_call_recall.py](../../evaluation/chatbot/evaluators/function_call_recall.py))
+- **Function Call Arguments Precision Evaluator** – Evaluates parameter accuracy in function calls ([function_call_precision.py](../../evaluation/chatbot/evaluators/function_call_precision.py))
+- **Function Call Arguments Recall Evaluator** – Checks if all required parameters are included ([function_call_recall.py](../../evaluation/chatbot/evaluators/function_call_recall.py))
+- **Function Call Reliability Evaluator** – Measures overall success in completing business processes ([function_call_reliability.py](../../evaluation/chatbot/evaluators/function_call_reliability.py))
 
 Each evaluator produces a score between 0 and 1, with higher scores indicating better performance.
 
@@ -70,11 +70,11 @@ Each evaluator produces a score between 0 and 1, with higher scores indicating b
 
 Tools for interpreting evaluation results:
 
-- **JSON Result Storage** - Detailed metrics stored in machine-readable format
-- **Aggregation Across Scenarios** - Performance summarized across different business workflows
-- **Error Analysis** - LLM-powered identification of patterns in chatbot mistakes
-- **Performance Tracking** - Comparison of metrics across different chatbot versions
-- **Azure AI Evaluation SDK Integration** - Leverages Azure's evaluation tools for advanced analysis
+- **JSON Result Storage** – Detailed metrics stored in machine-readable format
+- **Aggregation Across Scenarios** – Performance summarized across different business workflows
+- **Error Analysis** – LLM-powered identification of patterns in chatbot mistakes ([error_analysis_chatbot.ipynb](../../evaluation/chatbot/error_analysis_chatbot.ipynb))
+- **Performance Tracking** – Comparison of metrics across different chatbot versions
+- **Azure AI Evaluation SDK Integration** – Leverages Azure's evaluation tools for advanced analysis
 
 This component helps identify specific areas for improvement in the chatbot implementation.
 
@@ -104,9 +104,9 @@ This component helps identify specific areas for improvement in the chatbot impl
 
 The evaluation framework is designed to be extensible:
 
-1. **Custom Evaluators** - Create new evaluators for domain-specific metrics by implementing the Evaluator interface
-2. **Test Scenarios Templating** - Easily expand test coverage by adding new business scenarios
-3. **Custom Error Analysis** - Extend error analysis code to fulfil your use-case requirements
+1. **Custom Evaluators** – Create new evaluators for domain-specific metrics by implementing the [evaluator.py](../../evaluation/chatbot/evaluators/evaluator.py) interface
+2. **Test Scenarios Templating** – Easily expand test coverage by adding new [test_scenarios_templates.json](../../evaluation/chatbot/ground-truth/test_scenarios_templates.json)
+3. **Custom Error Analysis** – Extend [error_analysis_chatbot.ipynb](../../evaluation/chatbot/error_analysis_chatbot.ipynb) to fulfil your use-case requirements
 
 ## Best Practices for LOB Chatbot Evaluation
 
