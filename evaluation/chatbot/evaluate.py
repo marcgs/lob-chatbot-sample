@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 import pandas as pd
 import logging
 import os
@@ -95,8 +96,8 @@ def run_support_ticket_evaluation(
     # Copy and execute error analysis notebook
     copy_and_execute_notebook(
         notebook_name="error_analysis_chatbot.ipynb",
-        root_path=str(chatbot_eval_root_path()),
-        output_path=output_path
+        root_path=chatbot_eval_root_path(),
+        output_path=Path(output_path)
     )
 
     # convert results to dataframe
