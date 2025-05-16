@@ -79,11 +79,7 @@ The diagram below illustrates the architecture of our evaluation framework, high
 
 A key pillar of our evaluation framework is the ability to simulate realistic, multi-turn conversations between a user and the chatbot. To achieve this, we developed an LLM-powered User Agent that acts as a stand-in for real users, following scenario-specific instructions and interacting with the chatbot just as a human would.
 
-In each evaluation run, the User Agent is provided with a set of instructions that define the user's intent and business context (for example, creating a high-priority support ticket for an IT issue). The User Agent then engages in a natural conversation with the chatbot, responding to prompts, clarifying details, and navigating the workflow as a real user would. This back-and-forth continues until a predefined completion condition is met, such as the successful creation of a ticket or resolution of a request. The simulation logic is implemented within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module.
-
-To ensure realistic interactions, the User Agent is configured to simulate non-technical users who understand the task but not the internal workings of the system. This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively. See sample [User Agent instructions](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/support_ticket_eval_dataset.json#L4) in the evaluation dataset.
-
-### Chat History with Function Calling
+In each evaluation run, the User Agent is provided with a set of instructions that define the user's intent and business context (for example, creating a high-priority support ticket for an IT issue). The User Agent then engages in a natural conversation with the chatbot, responding to prompts, clarifying details, and navigating the workflow as a real user would. This back-and-forth continues until a predefined completion condition is met, such as the successful creation of a ticket or resolution of a request.
 
 Throughout the simulated conversation, the framework automatically captures every function call made by the chatbot, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the ground truth for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
 
@@ -118,10 +114,12 @@ Throughout the simulated conversation, the framework automatically captures ever
 
         # ...
         
+        history = await agent_thread.get_messages()
+
         # Check if conversation is finished according to the specified termination condition
         should_agent_terminate = await termination_strategy.should_agent_terminate(
             agent=support_ticket_agent,
-            history=await agent_thread.get_messages(),
+            history=history,
         )
 
         if should_agent_terminate:
@@ -129,10 +127,16 @@ Throughout the simulated conversation, the framework automatically captures ever
             break
 
     # Extract history including function calls
-    history = await agent_thread.get_messages()
-
     return history
 ```
+
+ The simulation logic is implemented within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module.
+
+To ensure realistic interactions, the User Agent is configured to simulate non-technical users who understand the task but not the internal workings of the system. This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively. See sample [User Agent instructions](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/support_ticket_eval_dataset.json#L4) in the evaluation dataset.
+
+### Chat History with Function Calling
+
+
 
 ### Metrics, Evaluation, and Error Analysis
 
