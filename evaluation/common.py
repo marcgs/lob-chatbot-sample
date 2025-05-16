@@ -2,6 +2,9 @@ from datetime import datetime
 import json
 import os
 from pathlib import Path
+import shutil
+import nbformat
+from nbconvert.preprocessors import ExecutePreprocessor
 
 
 def convert_json_to_jsonl(filePath: str) -> str:
@@ -60,3 +63,36 @@ def generate_experiment_name(name: str = "Eval") -> str:
     """
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")
     return f"{name}_{timestamp}"
+
+
+def copy_and_execute_notebook(notebook_name: str, root_path: Path, output_path: Path) -> None:
+    """
+    Copy and execute a notebook to the output directory
+
+    Args:
+        notebook_name (str): Name of the notebook file
+        root_path (Path): Root path where the notebook is located
+        output_path (Path): Path to the output directory where the notebook will be copied
+    """
+    notebook_src = root_path / notebook_name
+    notebook_dst = output_path / notebook_name
+    
+    try:
+        print(f"Copying notebook from {notebook_src} to {notebook_dst}")
+        shutil.copy(notebook_src, notebook_dst)
+        
+        # Execute all cells in the notebook after copying
+        with open(notebook_dst, "r", encoding="utf-8") as f:
+            nb = nbformat.read(f, as_version=4)
+            
+        ep = ExecutePreprocessor(kernel_name="python3")
+        try:
+            print(f"Executing notebook: {notebook_dst}")
+            ep.preprocess(nb, {"metadata": {"path": os.path.dirname(notebook_dst)}})
+            with open(notebook_dst, "w", encoding="utf-8") as f:
+                nbformat.write(nb, f)
+            print(f"Executed and saved notebook with outputs: {notebook_dst}")
+        except Exception as e:
+            print(f"Failed to execute notebook: {e}")
+    except Exception as e:
+        print(f"Could not copy notebook: {e}")
