@@ -10,9 +10,9 @@ Traditional chatbot evaluation frameworks fall short when applied to modern LLM-
 
 Evaluating conversational AI presents a spectrum of challenges that vary dramatically based on the task domain:
 
-Open-ended task agents (like those generating images, answering general knowledge questions, or providing creative content) operate in unbounded spaces where success criteria are often subjective. For these systems, evaluation typically focuses on user satisfaction, appropriateness, and creative quality.
+*Open-ended task agents* (like those generating images, answering general knowledge questions, or providing creative content) operate in unbounded spaces where success criteria are often subjective. For these systems, evaluation typically focuses on user satisfaction, appropriateness, and creative quality.
 
-Closed-domain, business-specific agents—the Line of Business (LOB) chatbots that manage inventory, process orders, or handle employee requests—face a different reality. These systems interact with structured business processes and must deliver precise, reliable outcomes with minimal tolerance for error. Here, evaluation must balance the flexibility of natural language interaction with the rigor of business process execution.
+*Closed-domain, business-specific agents* — the Line of Business (LOB) chatbots that manage inventory, process orders, or handle employee requests—face a different reality. These systems interact with structured business processes and must deliver precise, reliable outcomes with minimal tolerance for error. Here, evaluation must balance the flexibility of natural language interaction with the rigor of business process execution.
 
 As noted by Anthropic in their engineering blog on [building effective agents](https://www.anthropic.com/engineering/building-effective-agents), "Agents should be designed not to replace humans but to augment them, handling routine tasks while escalating complex scenarios." This principle becomes even more critical in LOB applications where business outcomes and process integrity are non-negotiable.
 
@@ -73,10 +73,26 @@ In the following sections, I'll share our journey building an end-to-end evaluat
 
 ![lob_chatbot_evaluation_diagram](./docs/evaluation/lob_chatbot_eval_diagram.png)
 
-### Chat Simulation (User Agent)
+### Ground Truth Management
+
+A foundational element of our evaluation framework is the structured ground truth dataset. For each business scenario, the ground truth defines the expected user instructions, business context, and a precise sequence of function calls with their required arguments. This dataset is crafted to reflect authentic workflows and domain constraints, often incorporating real or representative business data such as support tickets and action items.
+
+The ground truth dataset is stored in JSON format, with fields for scenario type, completion conditions, user instructions, and expected function calls. This structure ensures that the evaluation process is both scalable and adaptable to various business contexts. During simulation, the chatbot’s actions are systematically compared against this ground truth, enabling precise measurement of function call accuracy and adherence to business logic. This rigorous approach ensures evaluations are objective, repeatable, and aligned with enterprise requirements.
+
+### Chat Simulation
+
+Another key pillar of our evaluation framework is the ability to simulate realistic, multi-turn conversations between a user and the chatbot. To achieve this, we developed an LLM-powered User Agent that acts as a stand-in for real users, following scenario-specific instructions and interacting with the chatbot just as a human would.
+
+In each evaluation run, the User Agent is provided with a set of instructions that define the user's intent and business context (for example, creating a high-priority support ticket for an IT issue). The User Agent then engages in a natural conversation with the chatbot, responding to prompts, clarifying details, and navigating the workflow as a real user would. This back-and-forth continues until a predefined completion condition is met, such as the successful creation of a ticket or resolution of a request. The simulation logic is implemented within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module.
 
 ### Chat History with Function Calling
 
+Throughout the simulated conversation, the framework automatically captures every function call made by the chatbot, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the ground truth for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
+
 ### Metrics, Eval, Error Analysis
+
+With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include measures of function call precision and recall for both function names and arguments, and task completion rates. The system also supports error analysis, surfacing discrepancies between expected and actual outcomes, and providing insights into failure modes—such as incorrect function usage or deviations from workflow. This enables rapid iteration and targeted improvements, ensuring that the chatbot consistently delivers reliable business value.
+
+The evaluation framework integrates with tools like the Azure AI Evaluation SDK to calculate metrics and track evaluation runs. This integration provides advanced analysis capabilities, including performance tracking across chatbot versions and actionable summaries for error patterns. By combining realistic simulation, comprehensive data capture, and automated evaluation, this solution provides a scalable and repeatable methodology for assessing LOB chatbots in enterprise environments. The result is a robust foundation for continuous improvement and confident deployment of conversational AI in business-critical workflows.
 
 ### Conclusions
