@@ -74,8 +74,8 @@ def copy_and_execute_notebook(notebook_name: str, root_path: Path, output_path: 
         root_path (Path): Root path where the notebook is located
         output_path (Path): Path to the output directory where the notebook will be copied
     """
-    notebook_src = os.path.join(root_path, notebook_name)
-    notebook_dst = os.path.join(output_path, notebook_name)
+    notebook_src = root_path / notebook_name
+    notebook_dst = output_path / notebook_name
     
     try:
         print(f"Copying notebook from {notebook_src} to {notebook_dst}")
