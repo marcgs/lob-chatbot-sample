@@ -71,28 +71,61 @@ In the following sections, I'll share our journey building an end-to-end evaluat
 
 ## Proposed Solution Details
 
+The diagram below illustrates the architecture of our evaluation framework, highlighting its key components and their interactions. This framework is designed to address the unique challenges of evaluating LOB chatbots, ensuring scalability, reproducibility, and actionable insights.
+
 ![lob_chatbot_evaluation_diagram](./docs/evaluation/lob_chatbot_eval_diagram.png)
-
-### Ground Truth Management
-
-A foundational element of our evaluation framework is the structured ground truth dataset. For each business scenario, the ground truth defines the expected user instructions, business context, and a precise sequence of function calls with their required arguments. This dataset is crafted to reflect authentic workflows and domain constraints, often incorporating real or representative business data such as support tickets and action items.
-
-The ground truth dataset is stored in JSON format, with fields for scenario type, completion conditions, user instructions, and expected function calls. This structure ensures that the evaluation process is both scalable and adaptable to various business contexts. During simulation, the chatbot’s actions are systematically compared against this ground truth, enabling precise measurement of function call accuracy and adherence to business logic. This rigorous approach ensures evaluations are objective, repeatable, and aligned with enterprise requirements.
 
 ### Chat Simulation
 
-Another key pillar of our evaluation framework is the ability to simulate realistic, multi-turn conversations between a user and the chatbot. To achieve this, we developed an LLM-powered User Agent that acts as a stand-in for real users, following scenario-specific instructions and interacting with the chatbot just as a human would.
+A key pillar of our evaluation framework is the ability to simulate realistic, multi-turn conversations between a user and the chatbot. To achieve this, we developed an LLM-powered User Agent that acts as a stand-in for real users, following scenario-specific instructions and interacting with the chatbot just as a human would.
 
 In each evaluation run, the User Agent is provided with a set of instructions that define the user's intent and business context (for example, creating a high-priority support ticket for an IT issue). The User Agent then engages in a natural conversation with the chatbot, responding to prompts, clarifying details, and navigating the workflow as a real user would. This back-and-forth continues until a predefined completion condition is met, such as the successful creation of a ticket or resolution of a request. The simulation logic is implemented within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module.
+
+To ensure realistic interactions, the User Agent is configured to simulate non-technical users who understand the task but not the internal workings of the system. This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively. See sample [User Agent instructions](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/support_ticket_eval_dataset.json#L4) in the evaluation dataset.
 
 ### Chat History with Function Calling
 
 Throughout the simulated conversation, the framework automatically captures every function call made by the chatbot, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the ground truth for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
 
-### Metrics, Eval, Error Analysis
+### Metrics, Evaluation, and Error Analysis
 
-With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include measures of function call precision and recall for both function names and arguments, and task completion rates. The system also supports error analysis, surfacing discrepancies between expected and actual outcomes, and providing insights into failure modes—such as incorrect function usage or deviations from workflow. This enables rapid iteration and targeted improvements, ensuring that the chatbot consistently delivers reliable business value.
+With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include:
 
-The evaluation framework integrates with tools like the Azure AI Evaluation SDK to calculate metrics and track evaluation runs. This integration provides advanced analysis capabilities, including performance tracking across chatbot versions and actionable summaries for error patterns. By combining realistic simulation, comprehensive data capture, and automated evaluation, this solution provides a scalable and repeatable methodology for assessing LOB chatbots in enterprise environments. The result is a robust foundation for continuous improvement and confident deployment of conversational AI in business-critical workflows.
+- **Function Call Name Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function names.
+- **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function parameters.
+- **Reliability**: Measures overall success in completing business processes.
 
-### Conclusions
+The evaluation framework integrates with the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme) and optionally with [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) to calculate metrics and track evaluation runs. This integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
+
+### Ground Truth Generation at Scale
+
+To generate evaluation datasets at scale, we leverage a script [generate_eval_dataset.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/generate_eval_dataset.py) that combines scenario templates with real or representative business data. This script automates the creation of test cases by filling placeholders in templates with data from support tickets and action items. Below is a simplified example of how the dataset is generated:
+
+```python
+from pathlib import Path
+from generate_eval_dataset import load_templates, load_and_process_data, generate_dataset
+
+# Load templates and business data
+templates = load_templates(Path("test_scenarios_templates.json"))
+business_data = load_and_process_data(
+    tickets_path=Path("dummy_support_tickets.csv"),
+    actions_path=Path("dummy_action_items.csv")
+)
+
+# Generate dataset
+dataset = generate_dataset(
+    templates=templates,
+    business_data=business_data,
+    num_cases_per_scenario=3
+)
+
+# Save dataset to file
+with open("support_ticket_eval_dataset.json", "w", encoding="utf-8") as f:
+    json.dump(dataset, f, indent=4)
+```
+
+This approach ensures that the dataset reflects real-world scenarios while maintaining scalability and consistency.
+
+### Conclusion
+
+By combining realistic simulation, comprehensive data capture, and automated evaluation, this solution provides a scalable and repeatable methodology for assessing LOB chatbots in enterprise environments. The result is a robust foundation for continuous improvement and confident deployment of conversational AI in business-critical workflows.
