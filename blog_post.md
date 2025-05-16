@@ -87,6 +87,53 @@ To ensure realistic interactions, the User Agent is configured to simulate non-t
 
 Throughout the simulated conversation, the framework automatically captures every function call made by the chatbot, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the ground truth for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
 
+```python
+    # Create Support Ticket Agent (evaluation target)
+    support_ticket_agent: ChatCompletionAgent = create_support_ticket_agent(name="SupportTicketAgent")
+
+    # Create User Agent
+    user_agent: ChatCompletionAgent = create_user_agent(name="UserAgent", instructions=instructions)
+
+    # Termination Strategy to detect conversation end
+    termination_strategy: KernelFunctionTerminationStrategy = (
+        create_termination_strategy(
+            task_completion_condition=task_completion_condition
+        )
+    )
+
+    # Create agent conversation thread
+    agent_thread: ChatHistoryAgentThread = ChatHistoryAgentThread(
+        thread_id="ChatSimulatorAgentThread"
+    )
+
+    # Create separate user thread for the user agent to keep track of conversation separately
+    user_thread: ChatHistoryAgentThread = ChatHistoryAgentThread(
+        thread_id="ChatSimulatorUserThread"
+    )
+
+    while True:
+        agent_message: AgentResponseItem[ChatMessageContent] = await support_ticket_agent.get_response(messages=user_message, thread=agent_thread)
+
+        user_response = await user_agent.get_response(messages=agent_message.content, thread=user_thread)
+
+        # ...
+        
+        # Check if conversation is finished according to the specified termination condition
+        should_agent_terminate = await termination_strategy.should_agent_terminate(
+            agent=support_ticket_agent,
+            history=await agent_thread.get_messages(),
+        )
+
+        if should_agent_terminate:
+            # Conversation is finished => exit loop
+            break
+
+    # Extract history including function calls
+    history = await agent_thread.get_messages()
+
+    return history
+```
+
 ### Metrics, Evaluation, and Error Analysis
 
 With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include:
