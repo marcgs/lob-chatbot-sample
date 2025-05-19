@@ -16,7 +16,7 @@ Evaluating conversational AI presents a spectrum of challenges that vary dramati
 
 - *Open-ended task agents* (like those generating images, answering general knowledge questions, or providing creative content) operate in unbounded spaces where success criteria are often subjective. For these systems, evaluation typically focuses on user satisfaction, appropriateness, and creative quality.
 
-- *Closed-domain, business-specific agents* — the Line of Business (LOB) chatbots that manage inventory, process orders, or handle employee requests—face a different reality. These systems interact with structured business processes and must deliver precise, reliable outcomes with minimal tolerance for error. Here, evaluation must balance the flexibility of natural language interaction with the rigor of business process execution.
+- *Closed-domain, business-specific agents* — the Line of Business (LOB) chatbots that manage inventory, process orders, or handle employee requests— face a different reality. These systems interact with structured business processes and must deliver precise, reliable outcomes with minimal tolerance for error. Here, evaluation must balance the flexibility of natural language interaction with the rigor of business process execution.
 
 As noted by Anthropic in their engineering blog on [building effective agents](https://www.anthropic.com/engineering/building-effective-agents), "Agents should be designed not to replace humans but to augment them, handling routine tasks while escalating complex scenarios." This principle becomes even more critical in LOB applications where business outcomes and process integrity are non-negotiable.
 
@@ -67,7 +67,6 @@ For general-purpose assistants, occasional errors might be acceptable. For busin
 3. **System integrations**: Chatbots must reliably interact with multiple backend systems
 4. **Financial implications**: Mistakes can directly impact revenue and costs
 5. **Employee and customer trust**: Consistent performance builds essential confidence
-
 
 ### Towards a Comprehensive Evaluation Framework
 
@@ -210,7 +209,11 @@ This approach ensures that the dataset reflects real-world scenarios while maint
 
 ### Bring Your Own Scenario
 
-TODO: How to use our repository + HVE to easily adapt it to users scenario.
+A powerful advantage of the LOB Chatbot sample is how easily it can be adapted to other business domains with GitHub Copilot’s Agent Mode and a plan-driven approach. By leveraging Copilot’s ability to generate migration plans and guide code adaptation, teams can rapidly scaffold, customize, and evaluate LOB chatbots for any enterprise context.
+
+This makes the sample an effective accelerator for demos, PoCs, and production projects: simply define your scenario, and let Copilot guide the migration and implementation process as you update the relevant plugins, data models, and evaluation templates. The approach enables you to focus on your unique business logic while reusing a robust, well-tested foundation.
+
+For step-by-step instructions on adapting the solution to your use case, see the [README](https://github.com/marcgs/lob-chatbot-sample/blob/main/README.md#migrating-the-sample).
 
 ## Conclusions
 
