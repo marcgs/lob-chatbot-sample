@@ -32,6 +32,7 @@ class SupportTicketChatSimulator:
             instructions (str): Instructions for the user agent to follow.
             task_completion_condition (str): Condition to determine if the task is complete.
         """
+        
         support_ticket_agent: ChatCompletionAgent = create_support_ticket_agent(
             name="SupportTicketAgent"
         )
@@ -55,26 +56,24 @@ class SupportTicketChatSimulator:
             thread_id="ChatSimulatorUserThread"
         )
 
+        # Initial system message coming to have the Support Ticket Agent start the conversation
         user_message: ChatMessageContent = ChatMessageContent(
             content="Starting the simulation", role=AuthorRole.SYSTEM, name="system"
         )
 
         while True:
-            agent_message: AgentResponseItem[
-                ChatMessageContent
-            ] = await support_ticket_agent.get_response(
+            agent_message: AgentResponseItem[ChatMessageContent] = await support_ticket_agent.get_response(
                 messages=user_message, thread=agent_thread
             )
+
             print(f"Support Ticket Agent: {agent_message.to_dict()}")
 
-            # we need to add thread to the user agent to make sure it retains the full context of the conversation
-            # otherwise it will only see the last message and get confused
             user_response = await user_agent.get_response(
                 messages=agent_message.content, thread=user_thread
             )
 
-            user_message = user_response.content
             # Set the role to user for the support ticket agent to think it is a user message
+            user_message = user_response.content
             user_message = ChatMessageContent(
                 content=user_message.content,
                 role=AuthorRole.USER,
@@ -83,22 +82,19 @@ class SupportTicketChatSimulator:
             
             print(f"User: {user_message.to_dict()}")
 
-            # Convert to list of messages to satisfy the type checker
-            messages_list = await agent_thread.get_messages()
-            # # Convert ChatHistory to list[ChatMessageContent] to solve type compatibility issue
-            # message_content_list = [msg for msg in messages_list]
+            # Extract conversation history
+            conversation_history = await agent_thread.get_messages()
+            
             should_agent_terminate = await termination_strategy.should_agent_terminate(
                 agent=support_ticket_agent,
-                history=messages_list,
+                history=[msg for msg in conversation_history],
             )
 
             if should_agent_terminate:
                 print("Task completed")
                 break
 
-        history = await agent_thread.get_messages()
-
-        return history
+        return conversation_history
 
     def get_function_calls(self, chatHistory: ChatHistory) -> list[dict]:
         """
