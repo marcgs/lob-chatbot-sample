@@ -170,31 +170,40 @@ The evaluation framework integrates with the [Azure AI Evaluation SDK](https://l
 
 Optional [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
 
+![azure-ai-foundry-eval](./docs/evaluation/azure-ai-foundry-eval.png)
+
 ### Ground Truth Generation at Scale
 
-To generate evaluation datasets at scale, we leverage a script [generate_eval_dataset.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/generate_eval_dataset.py) that combines scenario templates with real or representative business data. This script automates the creation of test cases by filling placeholders in templates with data from support tickets and action items. Below is a simplified example of how the dataset is generated:
+To generate evaluation datasets at scale, we leverage a script [generate_eval_dataset.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/generate_eval_dataset.py) that combines scenario templates with real or representative business data. This script automates the creation of test cases by filling placeholders in templates with data from support tickets and action items. Below is a simplified example of a scenario template including placeholders that will be replaced with business data:
 
-```python
-from pathlib import Path
-from generate_eval_dataset import load_templates, load_and_process_data, generate_dataset
-
-# Load templates and business data
-templates = load_templates(Path("test_scenarios_templates.json"))
-business_data = load_and_process_data(
-    tickets_path=Path("dummy_support_tickets.csv"),
-    actions_path=Path("dummy_action_items.csv")
-)
-
-# Generate dataset
-dataset = generate_dataset(
-    templates=templates,
-    business_data=business_data,
-    num_cases_per_scenario=3
-)
-
-# Save dataset to file
-with open("support_ticket_eval_dataset.json", "w", encoding="utf-8") as f:
-    json.dump(dataset, f, indent=4)
+```json
+{
+    "scenario_name": "create_ticket_and_action_item",
+    "user_instructions": "Create a new support ticket by manually providing the data and create a new action item for it.",
+    "task_completion": "The user has confirmed the end of the session.",
+    "expected_function_calls": [
+      {
+        "functionName": "TicketManagementPlugin-create_support_ticket",
+        "arguments": {
+          "title": "{ticket.title}",
+          "department_code": "{ticket.department_code}",
+          "priority": "{ticket.priority}",
+          "workflow_type": "{ticket.workflow_type}",
+          "description": "{ticket.description}",
+          "expected_outcome": "{ticket.expected_outcome}",
+          "customer_visible": "{ticket.customer_visible}"
+        }
+      },
+      {
+        "functionName": "ActionItemPlugin-create_action_item",
+        "arguments": {
+          "title": "{action.title}",
+          "assignee": "{action.assignee}",
+          "due_date": "{action.due_date}"
+        }
+      }
+    ]
+}
 ```
 
 This approach ensures that the dataset reflects real-world scenarios while maintaining scalability and consistency.
