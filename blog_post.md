@@ -94,6 +94,8 @@ In each evaluation run, the User Agent is provided with a set of instructions th
 
 Throughout the simulated conversation, the framework automatically captures every function call made by the chatbot, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the ground truth for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
 
+ The simulation logic is implemented using [Semantic Kernel](https://github.com/microsoft/semantic-kernel) within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module.
+
 ```python
     # Create Support Ticket Agent (evaluation target)
     support_ticket_agent: ChatCompletionAgent = create_support_ticket_agent(name="SupportTicketAgent")
@@ -108,19 +110,22 @@ Throughout the simulated conversation, the framework automatically captures ever
         )
     )
 
-    # Create agent conversation thread
+    # Create agent conversation thread (includes function calls)
     agent_thread: ChatHistoryAgentThread = ChatHistoryAgentThread(
         thread_id="ChatSimulatorAgentThread"
     )
 
-    # Create separate user thread for the user agent to keep track of conversation separately
+    # Create separate user thread for the user agent to keep track of conversation
+    # from the user's perspective separately
     user_thread: ChatHistoryAgentThread = ChatHistoryAgentThread(
         thread_id="ChatSimulatorUserThread"
     )
 
     while True:
+        # Support Ticket Agent conversation turn
         agent_message: AgentResponseItem[ChatMessageContent] = await support_ticket_agent.get_response(messages=user_message, thread=agent_thread)
 
+        # User Agent conversation turn
         user_response = await user_agent.get_response(messages=agent_message.content, thread=user_thread)
 
         # ...
@@ -141,21 +146,19 @@ Throughout the simulated conversation, the framework automatically captures ever
     return history
 ```
 
- The simulation logic is implemented within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module.
-
-To ensure realistic interactions, the User Agent is configured to simulate non-technical users who understand the task but not the internal workings of the system. This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively. See sample [User Agent instructions](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/support_ticket_eval_dataset.json#L4) in the evaluation dataset.
-
-### Chat History with Function Calling
-
-
+To ensure realistic interactions, the User Agent is configured to simulate non-technical users who understand the task but not the internal workings of the system.
+This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively.
+See sample [User Agent instructions](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/support_ticket_eval_dataset.json#L4) in the evaluation dataset.
 
 ### Metrics, Evaluation, and Error Analysis
 
 With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include:
 
 - **Function Call Name Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function names.
-- **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function parameters.
+- **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function parameters.
 - **Reliability**: Measures overall success in completing business processes.
+
+See [function_call_precision.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_precision.py), [function_call_recall.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_recall.py), and [function_call_reliability.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_reliability.py) modules for details on how these metrics have been implemented in the sample application.
 
 The evaluation framework integrates with the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme) and optionally with [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) to calculate metrics and track evaluation runs. This integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
 
