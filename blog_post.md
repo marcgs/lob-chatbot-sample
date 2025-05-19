@@ -166,9 +166,9 @@ With the conversation and function call data in hand, the framework automaticall
 - **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function parameters.
 - **Reliability**: Measures overall success in completing business processes.
 
-See [function_call_precision.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_precision.py), [function_call_recall.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_recall.py), and [function_call_reliability.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_reliability.py) modules for details on how these metrics have been implemented in the sample application.
+The evaluation framework integrates with the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme) to calculate metrics and track evaluation runs. See [function_call_precision.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_precision.py), [function_call_recall.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_recall.py), and [function_call_reliability.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_reliability.py) modules for details on how these metrics have been implemented in the sample application.
 
-The evaluation framework integrates with the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme) and optionally with [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) to calculate metrics and track evaluation runs. This integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
+Optional [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
 
 ### Ground Truth Generation at Scale
 
