@@ -94,9 +94,17 @@ In each evaluation run, the User Agent is provided with a set of instructions th
 
 Throughout the simulated conversation, the framework automatically captures every function call made by the chatbot, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the ground truth for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
 
- The simulation logic is implemented using [Semantic Kernel](https://github.com/microsoft/semantic-kernel) within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module.
+ The simulation logic is implemented using [Semantic Kernel](https://github.com/microsoft/semantic-kernel) within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module. Below is a simplified example of the simulation logic:
 
 ```python
+    from semantic_kernel.contents import ChatHistory, ChatMessageContent
+    from semantic_kernel.agents import (
+        ChatCompletionAgent,
+        ChatHistoryAgentThread,
+        AgentResponseItem,
+    )
+    from semantic_kernel.agents.strategies import KernelFunctionTerminationStrategy
+
     # Create Support Ticket Agent (evaluation target)
     support_ticket_agent: ChatCompletionAgent = create_support_ticket_agent(name="SupportTicketAgent")
 
