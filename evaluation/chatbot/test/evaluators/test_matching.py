@@ -1,8 +1,5 @@
-import pytest
 from evaluation.chatbot.evaluators.matching import (
     match_function_calls,
-    FunctionCallMatch,
-    FunctionArgs,
 )
 from evaluation.chatbot.test.evaluators.test_data import (
     FC_TICKET_CREATE,

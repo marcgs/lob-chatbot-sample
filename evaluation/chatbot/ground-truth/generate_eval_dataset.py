@@ -7,7 +7,7 @@ import json
 import random
 import pandas as pd
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 # Set random seed for reproducibility
 RANDOM_SEED = 42

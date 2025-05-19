@@ -18,14 +18,14 @@ class FunctionCallRecallEvaluator(Evaluator):
         super().__init__()
 
     def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
+        self, *, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]], **kwargs: object
     ) -> EvaluatorResult:
         return EvaluatorResult(
             score=self.evaluate(actual_function_calls, expected_function_calls)
         )
 
     def evaluate(
-        self, actual_function_calls: list[dict], expected_function_calls: list[dict]
+        self, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]]
     ) -> float:
         match_result: FunctionCallMatch = match_function_calls(
             actual_function_calls, expected_function_calls
@@ -56,14 +56,14 @@ class FunctionCallArgsRecallEvaluator(Evaluator):
         super().__init__()
 
     def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
+        self, *, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]], **kwargs: object
     ) -> EvaluatorResult:
         return EvaluatorResult(
             score=self.evaluate(actual_function_calls, expected_function_calls)
         )
 
     def evaluate(
-        self, actual_function_calls: list[dict], expected_function_calls: list[dict]
+        self, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]]
     ) -> float:
         match_result: FunctionCallMatch = match_function_calls(
             actual_function_calls, expected_function_calls

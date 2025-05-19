@@ -1,9 +1,6 @@
 from evaluation.chatbot.evaluators.function_call_recall import (
     FunctionCallRecallEvaluator, FunctionCallArgsRecallEvaluator
 )
-from evaluation.chatbot.evaluators.function_call_precision import (
-    FunctionCallPrecisionEvaluator,
-)
 from .evaluator import Evaluator, EvaluatorResult
 
 
@@ -22,7 +19,7 @@ class FunctionCallReliabilityEvaluator(Evaluator):
         super().__init__()
 
     def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
+        self, *, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]], **kwargs: dict[str, object]
     ) -> EvaluatorResult:
         """
         Private method, that should be used exclusively for evaluation framework purposes.
@@ -40,7 +37,7 @@ class FunctionCallReliabilityEvaluator(Evaluator):
         )
 
     def evaluate(
-        self, actual_function_calls: list[dict], expected_function_calls: list[dict]
+        self, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]]
     ) -> float:
         """
         Reliability = if precision == 1 and recall == 1 then return 1 else return 0
@@ -53,13 +50,8 @@ class FunctionCallReliabilityEvaluator(Evaluator):
             float: task completion reliability score
         """
 
-        # precision_evaluator = FunctionCallPrecisionEvaluator()
-        # precision = precision_evaluator.evaluate(
-        #     actual_function_calls, expected_function_calls
-        # )
-        scores = []
+        scores: list[float] = []
         evaluators = [
-            # FunctionCallPrecisionEvaluator(),
             FunctionCallRecallEvaluator(),
             FunctionCallArgsRecallEvaluator(),
         ]

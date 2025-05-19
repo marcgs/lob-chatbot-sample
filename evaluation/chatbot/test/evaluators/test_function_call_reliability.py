@@ -5,7 +5,7 @@ from evaluation.chatbot.evaluators.function_call_reliability import (
 from evaluation.chatbot.test.evaluators.test_data import (
     FC_TICKET_CREATE,
     FC_TICKET_CREATE_2,
-    FC_TICKET_CREATE_2_DIFF_ARGS,
+    # FC_TICKET_CREATE_2_DIFF_ARGS is not used
 )
 
 

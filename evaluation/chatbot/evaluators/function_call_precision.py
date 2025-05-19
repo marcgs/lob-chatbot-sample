@@ -18,7 +18,7 @@ class FunctionCallPrecisionEvaluator(Evaluator):
         super().__init__()
 
     def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
+        self, *, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]], **kwargs: dict[str, object]
     ) -> EvaluatorResult:
         return EvaluatorResult(
             score=self.evaluate(actual_function_calls, expected_function_calls)
@@ -58,7 +58,7 @@ class FunctionCallArgsPrecisionEvaluator(Evaluator):
         super().__init__()
 
     def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
+        self, *, actual_function_calls: list[dict[str, object]], expected_function_calls: list[dict[str, object]], **kwargs: dict[str, object]
     ) -> EvaluatorResult:
         return EvaluatorResult(
             score=self.evaluate(actual_function_calls, expected_function_calls)

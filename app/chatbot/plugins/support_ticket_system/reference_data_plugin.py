@@ -59,7 +59,7 @@ class ReferenceDataPlugin:
         logging.info("Retrieving department list")
 
         departments = []
-        for code, dept in self._departments.items():
+        for _, dept in self._departments.items():
             departments.append(
                 {"code": dept.code, "name": dept.name, "description": dept.description}
             )

@@ -9,7 +9,6 @@ from app.chatbot.data_models.ticket_models import (
     SupportTicket,
     TicketPriority,
     TicketWorkflowType,
-    Department,
 )
 from app.chatbot.data_models.sample_data.sample_tickets import TICKETS_BY_ID
 

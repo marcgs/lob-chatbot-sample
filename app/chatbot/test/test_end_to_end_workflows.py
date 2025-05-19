@@ -1,5 +1,4 @@
 import unittest
-from datetime import datetime
 
 from app.chatbot.plugins.support_ticket_system.ticket_management_plugin import (
     TicketManagementPlugin,
@@ -11,7 +10,8 @@ from app.chatbot.plugins.support_ticket_system.action_item_plugin import (
     ActionItemPlugin,
 )
 
-
+# Disabling the pyright error for private usage in this test file
+# pyright: reportPrivateUsage=false
 class TestEndToEndWorkflows(unittest.TestCase):
     """Test the end-to-end workflows for the support ticket management system"""
 

@@ -12,5 +12,5 @@ class EvaluatorResult:
 
 class Evaluator(ABC):
     @abstractmethod
-    def __call__(self, **kwargs) -> EvaluatorResult:
+    def __call__(self, **kwargs: dict[str, object]) -> EvaluatorResult:
         pass

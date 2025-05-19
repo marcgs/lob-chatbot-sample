@@ -1,10 +1,8 @@
 import unittest
-from unittest import mock
 
 from app.chatbot.plugins.support_ticket_system.reference_data_plugin import (
     ReferenceDataPlugin,
 )
-from app.chatbot.data_models.ticket_models import Department
 
 
 class TestReferenceDataPlugin(unittest.TestCase):
