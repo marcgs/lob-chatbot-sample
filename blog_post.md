@@ -209,7 +209,7 @@ This approach ensures that the dataset reflects real-world scenarios while maint
 
 ### Bring Your Own Scenario
 
-A powerful advantage of the LOB Chatbot sample is how easily it can be adapted to other business domains with GitHub Copilot’s Agent Mode and a plan-driven approach. By leveraging Copilot’s ability to generate migration plans and guide code adaptation, teams can rapidly scaffold, customize, and evaluate LOB chatbots for any enterprise context.
+A powerful advantage of the LOB Chatbot sample is how easily it can be adapted to other business domains with [GitHub Copilot’s Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) and a plan-driven approach. By leveraging Copilot’s ability to generate migration plans and guide code adaptation, teams can rapidly scaffold, customize, and evaluate LOB chatbots for any enterprise context.
 
 This makes the sample an effective accelerator for demos, PoCs, and production projects: simply define your scenario, and let Copilot guide the migration and implementation process as you update the relevant plugins, data models, and evaluation templates. The approach enables you to focus on your unique business logic while reusing a robust, well-tested foundation.
 
