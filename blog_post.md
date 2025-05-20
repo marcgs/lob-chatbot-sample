@@ -14,11 +14,11 @@ This blog post will delve deeper into these evaluation challenges, exploring how
 
 Evaluating conversational AI presents a spectrum of challenges that vary dramatically based on the task domain:
 
-- *Open-ended task agents* (like those generating images, answering general knowledge questions, or providing creative content) operate in unbounded spaces where success criteria are often subjective. For these systems, evaluation typically focuses on user satisfaction, appropriateness, and creative quality.
+- **Open-ended task agents** (like those generating images, answering general knowledge questions, or providing creative content) operate in unbounded spaces where success criteria are often subjective. For these systems, evaluation typically focuses on user satisfaction, appropriateness, and creative quality.
 
-- *Closed-domain, business-specific agents* — the Line of Business (LOB) chatbots that manage inventory, process orders, or handle employee requests— face a different reality. These systems interact with structured business processes and must deliver precise, reliable outcomes with minimal tolerance for error. Here, evaluation must balance the flexibility of natural language interaction with the rigor of business process execution.
+- **Closed-domain, business-specific agents** — the Line of Business (LOB) chatbots that manage inventory, process orders, or handle employee requests— face a different reality. These systems interact with structured business processes and must deliver precise, reliable outcomes with minimal tolerance for error. Here, evaluation must balance the flexibility of natural language interaction with the rigor of business process execution.
 
-As noted by Anthropic in their engineering blog on [building effective agents](https://www.anthropic.com/engineering/building-effective-agents), "Agents should be designed not to replace humans but to augment them, handling routine tasks while escalating complex scenarios." This principle becomes even more critical in LOB applications where business outcomes and process integrity are non-negotiable.
+*If you would like to better understand the role of "agents" in conversational AI, I encourage you to check out [building effective agents](https://www.anthropic.com/engineering/building-effective-agents) blog post by Anthropic.*
 
 ### The Non-Deterministic Evaluation Problem
 
@@ -26,12 +26,12 @@ LLM-based chatbots introduce a fundamental challenge to evaluation: non-determin
 
 This non-determinism creates several evaluation hurdles:
 
-- Reproducibility issues: Test cases may pass or fail inconsistently
-- Ground truth ambiguity: Multiple response paths may be equally correct
-- Function calling reliability: The same user intent might be mapped to different function calls on different runs
-- Hallucination risk: Models may confidently present incorrect information or take inappropriate actions
+- **Reproducibility issues:** Test cases may pass or fail inconsistently
+- **Ground truth ambiguity:** Multiple response paths may be equally correct
+- **Function calling reliability:** The same user intent might be mapped to different function calls on different runs
+- **Hallucination risk:** Models may confidently present incorrect information or take inappropriate actions
 
-### The Evolution of Chatbot Architectures
+<!-- ### The Evolution of Chatbot Architectures
 
 To understand evaluation challenges, we must recognize how chatbot architectures have evolved:
 
@@ -56,11 +56,11 @@ Fully Agentic Systems
 - Planning and self-correction
 - Complex evaluation across multiple dimensions
 
-Bommasani et al. discuss in their paper "On the Opportunities and Risks of Foundation Models" (2021) how foundation models present unique evaluation challenges, particularly as these models become more capable and integrated with tools. Their work suggests that as AI systems gain more agency and functionality, our evaluation approaches must evolve beyond traditional metrics.
+Bommasani et al. discuss in their paper "On the Opportunities and Risks of Foundation Models" (2021) how foundation models present unique evaluation challenges, particularly as these models become more capable and integrated with tools. Their work suggests that as AI systems gain more agency and functionality, our evaluation approaches must evolve beyond traditional metrics. -->
 
-### Why LOB Applications Demand Rigorous Evaluation
+### Why LOB Chatbots Demand Rigorous Evaluation
 
-For general-purpose assistants, occasional errors might be acceptable. For business systems managing inventory, processing payments, or handling sensitive customer data, they are not. Several factors make evaluation especially critical for LOB applications:
+For general-purpose assistants, occasional errors might be acceptable. For business systems managing inventory, processing payments, or handling sensitive customer data, they are not. Several factors make evaluation especially critical for LOB chatbots:
 
 1. **Business process integrity**: Errors can disrupt critical workflows
 2. **Compliance requirements**: Many industries face strict regulatory oversight
@@ -79,11 +79,17 @@ The gap between traditional metrics and the needs of modern LLM-based LOB applic
 
 In the following sections, we'll share our journey building an end-to-end evaluation framework for LLM-powered LOB chatbots, the technical challenges we overcame, and the methodology we developed to ensure these powerful but complex systems deliver reliable business value.
 
-## Chat Simulation Based Evaluation Framework
+## LOB Chatbot Evaluation Framework
 
-The diagram below illustrates the architecture of our evaluation framework, highlighting its key components and their interactions. This framework is designed to address the unique challenges of evaluating LOB chatbots, ensuring scalability, reproducibility, and actionable insights.
+Our team have recently worked with one of our customers on developing a LOB chatbot that was supposed to replace an internal, legacy tool for change management in their product development process. The tool was hard to maintain, had a very complex UI with a lot of business rules and restrictions, and it also required a lot of expert knowledge from users. Their leadership believed LLM-powered chatbots are the answer for these challenges and they wanted to build one with us. Our task was to prove feasibility and reliability of such solution when deployed at scale. That's where we started considering all of the forementioned challenges in evaluating such systems. Our primary goal was to run evaluations which would prove overall reliability and provide stakeholders with enough confidence in this solution. With that in mind we designed and implemented an evalution framework for LLM-powered, LOB chatbots.
 
 ![lob_chatbot_evaluation_diagram](./docs/evaluation/lob_chatbot_eval_diagram.png)
+
+The diagram above illustrates the architecture of our evaluation framework, highlighting its key components and their interactions. This framework is designed to address the unique challenges of evaluating LOB chatbots, ensuring scalability, reproducibility, and actionable insights.
+
+TODO: Add link + explanation of our repository + support tickets scenario
+
+In the following sections we will break it down into major components and provide in-depth explanations based on real solution that we developed and tested.
 
 ### Chat Simulation
 
@@ -91,9 +97,41 @@ A key pillar of our evaluation framework is the ability to simulate realistic, m
 
 In each evaluation run, the User Agent is provided with a set of instructions that define the user's intent and business context (for example, creating a high-priority support ticket for an IT issue). The User Agent then engages in a natural conversation with the chatbot, responding to prompts, clarifying details, and navigating the workflow as a real user would. This back-and-forth continues until a predefined completion condition is met, such as the successful creation of a ticket or resolution of a request.
 
+Example system prompt of the user agent:
+```python
+user_agent_system_prompt = """
+You are imitating a user interacting with a chatbot assistant.
+
+Your goal is to complete a specific task by conversing naturally with the assistant.
+
+Behave like a non-technical user who understands the task, but not the internal workings of the system.
+
+You have access to some business data relevant to your task. Use it when appropriate during the conversation.
+
+Follow these rules:
+- Act as a user, not an assitant.
+- Never correct the assistant or point out mistakes.
+- You are not allowed to change the inputs proposed by the assistant.
+- Stay focused on the task but allow for slight variability in how you express yourself.
+- Use the business data as needed, but do not mention that it was "given" to you.
+- Do not modify the business data you are given.
+- Speak naturally, as if you are recalling or referencing information you know.
+- Once your task is completed, you must end the conversation by saying "the session is finished".
+- Your goal is achieved when the assistant has completed the task and you have confirmed it.
+
+Here is the business data you can use during the conversation:
+{business_data}
+
+Here is your task:
+{user_instructions}
+
+Begin the conversation. Respond as the user.
+"""
+```
+
 Throughout the simulated conversation, the framework automatically captures every function call made by the chatbot, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the ground truth for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
 
- The simulation logic is implemented using [Semantic Kernel](https://github.com/microsoft/semantic-kernel) within the project’s evaluation framework in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module. Below is a simplified example of the simulation logic:
+ Our simulation logic is implemented using [Semantic Kernel](https://github.com/microsoft/semantic-kernel) but as you can see below, it mostly depends on a simple loop therefor the same pattern could be easily reproduced with any framework or even without it. You can find our implementation in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module in our repository. Below is a simplified example of the simulation logic:
 
 ```python
     from semantic_kernel.contents import ChatHistory, ChatMessageContent
@@ -155,23 +193,12 @@ Throughout the simulated conversation, the framework automatically captures ever
 
 To ensure realistic interactions, the User Agent is configured to simulate non-technical users who understand the task but not the internal workings of the system.
 This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively.
-See sample [User Agent instructions](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/support_ticket_eval_dataset.json#L4) in the evaluation dataset.
 
-### Metrics, Evaluation, and Error Analysis
-
-With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include:
-
-- **Function Call Name Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function names.
-- **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function parameters.
-- **Reliability**: Measures overall success in completing business processes.
-
-The evaluation framework integrates with the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme) to calculate metrics and track evaluation runs. See [function_call_precision.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_precision.py), [function_call_recall.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_recall.py), and [function_call_reliability.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_reliability.py) modules for details on how these metrics have been implemented in the sample application.
-
-Optional [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
-
-![azure-ai-foundry-eval](./docs/evaluation/azure-ai-foundry-eval.png)
+<!-- See sample [User Agent instructions](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/support_ticket_eval_dataset.json#L4) in the evaluation dataset. -->
 
 ### Ground Truth Generation at Scale
+
+To gain meaningful confidence in LLM-powered chatbots within enterprise settings, we need to run evaluations at scale with significant numbers of test cases. This isn't about dozens of manually curated examples - we're talking about hundreds of test cases for each task or scenario to establish statistical significance. Moreover, these scenarios must closely resemble real-world usage patterns and be grounded in actual business data to provide valid performance indicators. To achieve this scale while maintaining relevance, we designed a pattern that combines scenario templates with real business data using a "test case factory" approach. This factory automatically injects real business data into parameterized scenario templates, allowing us to generate hundreds of diverse yet realistic test cases efficiently. By systematically varying inputs across multiple dimensions of the business domain, we can thoroughly stress-test the chatbot's understanding and function-calling capabilities under conditions that mirror production environments.
 
 To generate evaluation datasets at scale, we leverage a script [generate_eval_dataset.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/generate_eval_dataset.py) that combines scenario templates with real or representative business data. This script automates the creation of test cases by filling placeholders in templates with data from support tickets and action items. Below is a simplified example of a scenario template including placeholders that will be replaced with business data:
 
@@ -205,7 +232,36 @@ To generate evaluation datasets at scale, we leverage a script [generate_eval_da
 }
 ```
 
-This approach ensures that the dataset reflects real-world scenarios while maintaining scalability and consistency.
+### Conversation History
+
+TODO: explain why this is important
+TODO: add examples of chat history and overall chat simulation outputs
+
+```
+TODO: Include Visual Examples of Chat Simulations
+Add visual examples of actual chat simulations showing:
+
+- The user agent's prompts
+- The chatbot's responses
+- Function calls being made
+- Comparison to ground truth
+
+This would help readers better understand how the simulation works in practice and the kind of data it produces.
+```
+
+### Metrics, Evaluation, and Error Analysis
+
+With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include:
+
+- **Function Call Name Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function names.
+- **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function parameters.
+- **Reliability**: Measures overall success in completing business processes.
+
+The evaluation framework integrates with the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme) to calculate metrics and track evaluation runs. See [function_call_precision.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_precision.py), [function_call_recall.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_recall.py), and [function_call_reliability.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_reliability.py) modules for details on how these metrics have been implemented in the sample application.
+
+Optional [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
+
+![azure-ai-foundry-eval](./docs/evaluation/azure-ai-foundry-eval.png)
 
 ### Bring Your Own Scenario
 
@@ -216,5 +272,16 @@ This makes the sample an effective accelerator for demos, PoCs, and production p
 For step-by-step instructions on adapting the solution to your use case, see the [README](https://github.com/marcgs/lob-chatbot-sample/blob/main/README.md#migrating-the-sample).
 
 ## Conclusions
+
+```
+TODO: Address Implementation Challenges and Mitigation Strategies
+Add a section discussing common challenges in implementing this framework and how to address them:
+
+- Balancing coverage vs. evaluation cost
+- Dealing with LLM user agent limitations
+- Handling edge cases and ambiguity
+- Managing prompt engineering for both the user agent and chatbot
+- Cost considerations for running evaluations at scale
+```
 
 By combining realistic simulation, comprehensive data capture, and automated evaluation, this solution provides a scalable and repeatable methodology for assessing LOB chatbots in enterprise environments. The result is a robust foundation for continuous improvement and confident deployment of conversational AI in business-critical workflows.
