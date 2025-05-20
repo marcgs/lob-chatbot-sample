@@ -87,8 +87,10 @@ from evaluation.chatbot.test.evaluators.test_data import (
     ],
 )
 def test_function_call_precision_evaluator(
-    actual: list[dict], expected: list[dict], expected_score: float
+    actual, expected, expected_score
 ):
+    actual = [f.to_dict() for f in actual]
+    expected = [f.to_dict() for f in expected]
     evaluator = FunctionCallPrecisionEvaluator()
     result = evaluator(actual_function_calls=actual, expected_function_calls=expected)
     assert result.score == expected_score
@@ -163,8 +165,10 @@ def test_function_call_precision_evaluator(
     ],
 )
 def test_function_call_args_precision_evaluator(
-    actual: list[dict], expected: list[dict], expected_score: float
+    actual, expected, expected_score
 ):
+    actual = [f.to_dict() for f in actual]
+    expected = [f.to_dict() for f in expected]
     evaluator = FunctionCallArgsPrecisionEvaluator()
     result = evaluator(actual_function_calls=actual, expected_function_calls=expected)
     assert result.score == expected_score

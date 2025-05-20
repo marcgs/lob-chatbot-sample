@@ -82,6 +82,8 @@ from evaluation.chatbot.test.evaluators.test_data import (
     ],
 )
 def test_function_call_function_names_equality(actual, expected, expected_score):
+    actual = [f.to_dict() for f in actual]
+    expected = [f.to_dict() for f in expected]
     evaluator = FunctionCallRecallEvaluator()
     result = evaluator(actual_function_calls=actual, expected_function_calls=expected)
     assert result.score == expected_score
@@ -153,6 +155,8 @@ def test_function_call_function_names_equality(actual, expected, expected_score)
     ],
 )
 def test_function_call_args_recall_evaluator(actual, expected, expected_score):
+    actual = [f.to_dict() for f in actual]
+    expected = [f.to_dict() for f in expected]
     evaluator = FunctionCallArgsRecallEvaluator()
     result = evaluator(actual_function_calls=actual, expected_function_calls=expected)
     assert result.score == expected_score
