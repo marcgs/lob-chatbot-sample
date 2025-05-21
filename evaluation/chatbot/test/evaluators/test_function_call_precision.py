@@ -14,6 +14,7 @@ from evaluation.chatbot.test.evaluators.test_data import (
     FC_TICKET_CREATE_MISSING_ARG,
     FC_TICKET_CREATE_2_DIFF_ARGS,
     FC_TICKET_CREATE_NO_ARGS,
+    convert_to_dict,
 )
 
 
@@ -87,10 +88,10 @@ from evaluation.chatbot.test.evaluators.test_data import (
     ],
 )
 def test_function_call_precision_evaluator(
-    actual: list[dict], expected: list[dict], expected_score: float
+    actual, expected, expected_score
 ):
     evaluator = FunctionCallPrecisionEvaluator()
-    result = evaluator(actual_function_calls=actual, expected_function_calls=expected)
+    result = evaluator(actual_function_calls=convert_to_dict(actual), expected_function_calls=convert_to_dict(expected))
     assert result.score == expected_score
 
 
@@ -163,8 +164,8 @@ def test_function_call_precision_evaluator(
     ],
 )
 def test_function_call_args_precision_evaluator(
-    actual: list[dict], expected: list[dict], expected_score: float
+    actual, expected, expected_score
 ):
     evaluator = FunctionCallArgsPrecisionEvaluator()
-    result = evaluator(actual_function_calls=actual, expected_function_calls=expected)
+    result = evaluator(actual_function_calls=convert_to_dict(actual), expected_function_calls=convert_to_dict(expected))
     assert result.score == expected_score

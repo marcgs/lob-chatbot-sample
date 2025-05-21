@@ -1,3 +1,4 @@
+from evaluation.chatbot.models import FunctionCall
 from evaluation.chatbot.evaluators.matching import (
     match_function_calls,
 )
@@ -21,14 +22,14 @@ def test_exact_match_single_call():
     assert len(result.unmatched_expected_calls) == 0
     assert len(result.unmatched_actual_calls) == 0
 
-    function_name = FC_TICKET_CREATE["functionName"].lower()
+    function_name = FC_TICKET_CREATE.functionName.lower()
     assert function_name in result.matched_calls
     assert (
-        result.matched_calls[function_name].actual_args == FC_TICKET_CREATE["arguments"]
+        result.matched_calls[function_name].actual_args == FC_TICKET_CREATE.arguments
     )
     assert (
         result.matched_calls[function_name].expected_args
-        == FC_TICKET_CREATE["arguments"]
+        == FC_TICKET_CREATE.arguments
     )
 
 
@@ -43,8 +44,8 @@ def test_match_multiple_calls():
     assert len(result.unmatched_expected_calls) == 0
     assert len(result.unmatched_actual_calls) == 0
 
-    ticket_function_name = FC_TICKET_CREATE["functionName"].lower()
-    ref_data_function_name = FC_REFERENCE_DATA_GET_DEPARTMENTS["functionName"].lower()
+    ticket_function_name = FC_TICKET_CREATE.functionName.lower()
+    ref_data_function_name = FC_REFERENCE_DATA_GET_DEPARTMENTS.functionName.lower()
 
     assert ticket_function_name in result.matched_calls
     assert ref_data_function_name in result.matched_calls
@@ -62,7 +63,7 @@ def test_unmatched_actual_calls():
     assert len(result.unmatched_actual_calls) == 1
 
     assert (
-        FC_REFERENCE_DATA_GET_DEPARTMENTS["functionName"].lower()
+        FC_REFERENCE_DATA_GET_DEPARTMENTS.functionName.lower()
         in result.unmatched_actual_calls
     )
 
@@ -79,7 +80,7 @@ def test_unmatched_expected_calls():
     assert len(result.unmatched_actual_calls) == 0
 
     assert (
-        FC_REFERENCE_DATA_GET_DEPARTMENTS["functionName"].lower()
+        FC_REFERENCE_DATA_GET_DEPARTMENTS.functionName.lower()
         in result.unmatched_expected_calls
     )
 
@@ -91,15 +92,15 @@ def test_different_arguments():
 
     result = match_function_calls(actual_calls, expected_calls)
 
-    function_name = FC_TICKET_CREATE["functionName"].lower()
+    function_name = FC_TICKET_CREATE.functionName.lower()
     assert function_name in result.matched_calls
     assert (
         result.matched_calls[function_name].actual_args
-        == FC_TICKET_CREATE_DIFF_ARGS["arguments"]
+        == FC_TICKET_CREATE_DIFF_ARGS.arguments
     )
     assert (
         result.matched_calls[function_name].expected_args
-        == FC_TICKET_CREATE["arguments"]
+        == FC_TICKET_CREATE.arguments
     )
 
 
@@ -118,10 +119,10 @@ def test_no_matches():
 def test_case_insensitive_matching():
     """Test that matching is case-insensitive for function names."""
     # Create a version with different case
-    case_diff_call = {
-        "functionName": "ticketMANAGEMENTPlugin-create_support_ticket",
-        "arguments": FC_TICKET_CREATE["arguments"],
-    }
+    case_diff_call = FunctionCall(
+        functionName="ticketMANAGEMENTplugin-create_support_ticket",
+        arguments=FC_TICKET_CREATE.arguments,
+    )
 
     actual_calls = [case_diff_call]
     expected_calls = [FC_TICKET_CREATE]
@@ -152,7 +153,7 @@ def test_matching_with_missing_arguments():
 
     result = match_function_calls(actual_calls, expected_calls)
 
-    function_name = FC_TICKET_CREATE["functionName"].lower()
+    function_name = FC_TICKET_CREATE.functionName.lower()
     assert function_name in result.matched_calls
     assert "workflow_type" not in result.matched_calls[function_name].actual_args
     assert "workflow_type" in result.matched_calls[function_name].expected_args
@@ -169,8 +170,8 @@ def test_different_function_name_similar_args():
     assert len(result.unmatched_expected_calls) == 1
     assert len(result.unmatched_actual_calls) == 1
 
-    assert FC_TICKET_CREATE["functionName"].lower() in result.unmatched_expected_calls
+    assert FC_TICKET_CREATE.functionName.lower() in result.unmatched_expected_calls
     assert (
-        FC_TICKET_CREATE_DIFF_NAME["functionName"].lower()
+        FC_TICKET_CREATE_DIFF_NAME.functionName.lower()
         in result.unmatched_actual_calls
     )

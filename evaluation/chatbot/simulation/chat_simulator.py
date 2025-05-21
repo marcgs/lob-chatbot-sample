@@ -7,9 +7,11 @@ from semantic_kernel.agents import (
     AgentResponseItem,
 )
 from semantic_kernel.agents.strategies import KernelFunctionTerminationStrategy
+from semantic_kernel.contents.function_call_content import FunctionCallContent
 from semantic_kernel.contents.utils.author_role import AuthorRole
 
 from app.chatbot.factory import create_support_ticket_agent
+from evaluation.chatbot.models import FunctionCall
 from evaluation.chatbot.simulation.factory import create_termination_strategy, create_user_agent
 
 
@@ -82,38 +84,36 @@ class SupportTicketChatSimulator:
             
             print(f"User: {user_message.to_dict()}")
 
-            # Extract conversation history
-            conversation_history = await agent_thread.get_messages()
-            
+            # Convert to list of messages to satisfy the type checker
+            messages_list = await agent_thread.get_messages()
+            # # Convert ChatHistory to list[ChatMessageContent] to solve type compatibility issue
             should_agent_terminate = await termination_strategy.should_agent_terminate(
                 agent=support_ticket_agent,
-                history=[msg for msg in conversation_history],
+                history=[msg for msg in messages_list], # list comprehension required for resolving type compatibility
             )
 
             if should_agent_terminate:
                 print("Task completed")
                 break
 
-        return conversation_history
+        history = await agent_thread.get_messages()
 
-    def get_function_calls(self, chatHistory: ChatHistory) -> list[dict]:
+        return history
+
+    def get_function_calls(self, chatHistory: ChatHistory) -> list[FunctionCall]:
         """
         This method retrieves the function calls made by the chatbot.
         It is used for evaluation purposes only.
         """
 
-        function_calls = [
-            t.to_dict().get("tool_calls")
-            for t in chatHistory
-            if t.to_dict().get("tool_calls") is not None
+        function_calls: list[FunctionCall] = [
+            FunctionCall.from_FunctionCallContent(item)
+                for chatMessageContent in chatHistory 
+                for item in chatMessageContent.items 
+                if isinstance(item, FunctionCallContent)
         ]
-        # Flatten the list of function calls and ensure it's not None before iteration
-        function_calls_flat = []
-        for calls in function_calls:
-            if calls:
-                function_calls_flat.extend(calls)
 
-        return function_calls_flat
+        return function_calls
 
 
 if __name__ == "__main__":
