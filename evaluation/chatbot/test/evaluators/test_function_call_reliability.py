@@ -6,6 +6,8 @@ from evaluation.chatbot.test.evaluators.test_data import (
     FC_TICKET_CREATE,
     FC_TICKET_CREATE_2,
     FC_TICKET_CREATE_2_DIFF_ARGS,
+    FC_TICKET_CREATE_DIFF_ARGS,
+    FC_TICKET_CREATE_DIFF_NAME,
 )
 
 
@@ -24,15 +26,15 @@ def __call_evaluator(actual: list[dict], expected: list[dict], expected_score: f
             1.0,  # perfect precision and recall
         ),
         (
-            [FC_TICKET_CREATE, FC_TICKET_CREATE_2],
             [FC_TICKET_CREATE],
-            0.0,  # precision not 1
+            [FC_TICKET_CREATE_DIFF_ARGS],
+            0.5,  # argument recall not 1
         ),
         (
-            [FC_TICKET_CREATE],
             [FC_TICKET_CREATE, FC_TICKET_CREATE_2],
-            0.0,  # recall not 1
-        ),
+            [FC_TICKET_CREATE_DIFF_NAME, FC_TICKET_CREATE_2_DIFF_ARGS],
+            0.25,  # argument recall of second function call is not 1
+        )
     ],
 )
 def test_function_call_reliability(actual, expected, expected_score):
