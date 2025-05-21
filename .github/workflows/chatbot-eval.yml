@@ -26,6 +26,10 @@ jobs:
       run: make chatbot-eval
       env:
         PYTHONPATH: ${{ github.workspace }}
+        AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+        AZURE_OPENAI_ENDPOINT: ${{ env.AZURE_OPENAI_ENDPOINT }}
+        AZURE_OPENAI_API_VERSION: ${{ env.AZURE_OPENAI_API_VERSION }}
+        AZURE_OPENAI_DEPLOYMENT_NAME: ${{ env.AZURE_OPENAI_DEPLOYMENT_NAME }}
       
     - name: Upload evaluation results
       uses: actions/upload-artifact@v4
