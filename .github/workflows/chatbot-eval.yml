@@ -2,7 +2,7 @@ name: Chatbot Evaluation
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, eval-workflow ]
   pull_request:
     branches: [ main ]
 
