@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Lint
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: make lint
+        
+    - name: Test
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: make test
