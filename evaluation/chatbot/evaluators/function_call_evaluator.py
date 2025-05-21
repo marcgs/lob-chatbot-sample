@@ -3,8 +3,6 @@ from evaluation.chatbot.evaluators.evaluator import Evaluator, EvaluatorResult
 from evaluation.chatbot.models import FunctionCall
 
 
-# Ignore certain type checks as the Azure AI Evaluation SDK does not support Python complex types
-# pyright: reportUnknownMemberType=false, reportUnknownArgumentType=false, reportUnknownVariableType=false, reportUnknownParameterType=false, reportMissingTypeArgument=false
 class FunctionCallEvaluator(Evaluator):
     """
     An evaluator to calculate function call precision.
@@ -16,10 +14,11 @@ class FunctionCallEvaluator(Evaluator):
     def __init__(self):
         super().__init__()
 
-    def __call__(self, *, actual_function_calls: dict, expected_function_calls: dict, **kwargs: Any) -> EvaluatorResult:
+    # Ignore certain type checks as the Azure AI Evaluation SDK does not support Python complex types
+    def __call__(self, *, actual_function_calls: dict, expected_function_calls: dict, **kwargs: Any) -> EvaluatorResult: # pyright: ignore[reportUnknownParameterType, reportMissingTypeArgument]
         # Convert the function calls to FunctionCall objects
-        actual = [FunctionCall.from_dict(f) for f in actual_function_calls]
-        expected = [FunctionCall.from_dict(f) for f in expected_function_calls]
+        actual = [FunctionCall.from_dict(f) for f in actual_function_calls] # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType, reportUnknownVariableType]
+        expected = [FunctionCall.from_dict(f) for f in expected_function_calls] # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType, reportUnknownVariableType]
         return EvaluatorResult(
             score=self.evaluate(actual, expected)
         )
