@@ -4,8 +4,6 @@ from evaluation.chatbot.simulation.chat_simulator import SupportTicketChatSimula
 from semantic_kernel.contents import ChatHistory
 
 
-    
-
 class SupportTicketEvaluationTarget:
     """
     This class is responsible for evaluating the Support Ticket Management System chatbot.
