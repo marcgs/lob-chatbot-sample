@@ -1,13 +1,11 @@
+from evaluation.chatbot.evaluators.function_call_evaluator import FunctionCallEvaluator
+from evaluation.chatbot.models import FunctionCall
 from evaluation.chatbot.evaluators.function_call_recall import (
     FunctionCallRecallEvaluator, FunctionCallArgsRecallEvaluator
 )
-from evaluation.chatbot.evaluators.function_call_precision import (
-    FunctionCallPrecisionEvaluator,
-)
-from .evaluator import Evaluator, EvaluatorResult
 
 
-class FunctionCallReliabilityEvaluator(Evaluator):
+class FunctionCallReliabilityEvaluator(FunctionCallEvaluator):
     """
     Calculate Reliability of function calls.
 
@@ -15,51 +13,15 @@ class FunctionCallReliabilityEvaluator(Evaluator):
 
     """
 
-    def __init__(
-        self,
-    ):
-        """Initialize the object of the class."""
-        super().__init__()
-
-    def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
-    ) -> EvaluatorResult:
-        """
-        Private method, that should be used exclusively for evaluation framework purposes.
-
-        Args:
-            actual_function_calls (list[dict]): an array of actual function calls done by the LLM model
-            expected_function_calls (list[dict]): an array of expected function calls (ground truth)
-
-        Returns:
-            Dict: Result of evaluation in the following format: `{reliability: <value>}`
-        """
-
-        return EvaluatorResult(
-            score=self.evaluate(actual_function_calls, expected_function_calls)
-        )
-
     def evaluate(
-        self, actual_function_calls: list[dict], expected_function_calls: list[dict]
+        self, actual_function_calls: list[FunctionCall], expected_function_calls: list[FunctionCall]
     ) -> float:
         """
-        Reliability = if precision == 1 and recall == 1 then return 1 else return 0
-
-        Args:
-            actual_function_calls (list[dict]): an array of actual function calls done by the LLM model
-            expected_function_calls (list[dict]): an array of expected function calls (ground truth)
-
-        Returns:
-            float: task completion reliability score
+        Calculate the reliability of function calls.
         """
 
-        # precision_evaluator = FunctionCallPrecisionEvaluator()
-        # precision = precision_evaluator.evaluate(
-        #     actual_function_calls, expected_function_calls
-        # )
-        scores = []
+        scores: list[float] = []
         evaluators = [
-            # FunctionCallPrecisionEvaluator(),
             FunctionCallRecallEvaluator(),
             FunctionCallArgsRecallEvaluator(),
         ]

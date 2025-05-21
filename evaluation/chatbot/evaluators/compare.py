@@ -2,7 +2,7 @@ import re
 from difflib import SequenceMatcher
 
 
-def normalize_text(text):
+def normalize_text(text: str) -> str:
     # 1 lowercase
     text = text.lower()
     # 2 remove special characters
@@ -25,7 +25,7 @@ def normalize_text(text):
     return text
 
 
-def is_similar(t1, t2, threshold=0.95):
+def is_similar(t1: str, t2: str, threshold: float=0.95):
     return (
         SequenceMatcher(None, normalize_text(t1), normalize_text(t2)).ratio()
         >= threshold
