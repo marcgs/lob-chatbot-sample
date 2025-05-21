@@ -18,7 +18,7 @@ class FunctionCall:
         
         return FunctionCall(
             functionName=source.name or source.function_name, # name attribute includes plugin name
-            arguments=args,
+            arguments=args, # pyright: ignore [reportArgumentType]
         )
     
     # Ignore certain type checks as the Azure AI Evaluation SDK does not support Python complex types
