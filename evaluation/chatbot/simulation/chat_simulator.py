@@ -88,7 +88,7 @@ class SupportTicketChatSimulator:
             # # Convert ChatHistory to list[ChatMessageContent] to solve type compatibility issue
             should_agent_terminate = await termination_strategy.should_agent_terminate(
                 agent=support_ticket_agent,
-                history=[msg for msg in messages_list],
+                history=[msg for msg in messages_list], # list comprehension required for resolving type compatibility
             )
 
             if should_agent_terminate:
