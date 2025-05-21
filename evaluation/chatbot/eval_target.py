@@ -35,7 +35,7 @@ class SupportTicketEvaluationTarget:
             function_calls = simulator.get_function_calls(history)
 
             return {
-                "chat_history": list([t.to_dict() for t in history]),
+                "chat_history": list(t.to_dict() for t in history),
                 "function_calls": list(f.to_dict() for f in function_calls),
             }
 
