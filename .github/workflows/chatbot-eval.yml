@@ -24,6 +24,8 @@ jobs:
         
     - name: Run Chatbot Evaluation
       run: make chatbot-eval
+      env:
+        PYTHONPATH: ${{ github.workspace }}
       
     - name: Upload evaluation results
       uses: actions/upload-artifact@v4
