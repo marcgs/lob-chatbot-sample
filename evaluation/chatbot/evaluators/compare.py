@@ -3,7 +3,6 @@ from difflib import SequenceMatcher
 
 
 def normalize_text(text: str) -> str:
-def normalize_text(text: str) -> str:
     # 1 lowercase
     text = text.lower()
     # 2 remove special characters

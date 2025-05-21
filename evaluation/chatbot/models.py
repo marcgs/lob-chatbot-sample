@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import json
+from typing import Any
 
 from semantic_kernel.contents.function_call_content import FunctionCallContent
 
@@ -33,11 +34,11 @@ class FunctionCall:
             arguments=source["arguments"], # pyright: ignore [reportUnknownArgumentType]
         )
     
-    def to_dict(self) -> dict: # pyright: ignore [reportUnknownParameterType, reportMissingTypeArgument]
+    def to_dict(self) -> dict[str, Any]:
         """
         Converts the FunctionCall object to a dictionary.
         """
-        return { # pyright: ignore [reportUnknownVariableType]
+        return {
             "functionName": self.functionName,
             "arguments": self.arguments,
         }

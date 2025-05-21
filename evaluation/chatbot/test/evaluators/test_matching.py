@@ -136,8 +136,8 @@ def test_case_insensitive_matching():
 
 def test_empty_lists():
     """Test with empty lists of actual and expected calls."""
-    actual_calls = []
-    expected_calls = []
+    actual_calls: list[FunctionCall] = []
+    expected_calls: list[FunctionCall] = []
 
     result = match_function_calls(actual_calls, expected_calls)
 

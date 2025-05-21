@@ -188,7 +188,7 @@ class TicketManagementPlugin:
         # Simple search implementation
         if search_query:
             search_terms = search_query.lower().split()
-            filtered_results = []
+            filtered_results: list[SupportTicket] = []
 
             for ticket in results:
                 ticket_text = (

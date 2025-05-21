@@ -1,5 +1,6 @@
 # Constants for function call objects to reduce clutter in tests
 from collections.abc import Sequence
+from typing import Any
 from evaluation.chatbot.models import FunctionCall
 
 FC_TICKET_CREATE = FunctionCall(
@@ -93,6 +94,6 @@ FC_REFERENCE_DATA_GET_DEPARTMENTS = FunctionCall(
     arguments={},
 )
 
-def convert_to_dict(function_calls: Sequence[FunctionCall]) -> dict:
+def convert_to_dict(function_calls: Sequence[FunctionCall]) -> dict[str, Any]:
     """Convert a sequence of FunctionCall objects to a list of dictionaries."""
     return [f.to_dict() for f in function_calls] # pyright: ignore[reportReturnType] dict type is required by Azure AI Evaluation SDK
