@@ -86,10 +86,9 @@ class SupportTicketChatSimulator:
             # Convert to list of messages to satisfy the type checker
             messages_list = await agent_thread.get_messages()
             # # Convert ChatHistory to list[ChatMessageContent] to solve type compatibility issue
-            # message_content_list = [msg for msg in messages_list]
             should_agent_terminate = await termination_strategy.should_agent_terminate(
                 agent=support_ticket_agent,
-                history=messages_list,
+                history=[msg for msg in messages_list],
             )
 
             if should_agent_terminate:
