@@ -1,0 +1,33 @@
+name: Chatbot Evaluation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        make setup
+        
+    - name: Run Chatbot Evaluation
+      run: make chatbot-eval
+      
+    - name: Upload evaluation results
+      uses: actions/upload-artifact@v3
+      with:
+        name: chatbot-evaluation-results
+        path: evaluation/chatbot/output/
+        if-no-files-found: warn
