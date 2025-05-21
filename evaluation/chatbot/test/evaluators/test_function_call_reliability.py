@@ -8,6 +8,7 @@ from evaluation.chatbot.test.evaluators.test_data import (
     FC_TICKET_CREATE_2_DIFF_ARGS,
     FC_TICKET_CREATE_DIFF_ARGS,
     FC_TICKET_CREATE_DIFF_NAME,
+    convert_to_dict,
 )
 
 
@@ -32,8 +33,6 @@ from evaluation.chatbot.test.evaluators.test_data import (
     ],
 )
 def test_function_call_reliability(actual, expected, expected_score):
-    actual = [f.to_dict() for f in actual]
-    expected = [f.to_dict() for f in expected]
     evaluator = FunctionCallReliabilityEvaluator()
-    result = evaluator(actual_function_calls=actual, expected_function_calls=expected)
+    result = evaluator(actual_function_calls=convert_to_dict(actual), expected_function_calls=convert_to_dict(expected))
     assert result.score == expected_score
