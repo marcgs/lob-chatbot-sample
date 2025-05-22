@@ -94,6 +94,6 @@ FC_REFERENCE_DATA_GET_DEPARTMENTS = FunctionCall(
     arguments={},
 )
 
-def convert_to_dict(function_calls: Sequence[FunctionCall]) -> dict[str, Any]:
+def convert_to_dict(function_calls: Sequence[FunctionCall]) -> Any:
     """Convert a sequence of FunctionCall objects to a list of dictionaries."""
-    return [f.to_dict() for f in function_calls] # pyright: ignore[reportReturnType] dict type is required by Azure AI Evaluation SDK
+    return [f.to_dict() for f in function_calls]
