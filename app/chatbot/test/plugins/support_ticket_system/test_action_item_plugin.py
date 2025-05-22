@@ -96,7 +96,7 @@ class TestActionItemPlugin(unittest.TestCase):
         self.assertEqual(result["current_action_status"], "In Progress")
 
         # Verify the action item was actually updated
-        updated_action = self.plugin._action_items["ACT-TEST123"] 
+        updated_action = self.plugin._action_items["ACT-TEST123"]
         self.assertEqual(updated_action.status, ActionItemStatus.IN_PROGRESS)
 
     def test_update_action_item_with_invalid_status(self):
