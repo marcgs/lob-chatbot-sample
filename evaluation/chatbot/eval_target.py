@@ -1,5 +1,4 @@
 import asyncio
-import json
 
 from evaluation.chatbot.simulation.chat_simulator import SupportTicketChatSimulator
 from semantic_kernel.contents import ChatHistory
@@ -33,20 +32,11 @@ class SupportTicketEvaluationTarget:
                 )
             )
 
-            print(f"Chat History: {[t.to_dict() for t in history]}")
-            func_calls = simulator.get_function_calls(history)
-            func_calls = [
-                {
-                    "functionName": res["function"]["name"],
-                    "arguments": json.loads(res["function"]["arguments"]),
-                    "callId": res["id"],
-                }
-                for res in func_calls
-            ]
+            function_calls = simulator.get_function_calls(history)
 
             return {
-                "chat_history": list([t.to_dict() for t in history]),
-                "function_calls": func_calls,
+                "chat_history": list(t.to_dict() for t in history),
+                "function_calls": list(f.to_dict() for f in function_calls),
             }
 
         except Exception as e:

@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 import pandas as pd
 import logging
 import os
@@ -20,7 +21,7 @@ from evaluation.chatbot.evaluators.function_call_reliability import (
 )
 from evaluation.chatbot.eval_target import SupportTicketEvaluationTarget
 from evaluation.evaluation_service import EvaluationService
-from evaluation import common as utils
+from evaluation.common import copy_and_execute_notebook, generate_experiment_name
 
 # Set the logging level for semantic_kernel.kernel to DEBUG.
 setup_logging()
@@ -56,7 +57,7 @@ def run_support_ticket_evaluation(
         ground_truth_data_path
         or f"{chatbot_eval_root_path()}/ground-truth/support_ticket_eval_dataset.json"
     )
-    experiment_name = experiment_name or utils.generate_experiment_name(
+    experiment_name = experiment_name or generate_experiment_name(
         name="Support_Ticket_Chatbot_Eval"
     )
     output_path = f"{chatbot_eval_root_path()}/output/{experiment_name}"
@@ -92,28 +93,12 @@ def run_support_ticket_evaluation(
         experiment_name=experiment_name,
     )
 
-    # Copy error analysis notebook into output directory
-    import shutil
-    notebook_src = os.path.join(chatbot_eval_root_path(), "error_analysis_chatbot.ipynb")
-    notebook_dst = os.path.join(output_path, "error_analysis_chatbot.ipynb")
-    try:
-        shutil.copy(notebook_src, notebook_dst)
-        print(f"Copied error analysis notebook to {notebook_dst}")
-        # Execute all cells in the notebook after copying
-        import nbformat
-        from nbconvert.preprocessors import ExecutePreprocessor
-        with open(notebook_dst, "r", encoding="utf-8") as f:
-            nb = nbformat.read(f, as_version=4)
-        ep = ExecutePreprocessor(kernel_name="python3")
-        try:
-            ep.preprocess(nb, {"metadata": {"path": os.path.dirname(notebook_dst)}})
-            with open(notebook_dst, "w", encoding="utf-8") as f:
-                nbformat.write(nb, f)
-            print(f"Executed and saved notebook with outputs: {notebook_dst}")
-        except Exception as e:
-            print(f"Warning: Failed to execute notebook: {e}")
-    except Exception as e:
-        print(f"Warning: Could not copy error analysis notebook: {e}")
+    # Copy and execute error analysis notebook
+    copy_and_execute_notebook(
+        notebook_name="error_analysis_chatbot.ipynb",
+        root_path=chatbot_eval_root_path(),
+        output_path=Path(output_path)
+    )
 
     # convert results to dataframe
     df = pd.DataFrame(results).round(2)

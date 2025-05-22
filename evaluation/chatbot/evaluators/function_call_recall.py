@@ -1,12 +1,13 @@
+from evaluation.chatbot.evaluators.function_call_evaluator import FunctionCallEvaluator
+from evaluation.chatbot.models import FunctionCall
 from evaluation.chatbot.evaluators.matching import (
     FunctionCallMatch,
     match_function_calls,
 )
-from evaluation.chatbot.evaluators.evaluator import Evaluator, EvaluatorResult
 from evaluation.chatbot.evaluators.compare import is_similar
 
 
-class FunctionCallRecallEvaluator(Evaluator):
+class FunctionCallRecallEvaluator(FunctionCallEvaluator):
     """
     An evaluator to calculate function call recall.
 
@@ -14,18 +15,8 @@ class FunctionCallRecallEvaluator(Evaluator):
 
     """
 
-    def __init__(self):
-        super().__init__()
-
-    def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
-    ) -> EvaluatorResult:
-        return EvaluatorResult(
-            score=self.evaluate(actual_function_calls, expected_function_calls)
-        )
-
     def evaluate(
-        self, actual_function_calls: list[dict], expected_function_calls: list[dict]
+        self, actual_function_calls: list[FunctionCall], expected_function_calls: list[FunctionCall]
     ) -> float:
         match_result: FunctionCallMatch = match_function_calls(
             actual_function_calls, expected_function_calls
@@ -41,7 +32,7 @@ class FunctionCallRecallEvaluator(Evaluator):
         return round(result, 2)
 
 
-class FunctionCallArgsRecallEvaluator(Evaluator):
+class FunctionCallArgsRecallEvaluator(FunctionCallEvaluator):
     """
     An evaluator to calculate function call argument recall.
 
@@ -52,18 +43,8 @@ class FunctionCallArgsRecallEvaluator(Evaluator):
     The overall precision is the average of the precision scores for all function calls.
     """
 
-    def __init__(self):
-        super().__init__()
-
-    def __call__(
-        self, *, actual_function_calls, expected_function_calls, **kwargs
-    ) -> EvaluatorResult:
-        return EvaluatorResult(
-            score=self.evaluate(actual_function_calls, expected_function_calls)
-        )
-
     def evaluate(
-        self, actual_function_calls: list[dict], expected_function_calls: list[dict]
+        self, actual_function_calls: list[FunctionCall], expected_function_calls: list[FunctionCall]
     ) -> float:
         match_result: FunctionCallMatch = match_function_calls(
             actual_function_calls, expected_function_calls
