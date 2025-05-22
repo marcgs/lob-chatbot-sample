@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+from typing import Any
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 
@@ -30,25 +31,22 @@ def convert_json_to_jsonl(filePath: str) -> str:
     return outputPath
 
 
-def save_to_file(data: list[dict], output_dir: str):
+def save_to_file(metrics: list[dict[str, Any]], detailed_results: list[dict[str, Any]], output_dir: str):
     """
-    Save content to a file
+    Save the evaluation results to a file
     Args:
-        data (list[dict]): data to save
-        experiment_name (str): name of the experiment
+        metrics (list[dict[str, Any]]): evaluation metrics
+        detailed_results (list[dict[str, Any]]): detailed evaluation results
+        output_dir (str): path to the output directory
     """
 
-    # file_dir = f"{root_path()}/evaluation/output/{experiment_name}"
-    file_path = f"{output_dir}/evaluation_results.json"
     os.makedirs(output_dir, exist_ok=True)
-    with open(file_path, "w+") as f:
-        f.write(json.dumps(data, ensure_ascii=False, indent=2))
-
-    for result in data:
-        del result["rows"]
+    
+    with open(f"{output_dir}/evaluation_results.json", "w+") as f:
+        f.write(json.dumps(detailed_results, ensure_ascii=False, indent=2))
 
     with open(f"{output_dir}/evaluation_metrics.json", "w+") as f:
-        f.write(json.dumps(data, indent=2))
+        f.write(json.dumps(metrics, indent=2))
 
 
 def generate_experiment_name(name: str = "Eval") -> str:
@@ -83,14 +81,14 @@ def copy_and_execute_notebook(notebook_name: str, root_path: Path, output_path: 
         
         # Execute all cells in the notebook after copying
         with open(notebook_dst, "r", encoding="utf-8") as f:
-            nb = nbformat.read(f, as_version=4)
+            nb = nbformat.read(f, as_version=4) # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType] As required by nbformat 
             
         ep = ExecutePreprocessor(kernel_name="python3")
         try:
             print(f"Executing notebook: {notebook_dst}")
             ep.preprocess(nb, {"metadata": {"path": os.path.dirname(notebook_dst)}})
             with open(notebook_dst, "w", encoding="utf-8") as f:
-                nbformat.write(nb, f)
+                nbformat.write(nb, f) # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType] As required by nbformat 
             print(f"Executed and saved notebook with outputs: {notebook_dst}")
         except Exception as e:
             print(f"Failed to execute notebook: {e}")

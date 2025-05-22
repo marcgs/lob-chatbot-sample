@@ -25,7 +25,7 @@ def normalize_text(text: str) -> str:
     return text
 
 
-def is_similar(t1: str, t2: str, threshold: float=0.95):
+def is_similar(t1: str, t2: str, threshold: float = 0.95) -> bool:
     return (
         SequenceMatcher(None, normalize_text(t1), normalize_text(t2)).ratio()
         >= threshold

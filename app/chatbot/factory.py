@@ -31,7 +31,7 @@ def create_support_ticket_agent(
 
     # Enable planning
     execution_settings = AzureChatPromptExecutionSettings()
-    execution_settings.function_choice_behavior = FunctionChoiceBehavior.Auto()
+    execution_settings.function_choice_behavior = FunctionChoiceBehavior.Auto() # pyright: ignore[reportUnknownMemberType] As required by the Semantic Kernel SDK
     execution_settings.temperature = 0.3
     execution_settings.top_p = 0.9
 

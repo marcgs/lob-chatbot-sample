@@ -1,5 +1,6 @@
 import argparse
 from pathlib import Path
+from typing import Any
 import pandas as pd
 import logging
 import os
@@ -7,6 +8,7 @@ import os
 from azure.ai.evaluation import AzureAIProject, EvaluatorConfig
 from semantic_kernel.utils.logging import setup_logging
 
+from evaluation.chatbot.evaluators.evaluator import Evaluator
 from evaluation.chatbot.root_path import chatbot_eval_root_path
 from evaluation.chatbot.evaluators.function_call_precision import (
     FunctionCallArgsPrecisionEvaluator,
@@ -30,7 +32,7 @@ logging.basicConfig(level=logging.INFO)
 
 def run_support_ticket_evaluation(
     ground_truth_data_path: str | None, experiment_name: str | None
-) -> list[dict]:
+) -> list[dict[str, Any]]:
     """
     Run evaluation for the support ticket management system
     """
@@ -62,7 +64,7 @@ def run_support_ticket_evaluation(
     )
     output_path = f"{chatbot_eval_root_path()}/output/{experiment_name}"
 
-    evaluators = {
+    evaluators: dict[str, Evaluator] = {
         "Precision_fn": FunctionCallPrecisionEvaluator(),
         "Recall_fn": FunctionCallRecallEvaluator(),
         "Precision_args": FunctionCallArgsPrecisionEvaluator(),
@@ -84,7 +86,7 @@ def run_support_ticket_evaluation(
     }
 
     # run evaluation for Chatbot
-    results: list[dict] = evaluation_service.evaluate(
+    results: list[dict[str, Any]] = evaluation_service.evaluate(
         evaluators=evaluators,
         evaluators_config=evaluators_config,
         eval_target=SupportTicketEvaluationTarget(),
@@ -101,7 +103,7 @@ def run_support_ticket_evaluation(
     )
 
     # convert results to dataframe
-    df = pd.DataFrame(results).round(2)
+    df: pd.DataFrame = pd.DataFrame(results).round(2) # pyright: ignore[reportUnknownMemberType] As required by pandas
     print(df.transpose())
     print(output_path)
 

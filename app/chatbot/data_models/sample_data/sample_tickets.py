@@ -220,7 +220,7 @@ SAMPLE_ACTION_ITEMS = [
 ACTION_ITEMS_BY_ID = {item.action_id: item for item in SAMPLE_ACTION_ITEMS}
 
 # Create a dictionary of action items by parent ticket ID
-TICKET_TO_ACTIONS = {}
+TICKET_TO_ACTIONS: dict[str, list[str]] = {}
 for item in SAMPLE_ACTION_ITEMS:
     if item.parent_ticket_id not in TICKET_TO_ACTIONS:
         TICKET_TO_ACTIONS[item.parent_ticket_id] = []

@@ -1,3 +1,4 @@
+# pyright: reportUnknownVariableType=false, reportUnknownParameterType=false, reportUnknownMemberType=false, reportUnknownArgumentType=false, reportUnknownLambdaType=false
 """
 Script to generate chatbot evaluation dataset from scenario templates and dummy business data.
 Uses pandas for more efficient data processing with improved handling of multi-action tickets.
@@ -7,7 +8,7 @@ import json
 import random
 import pandas as pd
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 # Set random seed for reproducibility
 RANDOM_SEED = 42

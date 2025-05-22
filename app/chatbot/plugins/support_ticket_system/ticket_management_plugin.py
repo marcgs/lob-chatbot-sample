@@ -9,7 +9,6 @@ from app.chatbot.data_models.ticket_models import (
     SupportTicket,
     TicketPriority,
     TicketWorkflowType,
-    Department,
 )
 from app.chatbot.data_models.sample_data.sample_tickets import TICKETS_BY_ID
 
@@ -189,7 +188,7 @@ class TicketManagementPlugin:
         # Simple search implementation
         if search_query:
             search_terms = search_query.lower().split()
-            filtered_results = []
+            filtered_results: list[SupportTicket] = []
 
             for ticket in results:
                 ticket_text = (

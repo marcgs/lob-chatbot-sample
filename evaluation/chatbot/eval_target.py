@@ -1,8 +1,7 @@
 import asyncio
-
+import logging
 from evaluation.chatbot.simulation.chat_simulator import SupportTicketChatSimulator
 from semantic_kernel.contents import ChatHistory
-
 
 class SupportTicketEvaluationTarget:
     """
@@ -14,7 +13,7 @@ class SupportTicketEvaluationTarget:
         Instantiates a Support Ticket Evaluation Target
         """
 
-    def __call__(self, instructions: str, task_completion_condition: str):
+    def __call__(self, instructions: str, task_completion_condition: str): # pyright: ignore[reportUnknownParameterType] As required by the Azure AI Evaluation SDK
         """
         This method simulates a support ticket conversation and should be used by the evaluation framework only.
 
@@ -40,5 +39,9 @@ class SupportTicketEvaluationTarget:
             }
 
         except Exception as e:
-            print(f"Error: {e}")
-            return {"chat_history": [], "function_calls": [], "error_message": str(e)}
+            logging.error(f"Error: {e}")
+            return { # pyright: ignore[reportUnknownVariableType] As required by the Azure AI Evaluation SDK
+                "chat_history": [],
+                "function_calls": [],
+                "error_message": str(e)
+            }

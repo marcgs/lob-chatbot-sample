@@ -21,10 +21,11 @@ dependencies = [
     "seaborn>=0.13.0",
     "nbformat",
     "nbconvert",
-    "pandas"
+    "pandas",
+    "pandas-stubs",
 ]
 
 [tool.pyright]
-typeCheckingMode = "basic"
+typeCheckingMode = "strict"
 deprecateTypingAliases = true
 reportDeprecated = "error"

@@ -15,7 +15,7 @@ class FunctionCallEvaluator(Evaluator):
         super().__init__()
 
     # Ignore certain type checks as the Azure AI Evaluation SDK does not support Python complex types
-    def __call__(self, *, actual_function_calls: dict, expected_function_calls: dict, **kwargs: Any) -> EvaluatorResult: # pyright: ignore[reportUnknownParameterType, reportMissingTypeArgument]
+    def __call__(self, *, actual_function_calls: dict, expected_function_calls: dict, **kwargs: Any) -> EvaluatorResult: # pyright: ignore[reportUnknownParameterType, reportMissingTypeArgument] As required by the Azure AI Evaluation SDK
         # Convert the function calls to FunctionCall objects
         actual = [FunctionCall.from_dict(f) for f in actual_function_calls] # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType, reportUnknownVariableType]
         expected = [FunctionCall.from_dict(f) for f in expected_function_calls] # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType, reportUnknownVariableType]

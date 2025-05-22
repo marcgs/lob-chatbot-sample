@@ -1,6 +1,4 @@
 import unittest
-from unittest import mock
-from datetime import datetime
 
 from app.chatbot.plugins.support_ticket_system.ticket_management_plugin import (
     TicketManagementPlugin,
@@ -11,7 +9,8 @@ from app.chatbot.data_models.ticket_models import (
     TicketWorkflowType,
 )
 
-
+# Disabling the pyright error for private usage in this test file
+# pyright: reportPrivateUsage=false
 class TestTicketManagementPlugin(unittest.TestCase):
     """Test cases for the Ticket Management Plugin"""
 

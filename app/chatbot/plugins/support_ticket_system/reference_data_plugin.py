@@ -58,8 +58,8 @@ class ReferenceDataPlugin:
         """Returns all available departments in the system"""
         logging.info("Retrieving department list")
 
-        departments = []
-        for code, dept in self._departments.items():
+        departments: list[dict[str, str | None]] = []
+        for _, dept in self._departments.items():
             departments.append(
                 {"code": dept.code, "name": dept.name, "description": dept.description}
             )

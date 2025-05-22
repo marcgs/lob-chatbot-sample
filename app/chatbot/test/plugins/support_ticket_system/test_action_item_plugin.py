@@ -1,5 +1,4 @@
 import unittest
-from unittest import mock
 from datetime import datetime
 
 from app.chatbot.plugins.support_ticket_system.action_item_plugin import (
@@ -7,7 +6,8 @@ from app.chatbot.plugins.support_ticket_system.action_item_plugin import (
 )
 from app.chatbot.data_models.ticket_models import ActionItem, ActionItemStatus
 
-
+# Disabling the pyright error for private usage in this test file
+# pyright: reportPrivateUsage=false
 class TestActionItemPlugin(unittest.TestCase):
     """Test cases for the Action Item Plugin"""
 
