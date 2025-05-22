@@ -1,0 +1,37 @@
+name: Chatbot Evaluation
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        make setup
+        
+    - name: Run Chatbot Evaluation
+      run: make chatbot-eval
+      env:
+        PYTHONPATH: ${{ github.workspace }}
+        AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+        AZURE_OPENAI_ENDPOINT: ${{ vars.AZURE_OPENAI_ENDPOINT }}
+        AZURE_OPENAI_API_VERSION: ${{ vars.AZURE_OPENAI_API_VERSION }}
+        AZURE_OPENAI_DEPLOYMENT_NAME: ${{ vars.AZURE_OPENAI_DEPLOYMENT_NAME }}
+      
+    - name: Upload evaluation results
+      uses: actions/upload-artifact@v4
+      with:
+        name: chatbot-evaluation-results
+        path: evaluation/chatbot/output/
+        if-no-files-found: warn
