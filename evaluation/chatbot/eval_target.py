@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from evaluation.chatbot.simulation.chat_simulator import SupportTicketChatSimulator
 from semantic_kernel.contents import ChatHistory
 
@@ -38,7 +39,7 @@ class SupportTicketEvaluationTarget:
             }
 
         except Exception as e:
-            print(f"Error: {e}")
+            logging.error(f"Error: {e}")
             return { # pyright: ignore[reportUnknownVariableType]
                 "chat_history": [],
                 "function_calls": [],
