@@ -58,6 +58,8 @@ In the following sections, we'll share our journey building an end-to-end evalua
 
 Our team have recently worked with one of our customers on developing a LOB chatbot that was supposed to replace an internal, legacy tool for change management in their product development process. The tool was hard to maintain, had a very complex UI with a lot of business rules and restrictions, and it also required a lot of expert knowledge from users. Their leadership believed LLM-powered chatbots are the answer for these challenges and they wanted to build one with us. Our task was to prove feasibility and reliability of such solution when deployed at scale. That's where we started considering all of the forementioned challenges in evaluating such systems. Our primary goal was to run evaluations which would prove overall reliability and provide stakeholders with enough confidence in this solution. With that in mind we designed and implemented an evalution framework for LLM-powered, LOB chatbots.
 
+TODO: Update evaluation framework diagram to make it super general. Add error analysis.
+
 ![lob_chatbot_evaluation_diagram](./docs/evaluation/lob_chatbot_eval_diagram.png)
 
 The above diagram illustrates the architecture of our evaluation framework, highlighting its key components and their interactions. We designed it to address the unique challenges of evaluating LOB chatbots, ensuring scalability, reproducibility, and actionable insights. We implemented this framework and shared it in a generalized way along with a demo LOB chatbot for a fake scenario of support tickets management. You can find it here: https://github.com/marcgs/lob-chatbot-sample
@@ -70,7 +72,8 @@ A key pillar of our evaluation framework is the ability to simulate realistic, m
 
 In each evaluation run, the User Agent is provided with a set of instructions that define the user's intent and business context (for example, creating a high-priority support ticket for an IT issue). The User Agent then engages in a natural conversation with the chatbot, responding to prompts, clarifying details, and navigating the workflow as a real user would. This back-and-forth continues until a predefined completion condition is met, such as the successful creation of a ticket or resolution of a request.
 
-Example system prompt of the user agent:
+To achieve this we created a template system prompt for the User Agent and during the generation of test cases dataset (covered in the next section) we inject it with business data and the specific task (user instructions) we expect the agent to complete during simulation.
+
 ```python
 user_agent_system_prompt = """
 You are imitating a user interacting with a chatbot assistant.
@@ -102,7 +105,44 @@ Begin the conversation. Respond as the user.
 """
 ```
 
-Our simulation logic is implemented using [Semantic Kernel](https://github.com/microsoft/semantic-kernel) but as you can see below, it mostly depends on a simple loop therefor the same pattern could be easily reproduced with any framework or even without it. You can find our implementation in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module in our repository. Below is a simplified example of the simulation logic:
+To ensure realistic interactions, the User Agent is prompted to simulate non-technical users who understand the task but not the internal workings of the system. However, the simulation framework we've built is flexible enough to support creation of test cases which can take into account different user personalities and interaction styles. This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively. For example, in real world we might find power users who will be very concise and efficient in their interactions with the chatbot - with our approach we can easily test it by providing additional instructions to the User Agent:
+
+```json
+...
+"scenario_name": "cmd_create_ticket_and_action_item",
+"user_instructions": "Create a new support ticket by manually providing the data and create a new action item for it. Don't use full sentences but only command-like terms 'search ...', 'new action ...', etc. If presented with a numerical list of options, use the number of the option to select it.",
+...
+```
+
+```json
+Conversation snippet:
+{
+  "role": "assistant",
+  "content": "Hello! How can I assist you today? Here are your options:\n\n1. Create a new support ticket.  \n2. Update an existing support ticket.  \n3. Create a new action item for an existing ticket.  \n4. Update an existing action item.  \n5. Search for historical tickets.  \n\nPlease let me know how you'd like to proceed!",
+  "name": "SupportTicketAgent"
+},
+{
+  "role": "user",
+  "content": "1",
+  "name": "UserAgent"
+},
+{
+  "role": "assistant",
+  "content": "Great! You want to create a new support ticket. How would you like to proceed?\n\n1. Manually provide the required details for the support ticket.  \n2. Use information from a similar previous ticket as a template.  \n\nLet me know your preference!",
+  "name": "SupportTicketAgent"
+},
+{
+  "role": "user",
+  "content": "1",
+  "name": "UserAgent"
+},
+{
+  "role": "assistant",
+  "content": "Got it! Please provide the following details to create the support ticket:\n\n1. **Title**: A concise and descriptive
+...
+```
+
+Our simulation logic is implemented using [Semantic Kernel](https://github.com/microsoft/semantic-kernel) but as you can see below, it mostly depends on a simple loop, so the same pattern could be easily reproduced with any framework or even without one. You can find our implementation in the [chat_simulator.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/simulation/chat_simulator.py) module in our repository. Below is a simplified example of the simulation logic:
 
 ```python
     from semantic_kernel.contents import ChatHistory, ChatMessageContent
@@ -162,12 +202,12 @@ Our simulation logic is implemented using [Semantic Kernel](https://github.com/m
     return history
 ```
 
-To ensure realistic interactions, the User Agent is configured to simulate non-technical users who understand the task but not the internal workings of the system.
-This approach helps identify potential usability issues and ensures the chatbot can handle diverse user expressions effectively.
 
 ### Ground Truth Generation at Scale
 
 To gain meaningful confidence in LLM-powered chatbots within enterprise settings, we need to run evaluations at scale with significant numbers of test cases. This isn't about dozens of manually curated examples - we're talking about hundreds of test cases for each task or scenario to establish statistical significance. Moreover, these scenarios must closely resemble real-world usage patterns and be grounded in actual business data to provide valid performance indicators. To achieve this scale while maintaining relevance, we designed a pattern that combines scenario templates with real business data using a "test case factory" approach. This factory automatically injects real business data into parameterized scenario templates, allowing us to generate hundreds of diverse yet realistic test cases efficiently. By systematically varying inputs across multiple dimensions of the business domain, we can thoroughly stress-test the chatbot's understanding and function-calling capabilities under conditions that mirror production environments.
+
+To generate evaluation datasets at scale, we leverage a script [generate_eval_dataset.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/generate_eval_dataset.py) that combines scenario templates with real or representative business data. This script automates the creation of test cases by filling placeholders in templates with data from support tickets and action items. Below is a simplified example of a scenario template including placeholders that will be replaced with business data:
 
 ```json
 {
@@ -199,8 +239,6 @@ To gain meaningful confidence in LLM-powered chatbots within enterprise settings
 }
 ```
 
-To generate evaluation datasets at scale, we leverage a script [generate_eval_dataset.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/ground-truth/generate_eval_dataset.py) that combines scenario templates with real or representative business data. This script automates the creation of test cases by filling placeholders in templates with data from support tickets and action items. Below is a simplified example of a scenario template including placeholders that will be replaced with business data:
-
 ### Simulation Outputs
 
 Throughout the simulated conversation, the framework automatically captures all exchanged messages and every function call made by the agent, including the function name and all arguments provided. This structured record of function calls is essential for evaluation: it allows us to directly compare the chatbot's actions against the expected function calls for each scenario, measuring not just whether the right functions were called, but also whether the correct parameters were supplied and the business process was followed as intended.
@@ -213,7 +251,7 @@ Simulated conversation history:
 
 ![Chat History](./chat_history.png)
 
-Actual vs expected function calls:
+Actual vs expected function calls - used to calculate various metrics and overall reliability score of the LOB agent:
 
 ![Function Calls](./function_calls.png)
 
@@ -221,7 +259,7 @@ Actual vs expected function calls:
 
 With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include:
 
-- **Function Call Name Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function names.
+- **Function Call Name Precision and Recall**: Measures the recall and precisioncompleteness of function calls, in terms of function names.
 - **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function parameters.
 - **Reliability**: Measures overall success in completing business processes.
 
@@ -250,6 +288,9 @@ Add a section discussing common challenges in implementing this framework and ho
 - Handling edge cases and ambiguity
 - Managing prompt engineering for both the user agent and chatbot
 - Cost considerations for running evaluations at scale
+- Parallelizing evaluations for large test suites
+- Resource management and optimization
+- Cost considerations and budgeting for evaluation
 ```
 
 By combining realistic simulation, comprehensive data capture, and automated evaluation, this solution provides a scalable and repeatable methodology for assessing LOB chatbots in enterprise environments. The result is a robust foundation for continuous improvement and confident deployment of conversational AI in business-critical workflows.
