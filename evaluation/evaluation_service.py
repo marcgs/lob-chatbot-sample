@@ -66,4 +66,4 @@ class EvaluationService:
         # Save the results to a file
         utils.save_to_file(metrics, detailed_results, output_path)
 
-        return detailed_results
+        return metrics
