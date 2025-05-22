@@ -255,19 +255,54 @@ Actual vs expected function calls - used to calculate various metrics and overal
 
 ![Function Calls](./function_calls.png)
 
-### Metrics, Evaluation, and Error Analysis
+### Evaluation, Metrics, and Error Analysis
 
-With the conversation and function call data in hand, the framework automatically computes a suite of evaluation metrics. These include:
+With conversation history, actual and expected function call data in hand, we can use the framework to compute a suite of evaluation metrics, which include:
 
-- **Function Call Name Precision and Recall**: Measures the recall and precisioncompleteness of function calls, in terms of function names.
-- **Function Call Argument Precision and Recall**: Measures the accuracy and completeness of function calls, in terms of function parameters.
-- **Reliability**: Measures overall success in completing business processes.
+- **Function Call Name Precision and Recall**  
+  Measures the accuracy of function calling, in terms of function names.  
+  For recall we check how many of expected functions were correctly called by LOB agent, and for precision we measure if any unexpected functions were called during simulation (LLMs can halucinate or simply misspell function names).
+- **Function Call Argument Precision and Recall**  
+  Measures the accuracy of function calls in terms of function parameters.  
+  For recall we check how many expected arguments were correctly provided, and for precision we check if any extra/unexpected arguments appeared during simulation (LLMs can halucinate or simply misspell function arguments).  
+- **Reliability Score**  
+  Measures overall success in completing test case tasks and should be used as the main metric for evaluation.  
+  We calculate this score for each test case by using the mean of our primary metrics: recall of function names and recall of function arguments.  
+  The final score is the mean of all test case level scores.
 
 The evaluation framework integrates with the [Azure AI Evaluation SDK](https://learn.microsoft.com/python/api/overview/azure/ai-evaluation-readme) to calculate metrics and track evaluation runs. See [function_call_precision.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_precision.py), [function_call_recall.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_recall.py), and [function_call_reliability.py](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/evaluators/function_call_reliability.py) modules for details on how these metrics have been implemented in the sample application.
 
-Optional [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) integration enables advanced analysis, including performance tracking across chatbot versions and actionable summaries for error patterns.
+One huge benefit of using Azure AI Evaluation SDK is that by adding single argument we enable an optional [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/) integration. This gives us a convenient dashboard for tracking evaluation runs, single place to store our metrics and make comparisons between different runs. It becomes especially important and useful with long running evaluations (hundreds or thousands of test cases which might take even several hours).
 
 ![azure-ai-foundry-eval](./docs/evaluation/azure-ai-foundry-eval.png)
+
+Aside from calculating metrics, a critical part of the evaluation process is performing error analysis. The insights gained from this step are essential for guiding further experimentation and focusing improvement efforts on the line-of-business (LOB) agents.
+
+In our framework, for every evaluation run, we automatically copy the [error_analysis.ipynb](https://github.com/marcgs/lob-chatbot-sample/blob/main/evaluation/chatbot/error_analysis_chatbot.ipynb) notebook into the evaluation outputs directory and execute it there. This notebook processes the `evaluation_results.json` file and performs several key analyses. In addition to standard operations - such as breaking down metrics by test scenarios and identifying the most error-prone functions and arguments - we also leverage LLMs to review the full conversation history of each simulation. This allows us to generate higher-level insights and draw conclusions much faster than ever before. Using this approach significantly improves upon the previously manual and time-consuming task of combing through message exchanges, enabling faster, more structured, and actionable feedback which accelerates the overal process of experimentation.
+
+```markdown
+#### Emerging Patterns and Key Issues:
+1. **Redundant Function Calls**:
+   - Across multiple test cases, the chatbot made unnecessary calls to retrieve reference data (e.g., `ReferenceDataPlugin-get_departments`, `ReferenceDataPlugin-get_priority_levels`) or action item details (`ActionItemPlugin-get_action_item`), even when the required information was already provided by the user or cached.
+   - This redundancy negatively impacted **Precision_fn** scores, even though the chatbot's logic was often valid for ensuring data accuracy.
+
+2. **Session Reset Misinterpretation**:
+   - The chatbot frequently invoked `CommonPlugin-start_over` when the user stated phrases like "The session is finished." This indicates a misunderstanding of user intent, where the chatbot interpreted session-ending statements as requests to reset the session.
+   - This behavior disrupted workflows and introduced unnecessary function calls.
+
+3. **Argument Mismatches**:
+   - In several cases, the chatbot included additional arguments (e.g., `parent_ticket_id` in `ActionItemPlugin-create_action_item`, `ticket_id` in `update_support_ticket`) that were logically valid but not part of the expected function calls. This led to lower **Precision_args** scores despite the chatbot's arguments being accurate and complete.
+
+4. **Misalignment Between Expected and Actual Behavior**:
+   - Test cases often did not account for logical preparatory steps (e.g., fetching reference data, checking for existing action items) or additional arguments that were necessary for the chatbot's implementation. This misalignment penalized the chatbot's performance metrics, even when its behavior was user-centric and logical.
+
+5. **Multi-Turn Interaction Handling**:
+   - In some scenarios (e.g., `update_action_item_assignee`), the chatbot failed to transition smoothly from gathering user inputs to executing the required action. This resulted in incomplete workflows or unnecessary loops.
+
+6. **High Recall but Low Precision**:
+   - The chatbot consistently achieved high **Recall_fn** and **Recall_args** scores, indicating that all expected function calls and arguments were included. However, low **Precision_fn** and **Precision_args** scores highlighted the presence of extraneous calls and arguments.
+
+```
 
 ### Bring Your Own Scenario
 
