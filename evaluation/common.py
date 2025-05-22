@@ -81,14 +81,14 @@ def copy_and_execute_notebook(notebook_name: str, root_path: Path, output_path: 
         
         # Execute all cells in the notebook after copying
         with open(notebook_dst, "r", encoding="utf-8") as f:
-            nb = nbformat.read(f, as_version=4) # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType] As defined in nbformat 
+            nb = nbformat.read(f, as_version=4) # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType] As required by nbformat 
             
         ep = ExecutePreprocessor(kernel_name="python3")
         try:
             print(f"Executing notebook: {notebook_dst}")
             ep.preprocess(nb, {"metadata": {"path": os.path.dirname(notebook_dst)}})
             with open(notebook_dst, "w", encoding="utf-8") as f:
-                nbformat.write(nb, f) # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType] As defined in nbformat 
+                nbformat.write(nb, f) # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType] As required by nbformat 
             print(f"Executed and saved notebook with outputs: {notebook_dst}")
         except Exception as e:
             print(f"Failed to execute notebook: {e}")

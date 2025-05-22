@@ -103,7 +103,7 @@ def run_support_ticket_evaluation(
     )
 
     # convert results to dataframe
-    df: pd.DataFrame = pd.DataFrame(results).round(2) # pyright: ignore[reportUnknownMemberType] As defined in pandas
+    df: pd.DataFrame = pd.DataFrame(results).round(2) # pyright: ignore[reportUnknownMemberType] As required by pandas
     print(df.transpose())
     print(output_path)
 
