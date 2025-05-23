@@ -114,8 +114,8 @@ To ensure realistic interactions, the User Agent is prompted to simulate non-tec
 ...
 ```
 
-```json
 Conversation snippet:
+```json
 {
   "role": "assistant",
   "content": "Hello! How can I assist you today? Here are your options:\n\n1. Create a new support ticket.  \n2. Update an existing support ticket.  \n3. Create a new action item for an existing ticket.  \n4. Update an existing action item.  \n5. Search for historical tickets.  \n\nPlease let me know how you'd like to proceed!",
